@@ -1,0 +1,80 @@
+:root {
+    --background: #F0EBE5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    flex: 1 1 0%;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Distribute items evenly */
+    gap: 4rem;
+    padding: 1rem 3rem;
+    width: 100%;
+    height: 100px;
+    background-color: var(--background); /* Dark background color */
+}
+
+header > a {
+    height: 100%;
+}
+
+header > a > img {
+    height: 100%;
+}
+
+aside {
+    height: 100%;
+    max-width: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+aside > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+aside > div > p {
+    text-transform: capitalize;
+    font-size: 1.2rem;
+}
+
+.logout {
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    background-color: var(--background);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    color: black;
+}
+
+.logout:hover {
+    background-color: #efe0ce;
+}

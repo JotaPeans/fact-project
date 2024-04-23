@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FACT</title>
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/root.css' %}">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <a href="{% url 'feedbackApp:root' %}">
+            <img src="{% static 'images/factLogo.png' %}" height="80" alt="FACT">
+        </a>
+    </header>
+    
+    <div id="root">
+        {% block content %}{% endblock %}
+        
+        <aside>
+            <div>
+                <img src="{% static 'images/factLogo.png' %}" height="80" alt="FACT">
+                <p>{{user}}</p>
+            </div>
+    
+            <a class="logout" href="{% url 'feedbackApp:logout' %}">logout</a>
+        </aside>
+    </div>
+
+    {% block script %}{% endblock %}
+</body>
+</html>

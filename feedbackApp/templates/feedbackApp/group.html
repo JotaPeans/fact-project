@@ -1,0 +1,83 @@
+{% extends 'feedbackApp/base.html' %}
+{% load static %}
+
+{% block head%}
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/group.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>{{ group.nome }}</h1>
+
+        {% if alunos|length < 1 %}
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label id="uploadfile" for="uploadfileInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    Envie o arquivo Excel
+                </label>
+                <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <button type="submit">Enviar</button>
+            </form>
+
+        {% else %}
+            <div class="alunos-container">
+                {% for aluno in alunos %}
+                    <div class="aluno">
+                        <div>
+                            <p>Nome:</p>
+                            <p>{{aluno.nome}}</p>
+                        </div>
+                        <div>
+                            <p>Email:</p>
+                            <p>{{aluno.email}}</p>
+                        </div>
+                        <div>
+                            <p>Pensamento Crítico e Criatividade:</p>
+                            <p>{{aluno.pensamento_critico_criatividade}}</p>
+                        </div>
+                        <div>
+                            <p>Comunicação:</p>
+                            <p>{{aluno.comunicacao}}</p>
+                        </div>
+                        <div>
+                            <p>Colaboração:</p>
+                            <p>{{aluno.colaboracao}}</p>
+                        </div>
+                        <div>
+                            <p>Qualidade das Entregas:</p>
+                            <p>{{aluno.qualidade_entregas}}</p>
+                        </div>
+                        <div>
+                            <p>Presença:</p>
+                            <p>{{aluno.presenca}}</p>
+                        </div>
+                        <div>
+                            <p>Entrega e Prazos:</p>
+                            <p>{{aluno.entrega_prazos}}</p>
+                        </div>
+                    </div>
+
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </main>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const upload = document.getElementById("uploadfileInput");
+        const uploadLabel = document.getElementById("uploadfile");
+
+        upload.addEventListener("change", (event) => {
+            const file = event.target.files[0];
+            if(file) {
+                uploadLabel.innerHTML = `<p class="currentFile">${file.name}</p>`
+            }
+        })
+    </script>
+{% endblock %}

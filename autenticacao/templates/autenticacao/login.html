@@ -1,0 +1,22 @@
+<!-- signin.html -->
+{% extends 'autenticacao/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'autenticacao/signin.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div class="form-container">
+        <h1>Login</h1>
+        <form class="perguntas_login" action="" method="POST">
+            {% csrf_token %}
+            
+            <label for="username"></label>
+            <input id="username" placeholder="Username" type="text" name="username">
+            <label for="password"></label>
+            <input id="password" placeholder="Senha" type="password" name="password">
+            <button>Sign in</button>
+        </form>
+    </div>
+{% endblock %}
