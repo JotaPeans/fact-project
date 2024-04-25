@@ -93,15 +93,15 @@ class GroupView(View):
             "group": group[0]
         }
 
-        #! TODO FAZER VERIFICACAO SE O ARQUIVO PERTENCE A ESSES TIPOS DE APPLICATION:
-        #! "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        #! ou
-        #! "application/vnd.ms-excel" 
+        try:
+            file = req.FILES["file"]
+            df = pd.read_excel(file)
 
-        file = req.FILES["file"]
-        df = pd.read_excel(file)
+            notas = getMediaAluno(df)
 
-        notas = getMediaAluno(df)
+        except:
+            messages.add_message(req, constants.ERROR, 'Excel ou arquivo no formato inválido')
+            return render(req, "feedbackApp/group.html", context=context)
 
         alunos = []
         

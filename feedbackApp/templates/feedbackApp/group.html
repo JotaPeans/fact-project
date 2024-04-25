@@ -78,6 +78,14 @@
 {% endblock %}
 
 {% block script %}
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                alert("{{message}}")
+            </script>
+        {% endfor %}
+    {% endif %}
+    
     <script>
         const upload = document.getElementById("uploadfileInput");
         const uploadLabel = document.getElementById("uploadfile");
