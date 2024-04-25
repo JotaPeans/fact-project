@@ -8,6 +8,10 @@
     <title>FACT</title>
     <link rel="stylesheet" href="{% static 'feedbackApp/css/root.css' %}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+
     {% block head %}{% endblock %}
 </head>
 
@@ -22,8 +26,8 @@
         {% block content %}{% endblock %}
         
         <aside>
-            <div>
-                <img src="{% static 'images/factLogo.png' %}" height="80" alt="FACT">
+            <div id = "usuario">
+                <img class = "temBorda" src="{% static 'images/imagem_padrao.png' %}" height="150" width = "150" alt="FACT">
                 <p>{{user}}</p>
             </div>
     

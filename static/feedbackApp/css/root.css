@@ -1,12 +1,26 @@
 :root {
-    --background: #F0EBE5;
+    --blue: #1E46D9;
+    --blueHover: #1c3ebb;
+    --yellow: #F7B401;
+    --yellowHover: #d69d00;
+    --red: #D72C00;
+    --redHover: #c02600;
+    --beige: #F0EBE5;
+    --beigeHover: #efe0ce;
+    --black: #292B26;
+    --blackHover: rgb(16, 16, 15);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: "Lexend Deca", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
     font-size: 16px;
 }
 
@@ -45,12 +59,15 @@ header > a > img {
 
 aside {
     height: 100%;
-    max-width: 15rem;
+    background-color: var(--black);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 2rem 0;
+    gap: 1rem;
+    width: 15rem;
+    max-width: 15rem;
 }
 
 aside > div {
@@ -63,18 +80,19 @@ aside > div {
 aside > div > p {
     text-transform: capitalize;
     font-size: 1.2rem;
+    color: white;
 }
 
 .logout {
     padding: 1rem 1.5rem;
     text-decoration: none;
-    background-color: var(--background);
+    background-color: var(--red);
     border-radius: 1rem;
     cursor: pointer;
     transition: all 150ms ease-in-out;
-    color: black;
+    color: white;
 }
 
 .logout:hover {
-    background-color: #efe0ce;
+    background-color: var(--redHover);
 }

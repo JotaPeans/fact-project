@@ -11,17 +11,6 @@ load_dotenv(dotenvpath)
 TARGET_ENV = os.environ.get("TARGET_ENV")
 NOT_PROD = not TARGET_ENV.lower().startswith('prod')
 
-# # Quick-start development settings - unsuitable for production
-# # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-fgw)*k%k2e%2xqy7u4grph+09fx9e&o&0aenrb#8fk&&1y3s1c'
-
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
-# ALLOWED_HOSTS = []
-
 if NOT_PROD:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True

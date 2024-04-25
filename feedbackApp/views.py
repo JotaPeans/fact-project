@@ -18,6 +18,7 @@ class FeedBackView(View):
             "user": user,
             "groups": groups
         }
+        print(f"groups de context é: {context['groups']}")
         
         return render(req, "feedbackApp/app.html", context=context)
 

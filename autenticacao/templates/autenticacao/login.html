@@ -1,4 +1,3 @@
-<!-- signin.html -->
 {% extends 'autenticacao/base.html' %}
 {% load static %}
 
@@ -7,16 +6,26 @@
 {% endblock %}
 
 {% block body %}
-    <div class="form-container">
+    <!-- <img id="background-principal" src="{% static 'images/background-principal.png' %}" alt="background"> -->
+    <img id="logo" src="{% static 'images/factLogo.png' %}" alt="background">
+    
+    <div class="container-login">
         <h1>Login</h1>
-        <form class="perguntas_login" action="" method="POST">
+        
+        <form method="POST">
             {% csrf_token %}
-            
-            <label for="username"></label>
-            <input id="username" placeholder="Username" type="text" name="username">
-            <label for="password"></label>
-            <input id="password" placeholder="Senha" type="password" name="password">
+            <input placeholder="Usuário" type="text" name="username">
+            <input placeholder="Senha" type="password" name="password">
             <button>Sign in</button>
         </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
     </div>
 {% endblock %}
