@@ -84,6 +84,11 @@ Validação de história: Eu, como coordenador pedagógico, visito a página de 
 
 ## Relatos do método Pair Programming
 
+
+## ScreenCast Lo-Fi
+
+https://www.youtube.com/watch?v=ik3k_kCxHu8
+
 ![LOGO FACT](https://github.com/JotaPeans/fact-project/assets/130470569/873cab2c-2c03-45fb-8791-952a7ddc7a7b)
 </details>
 
