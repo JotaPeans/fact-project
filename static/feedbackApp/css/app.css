@@ -20,6 +20,14 @@ main {
     padding: 2rem;
 }
 
+.error {
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--red);
+    margin: 1rem 0;
+}
+
 .background {
     opacity: 50%;
     position: absolute;

@@ -47,7 +47,16 @@
                 {% csrf_token %}
                 <input type="hidden" name="action" value="addGroup">
                 <label for="name">Nome do Grupo</label>
-                <input id="name" name="groupName"></input>
+                <input id="name" name="groupName" required></input>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error">
+                            {{message}}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+
                 <button type="submit">Enviar</button>
             </form>
         </div>
@@ -62,12 +71,24 @@
                 modal.classList.remove("active");
                 return;
             }
+            else if(action === "open") {
+                modal.classList.add("active");
+                return;
+            }
 
             modal.classList.toggle("active");
         }
 
         document.getElementById("addGroup")?.addEventListener("click", toggleModal);
         document.getElementById("closeModal")?.addEventListener("click", toggleModal);
+            
+        window.addEventListener("load", () => {
+            const errors = document.querySelectorAll(".error");
+
+            if(errors.length >= 1) {
+                toggleModal("open")
+            }
+        })
 
         window.addEventListener("keydown", (key) => {
             if(key.key === "Escape") toggleModal("close");
