@@ -5,6 +5,8 @@ from django.contrib.auth import logout
 from .models import Aluno, Grupo
 from .functions import getMediaAluno, transformNotasToObject
 import pandas as pd
+from django.http import JsonResponse
+from django.core.serializers import serialize
 
 class FeedBackView(View):
     def get(self, req):
@@ -103,8 +105,6 @@ class GroupView(View):
             aluno_data = list(filter(lambda x: x[0] == nome_aluno, notas))
 
             aluno_object = transformNotasToObject(aluno_data)
-
-            # print(aluno_object)
             
             aluno = Aluno.objects.filter(nome=aluno_object["nome"])
 
@@ -126,13 +126,36 @@ class GroupView(View):
                 group[0].alunos.add(aluno)
                 group[0].save()
 
+            else:
+                group[0].alunos.add(aluno[0])
+                group[0].save()
+
         group = Grupo.objects.get(pk=id)
 
         context["alunos"] = group.alunos.all()
 
         return render(req, "feedbackApp/group.html", context=context)
 
+
+class Group(View):
+    def get(self, req, id):
+        if(not req.user.is_authenticated):
+            return JsonResponse({"message": "Unauthorized"}, status=401)
+        
+        group = Grupo.objects.filter(pk=id)
+
+        if(not group.exists()):
+            return JsonResponse({"message": "Grupo não existe"}, status=404)
+        
+        alunos = group[0].alunos.all()
+
+        data = {
+            'group': list(group.values()),
+            'alunos': list(alunos.values())
+        }
+        return JsonResponse(data)
+
+
 def logoutFunction(req):
     logout(req)
     return redirect("autenticacao:root")
-        
