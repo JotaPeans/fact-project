@@ -5,8 +5,9 @@ from django.contrib.auth import logout
 from .models import Aluno, Grupo
 from .functions import getMediaAluno, transformNotasToObject
 import pandas as pd
+from django.contrib import messages
+from django.contrib.messages import constants
 from django.http import JsonResponse
-from django.core.serializers import serialize
 
 class FeedBackView(View):
     def get(self, req):
@@ -43,6 +44,13 @@ class FeedBackView(View):
     
     def addGroup(self, req, context, user):
         groupName = req.POST.get("groupName")
+
+        if(len(groupName) < 5):
+            groups = Grupo.objects.filter(professor=user)
+
+            messages.add_message(req, constants.ERROR, 'O nome do grupo precisa ter no mínimo 5 caracteres!')
+
+            return render(req, "feedbackApp/app.html", context=context)
         
         group = Grupo.objects.create(nome=groupName, professor=context["user"])
         group.save()
@@ -85,15 +93,15 @@ class GroupView(View):
             "group": group[0]
         }
 
-        #! TODO FAZER VERIFICACAO SE O ARQUIVO PERTENCE A ESSES TIPOS DE APPLICATION:
-        #! "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        #! ou
-        #! "application/vnd.ms-excel" 
+        try:
+            file = req.FILES["file"]
+            df = pd.read_excel(file)
 
-        file = req.FILES["file"]
-        df = pd.read_excel(file)
+            notas = getMediaAluno(df)
 
-        notas = getMediaAluno(df)
+        except:
+            messages.add_message(req, constants.ERROR, 'Excel ou arquivo no formato inválido')
+            return render(req, "feedbackApp/group.html", context=context)
 
         alunos = []
         

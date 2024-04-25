@@ -69,7 +69,8 @@ form > button:hover {
     height: 15rem;
     color: var(--black);
     border: 3px dashed var(--black);
-    background-color: var(--beige);
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
     border-radius: 1.5rem;
 }
 
