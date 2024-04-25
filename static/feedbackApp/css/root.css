@@ -46,7 +46,7 @@ header {
     padding: 1rem 3rem;
     width: 100%;
     height: 100px;
-    background-color: var(--background); /* Dark background color */
+    background-color: var(--beige); /* Dark background color */
 }
 
 header > a {
