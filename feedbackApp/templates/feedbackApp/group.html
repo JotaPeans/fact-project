@@ -89,22 +89,22 @@
             }
         });
         
-        // window.addEventListener("load", async () => {
-        //     const res = await fetch("/app/group/action/{{group.pk}}");
-        //     const data = await res.json();
+        window.addEventListener("load", async () => {
+            const res = await fetch("/app/group/action/{{group.pk}}");
+            const data = await res.json();
 
-        //     for(let aluno of data.alunos) {
-        //         const totalParagraph = document.getElementsByClassName(`total-${aluno.id}`);
+            for(let aluno of data.alunos) {
+                const totalParagraph = document.getElementsByClassName(`total-${aluno.id}`);
                 
-        //         const somaTotal = aluno.pensamento_critico_criatividade
-        //          + aluno.comunicacao
-        //          + aluno.colaboracao
-        //          + aluno.qualidade_entregas 
-        //          + aluno.presenca 
-        //          + aluno.entrega_prazos;
+                const somaTotal = aluno.pensamento_critico_criatividade
+                 + aluno.comunicacao
+                 + aluno.colaboracao
+                 + aluno.qualidade_entregas 
+                 + aluno.presenca 
+                 + aluno.entrega_prazos;
                  
-        //         totalParagraph[0].textContent = somaTotal;
-        //     }
-        // });
+                totalParagraph[0].textContent = somaTotal;
+            }
+        });
     </script>
 {% endblock %}
