@@ -113,3 +113,7 @@ form > button:hover {
     gap: 1rem;
     justify-content: space-between;
 }
+
+.lucide-loader-circle {
+    color: var(--zinc-500)
+}

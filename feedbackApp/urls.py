@@ -7,5 +7,6 @@ app_name = "feedbackApp"
 urlpatterns = [
     path("", views.FeedBackView.as_view(), name="root"),
     path("group/<int:id>", views.GroupView.as_view(), name="group"),
+    path("group/action/<int:id>", views.Group.as_view(), name="group_action"),
     path("logout/", views.logoutFunction, name="logout")
 ]
