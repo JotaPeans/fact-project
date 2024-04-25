@@ -37,6 +37,20 @@ main {
     gap: 1rem;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+}
+
+.container > h2 {
+    color: var(--black);
+    font-size: 2rem;
+}
+
 .group {
     text-decoration: none;
     color: var(--black);
@@ -79,6 +93,7 @@ main {
     gap: 0.5rem;
     padding: 1rem 1.5rem;
     background-color: var(--blue);
+    font-size: 1.2rem;
     color: white;
     cursor: pointer;
     transition: all 150ms ease-in-out;

@@ -1,5 +1,10 @@
 :root {
-    --background: #F0EBE5;
+    --beige: #F0EBE5;
+    --beigeHover: #efe0ce;
+}
+
+* {
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .addGroup-modal {
@@ -31,7 +36,7 @@
 }
 
 .addGroup-modal > div {
-    background-color: var(--background);
+    background-color: var(--beige);
     border-radius: 1rem;
     width: 30rem;
     height: auto;
@@ -57,7 +62,7 @@
 
 .addGroup-modal > div > form > input {
     border: none;
-    background: #efe0ce;
+    background: var(--beigeHover);
     border-radius: 1rem;
     width: auto;
     max-width: 100%;
@@ -71,8 +76,7 @@
 }
 
 .addGroup-modal > div > form > button {
-    font-family: sans-serif;
-    background: var(--background2);
+    background: var(--beigeHover);
     cursor: pointer;
     border: none;
     padding: 1rem;
@@ -82,8 +86,9 @@
     margin-left: auto;
     height: auto;
     border-radius: 0.5rem;
+    transition: all 150ms ease-in-out;
 }
 
 .addGroup-modal > div > form > button:hover {
-    background: #efe0ce;
+    background: #cec0b0;
 }
