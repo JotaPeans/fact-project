@@ -24,19 +24,19 @@ A aplicação é:
 - Fomenta a Cultura de Excelência e Melhoria Contínua 🌱;
 
 ## Integrantes
-Antonio Paulo Barros
+* Antonio Paulo Barros
 
-Clara Machado de Araújo
+* Clara Machado de Araújo
 
-Davi Gomes
+* Davi Gomes
 
-João Pedro Fontes
+* João Pedro Fontes
 
-Heloísa Tanaka
+* Heloísa Tanaka
 
-Larissa Sobrinho Santos
+* Larissa Sobrinho Santos
 
-Leonardo Guedes
+* Leonardo Guedes
 
 ## Histórias e Validações 📜
 
@@ -74,8 +74,7 @@ Leonardo Guedes
 
 <details>
   <summary><h1>Primeira Entrega 📦</h1></summary>
-  
-  
+
   ## Diagrama
 
   ![image](https://github.com/JotaPeans/fact-project/assets/142417937/f5e9b824-4de7-4464-bb53-b6fd6a54aa93)
