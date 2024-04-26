@@ -82,13 +82,34 @@ A aplicação é:
 
   ## Relatos do método Pair Programming
 
-  **Relato Programação em Par:**
-  - **_Larissa e Heloísa_**:
+  *Relato Programação em Par:*
+  - **Larissa e Heloísa**:
       Realizamos pair programming para implementar recursos de HTML e CSS.
     
-      **Resultado:** A implementação ocorreu perfeitamente bem e como esperado. Html do site e polimento do CSS saiu como planejado e ficamos contentes com o resultado, além de, encontrar e relatar bugs.
+      *Resultado:* A implementação ocorreu perfeitamente bem e como esperado. Html do site e polimento do CSS saiu como planejado e ficamos contentes com o resultado, além de, encontrar e relatar bugs.
     
-      **Conclusão:** Pair programming fortaleceu nossa colaboração e confiança como equipe.
+      *Conclusão:* Pair programming fortaleceu nossa colaboração e confiança como equipe.
+
+  - **Leonardo e João Pedro**:
+      Adotamos o pair programming para otimizar o uso do Pandas e aprimorar aspectos de desenvolvimento frontend.
+    
+      *Resultado:* A colaboração resultou em um uso eficiente do Pandas, permitindo manipulações de dados complexas e otimizadas. Além disso, conseguimos implementar e refinar a interface do usuário com técnicas avançadas de frontend, melhorando a usabilidade e estética do projeto. Durante o processo, também identificamos e corrigimos diversos bugs.
+    
+      *Conclusão:* O pair programming não só melhorou a qualidade do nosso trabalho, mas também reforçou nossa capacidade de trabalhar juntos de forma eficaz, aumentando a confiança mútua e a habilidade de resolver problemas em equipe.
+
+  - **Davi e Clara**:
+      Realizamos pair programming para ajustar o HTML da página de login.
+    
+      *Resultado:* Após algumas discordâncias entre duas opções de layout, chegamos a um consenso. Essa escolha resultou numa versão final que não só atendeu aos requisitos técnicos, mas também às necessidades dos usuários. Esse processo colaborativo nos permitiu identificar e solucionar questões chave para a melhoria da página.
+    
+      *Conclusão:* O pair programming reforçou nossa colaboração e confiança como equipe, mostrando que a comunicação eficaz é essencial para superar divergências e alcançar um objetivo comum.
+
+  - **Leonardo e Antonio**:
+      Empregamos o pair programming para a criação e edição de áreas de frontend em nosso projeto.
+    
+      *Resultado:* A sessão de programação conjunta possibilitou uma criação eficiente de interfaces de usuário atraentes e responsivas. Ajustamos e otimizamos o código HTML e CSS para garantir compatibilidade e performance em diversos dispositivos. Além disso, conseguimos identificar e corrigir erros de design e funcionalidade durante o desenvolvimento.
+    
+      *Conclusão:* O pair programming provou ser uma estratégia valiosa, não apenas para a qualidade técnica do trabalho, mas também para fortalecer nossa colaboração e comunicação como equipe. A experiência reforçou nossa confiança mútua e habilidade de trabalhar juntos sob diferentes desafios técnicos.
 
 
   ## ScreenCast Protótipo Lo-Fi
