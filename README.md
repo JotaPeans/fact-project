@@ -40,32 +40,32 @@ A aplicação é:
 
 ## Histórias e Validações 📜
 
-1. Eu, como usuário, desejo importar planilhas.
-2. Eu, como usuário, gostaria de ter a capacidade de visitar a página de cada grupo;
-3. Eu, como usuário, desejo exportar planilhas;
-4. Eu, como usuário professor, gostaria de ter a capacidade de mudar qualquer informação relacionado aos alunos/grupo;
-5. Eu, como usuário, gostaria de ter a capacidade de visitar a página de cada aluno;
+1. Eu, como usuário, desejo criar um grupo;
+2. Eu, como usuário, desejo importar uma planilha FACT;
+3. Eu, como usuário, desejo visualizar informações de um grupo;
+4. Eu, como usuário, desejo adicionar um aluno a um grupo já cadastrado;
+5. Eu, como usuário, desejo excluir um aluno de um grupo.
 
 
     ## Validações
       
-    - **História 1**: Importar Planilhas  <br/>
+    - **História 1**: Criar um Grupo  <br/>
       - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados
 
-    - **História 2**: Visitar Páginas de Grupos <br/> 
-      - **Validação de história**: Eu, como professor, visito a página do grupo para gerenciar membros, postar informações e editar configurações do grupo.
-      - **Validação de história**: Eu, como professor, visito a página de cada grupo para monitorar o progresso dos projetos, contribuir com recursos didáticos, e facilitar a comunicação entre os membros do grupo.
+    - **História 2**: Importar Planilha <br/> 
+      - **Validação de história**: Eu, como professor, para registrar os membros do grupo no sistema, visito a página de um grupo e importo uma planilha preenchida.
+      - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados. 
 
-    - **História 3**: Exportar Planilhas <br/>
-      - **Validação de história**: Eu, como professor, exporto planilhas dos resultados de avaliação para analisar o progresso dos alunos fora da plataforma
+    - **História 3**: Visualizar Informações de Grupo
+    <br/>
+      - **Validação de história**: Eu, como professor, visito a página de cada grupo para monitorar o progresso dos projetos, contribuir com recursos didáticos, e facilitar a comunicação entre os membros.
 
-    - **História 4**: Editar alunos/grupo <br/>
-      - **Validação de história**: Eu, como professor, modifico os detalhes do projeto de grupo para atualizar tarefas ou critérios de avaliação conforme a necessidade durante o semestre.
-      - **Validação de história**: Eu, como professor, utilizo a capacidade de alterar informações para corrigir erros cadastrais ou atualizar dados essenciais, garantindo a integridade e precisão das informações dos alunos e grupos.
+    - **História 4**: Adicionar um Aluno <br/>
+      - **Validação de história**: Eu, como professor, adiciono um novo membro ao grupo no sistema para refletir as mudanças feitas na sala de aula, um novo integrante entrou na equipe que supervisiono. 
 
-    - **História 5**: Visitar Páginas de Alunos <br/>
-      - **Validação de história**: Eu, como professor, desejo visitar a página de cada aluno para acessar informações detalhadas sobre seu desempenho, participação em atividades e histórico acadêmico.
-      - **Validação de história**: Eu, como coordenador pedagógico, visito a página de cada aluno para monitorar o progresso geral e identificar alunos que precisam de atenção especial ou apoio adicional.
+    - **História 5**: Excluir um Aluno <br/>
+      - **Validação de história**: Eu, como professor, removo um membro do grupo no sistema para refletir as mudanças feitas na sala de aula, um integrante saiu da equipe que supervisiono.
+
 
 ## Link de produção
 ### <a target="_blank">https://fact-project.azurewebsites.net</a>
