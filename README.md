@@ -84,6 +84,14 @@ Validação de história: Eu, como coordenador pedagógico, visito a página de 
 
 ## Relatos do método Pair Programming
 
+**Relato Programação em Par:**
+- **_Larissa e Heloísa_**:
+    Realizamos pair programming para implementar recursos de HTML e CSS.
+  
+    **Resultado:** A implementação ocorreu perfeitamente bem e como esperado. Html do site e polimento do CSS saiu como planejado e ficamos contentes com o resultado, além de, encontrar e relatar bugs.
+  
+    **Conclusão:** Pair programming fortaleceu nossa colaboração e confiança como equipe.
+
 
 ## ScreenCast Lo-Fi
 
