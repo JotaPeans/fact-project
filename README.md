@@ -56,8 +56,7 @@ A aplicação é:
       - **Validação de história**: Eu, como professor, para registrar os membros do grupo no sistema, visito a página de um grupo e importo uma planilha preenchida.
       - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados. 
 
-    - **História 3**: Visualizar Informações de Grupo
-    <br/>
+    - **História 3**: Visualizar Informações de Grupo <br/>
       - **Validação de história**: Eu, como professor, visito a página de cada grupo para monitorar o progresso dos projetos, contribuir com recursos didáticos, e facilitar a comunicação entre os membros.
 
     - **História 4**: Adicionar um Aluno <br/>
