@@ -120,7 +120,11 @@ A aplicação é:
   ### <a target="_blank">https://drive.google.com/file/d/1BaxPXs_i-CIUNxLiuHPePcDXowg_S8I7/view?usp=sharing</a>
 
   <br/><br/>
+   ## Issue/Bug Tracker
 
+  ![image](https://github.com/JotaPeans/fact-project/assets/95260401/f81995f8-1bf9-4d1f-a234-8088fe5b0d4e)
+
+   <br/><br/>
   ![LOGO FACT](https://github.com/JotaPeans/fact-project/assets/130470569/873cab2c-2c03-45fb-8791-952a7ddc7a7b)
 </details>
 
