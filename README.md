@@ -113,7 +113,7 @@ A aplicação é:
 
   ## ScreenCast Protótipo Lo-Fi
 
-  ### <a target="_blank">https://www.youtube.com/watch?v=ik3k_kCxHu8</a>
+  ### <a target="_blank">https://drive.google.com/file/d/16dqrQXCb4nZW6ziJDBjjgWukM2sCImw5/view?usp=sharing</a>
 
   ## ScreenCast do Uso do Sistema
 
