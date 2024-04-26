@@ -48,6 +48,8 @@ class FeedBackView(View):
         if(len(groupName) < 5):
             groups = Grupo.objects.filter(professor=user)
 
+            context["groups"] = groups
+
             messages.add_message(req, constants.ERROR, 'O nome do grupo precisa ter no mínimo 5 caracteres!')
 
             return render(req, "feedbackApp/app.html", context=context)
