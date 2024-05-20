@@ -57,6 +57,7 @@ main {
 .upperButtons{
    display: flex;
    justify-content: space-between;
+  
 
 }
 
@@ -65,7 +66,7 @@ main {
     font-size: 2rem;
 }
 
-.trashCan {
+#trashCan {
     border: none;
     max-width: fit-content;
     max-height: fit-content;
@@ -76,12 +77,31 @@ main {
     padding: 1rem 1.5rem;
     background-color: var(--red);
     font-size: 1.2rem;
-    color: white;
     cursor: pointer;
     transition: all 150ms ease-in-out;
     
     
 
+}
+
+#trashCanActivated{
+    border: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    border-radius: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--beigeHover);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    
+}
+
+#mensagemDeDelete{
+    display: none;
 }
 
 .group {
@@ -146,4 +166,21 @@ main {
 .temBorda{
     border: 2px solid white;
     border-radius: 5%;
+}
+
+.deleteGroup{
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    width: auto;
+    height: 15rem;
+    background-color: var(--beigeHover);
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 1rem;
+    display: none;
+    background-color: var(--red);
 }

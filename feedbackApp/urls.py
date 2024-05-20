@@ -8,5 +8,6 @@ urlpatterns = [
     path("", views.FeedBackView.as_view(), name="root"),
     path("group/<int:id>", views.GroupView.as_view(), name="group"),
     path("group/action/<int:id>", views.Group.as_view(), name="group_action"),
+    path("group/deleting/<int:groupId>", views.deleteGroup.as_view(), name = "deleteGroup"),
     path("logout/", views.logoutFunction, name="logout")
 ]

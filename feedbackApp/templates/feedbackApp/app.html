@@ -18,7 +18,11 @@
 
             <button id="trashCan">
                 <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.77273H9.2M19 6.77273H14.8M9.2 6.77273V5.5C9.2 4.94772 9.64772 4.5 10.2 4.5H13.8C14.3523 4.5 14.8 4.94772 14.8 5.5V6.77273M9.2 6.77273H14.8M6.4 8.59091V15.8636C6.4 17.5778 6.4 18.4349 6.94673 18.9675C7.49347 19.5 8.37342 19.5 10.1333 19.5H13.8667C15.6266 19.5 16.5065 19.5 17.0533 18.9675C17.6 18.4349 17.6 17.5778 17.6 15.8636V8.59091M9.2 10.4091V15.8636M12 10.4091V15.8636M14.8 10.4091V15.8636" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-        </button>
+            </button>
+
+            <button id="trashCanActivated">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.77273H9.2M19 6.77273H14.8M9.2 6.77273V5.5C9.2 4.94772 9.64772 4.5 10.2 4.5H13.8C14.3523 4.5 14.8 4.94772 14.8 5.5V6.77273M9.2 6.77273H14.8M6.4 8.59091V15.8636C6.4 17.5778 6.4 18.4349 6.94673 18.9675C7.49347 19.5 8.37342 19.5 10.1333 19.5H13.8667C15.6266 19.5 16.5065 19.5 17.0533 18.9675C17.6 18.4349 17.6 17.5778 17.6 15.8636V8.59091M9.2 10.4091V15.8636M12 10.4091V15.8636M14.8 10.4091V15.8636" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </button>
 
         </div>
 
@@ -31,11 +35,19 @@
             </button>
         </div>
     {% endif %}
-
+        <h2 id = "mensagemDeDelete">Selecione o grupo que deseja deletar</h2>
         <div class="content">
+            
             {% if groups %}
                 {% for group in groups %}
                 <a href="{% url 'feedbackApp:group' id=group.id %}" class="group">
+                    <div class="img">
+                        <img src="{% static 'images/factLogo.png' %}" alt="FACT">
+                    </div>
+                    <p>{{group.nome}}</p>
+                </a>
+
+                <a href="{% url 'feedbackApp:deleteGroup' groupId=group.id  %}" class="deleteGroup">
                     <div class="img">
                         <img src="{% static 'images/factLogo.png' %}" alt="FACT">
                     </div>
@@ -73,30 +85,6 @@
         </div>
     </div>
 
-    <div class="deleteGroup-modal">
-        <div>
-            <button id="dcloseModal">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
-            </button>
-
-            <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="action" value="deleteGroup">
-                <label for="name">Nome do Grupo Que Deseja Deletar</label>
-                <input id="name" name="groupName" required></input>
-
-                {% if messages %}
-                    {% for message in messages %}
-                        <p class="error">
-                            {{message}}
-                        </p>
-                    {% endfor %}
-                {% endif %}
-
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </div>
 {% endblock %}
 
 {% block script %}
@@ -132,28 +120,41 @@
         window.addEventListener("keydown", (key) => {
             if(key.key === "Escape") toggleModal("close");
         })
-    </script>
 
-    <script> 
+        function activateToDelete(action){
+            allGroupsToHide = document.getElementsByClassName("group")
+            allGroupsToShow = document.getElementsByClassName("deleteGroup")
 
-function toggleDeleteModal(action) {
-            const modal = document.getElementsByClassName("deleteGroup-modal")[0];
-            if (action === "close") {
-                modal.classList.remove("active");
-                return;
-            } else if (action === "open") {
-                modal.classList.add("active");
-                return;
+            document.getElementById("trashCan").style.display = "none";
+            document.getElementById("trashCanActivated").style.display = "flex";
+            document.getElementById("mensagemDeDelete").style.display = "flex";
+
+            for(let i = 0; i < allGroupsToHide.length; i++){
+
+                allGroupsToHide[i].style.display = "none";
+                allGroupsToShow[i].style.display = "flex";
             }
 
-            modal.classList.toggle("active");
+        }
+        function deactivateToDelete(action){
+            allGroupsToHide = document.getElementsByClassName("group")
+            allGroupsToShow = document.getElementsByClassName("deleteGroup")
+
+            document.getElementById("trashCan").style.display = "flex";
+            document.getElementById("trashCanActivated").style.display = "none";
+            document.getElementById("mensagemDeDelete").style.display = "none";
+
+            for(let i = 0; i < allGroupsToHide.length; i++){
+
+                allGroupsToHide[i].style.display = "flex";
+                allGroupsToShow[i].style.display = "none";
+            }
+
         }
 
-        document.getElementById("trashCan")?.addEventListener("click", () => toggleDeleteModal("open"));
-        document.getElementById("dcloseModal")?.addEventListener("click", () => toggleDeleteModal("close"));
+        document.getElementById("trashCan")?.addEventListener("click", activateToDelete);
+        document.getElementById("trashCanActivated")?.addEventListener("click", deactivateToDelete);
 
-        window.addEventListener("keydown", (key) => {
-            if (key.key === "Escape") toggleDeleteModal("close");
-        });
+
     </script>
 {% endblock %}
