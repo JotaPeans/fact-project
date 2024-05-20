@@ -54,9 +54,34 @@ main {
     gap: 1rem;
 }
 
+.upperButtons{
+   display: flex;
+   justify-content: space-between;
+
+}
+
 .container > h2 {
     color: var(--black);
     font-size: 2rem;
+}
+
+.trashCan {
+    border: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--red);
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    
+    
+
 }
 
 .group {
@@ -105,6 +130,12 @@ main {
     color: white;
     cursor: pointer;
     transition: all 150ms ease-in-out;
+}
+
+#editGroup{
+
+    color: yellow;
+
 }
 
 #addGroup:hover {

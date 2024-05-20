@@ -40,6 +40,9 @@ class FeedBackView(View):
 
         if(action == "addGroup"):
             return self.addGroup(req, context, user)
+        if(action =="removeGroup"):
+            id = Group.objects.get(id=pk)
+            return self.deleteGroup(req,context,user,id)
 
     
     def addGroup(self, req, context, user):
@@ -62,6 +65,13 @@ class FeedBackView(View):
         context["groups"] = groups
 
         return render(req, "feedbackApp/app.html", context=context)
+    
+    def deleteGroup(self,req,context,user,id):
+        group_to_delete = Grupo.objects.get(id=id)
+        group_to_delete.delete()
+    
+
+
 
 
 class GroupView(View):
