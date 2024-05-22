@@ -119,5 +119,10 @@ form > button:hover {
     color: var(--zinc-500)
 }
 
+.groupHeader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
 
 

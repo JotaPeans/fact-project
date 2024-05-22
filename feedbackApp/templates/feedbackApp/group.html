@@ -4,13 +4,18 @@
 {% block head%}
     <link rel="stylesheet" href="{% static 'feedbackApp/css/group.css' %}">
     <link rel="stylesheet" href="{% static 'root/styles/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/modal.css' %}">
 {% endblock %}
 
 {% block content %}
     <main>
-        <h1>{{ group.nome }}</h1>
+
+        
+        
 
         {% if alunos|length < 1 %}
+
+
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label id="uploadfile" for="uploadfileInput">
@@ -22,6 +27,36 @@
             </form>
 
         {% else %}
+
+            <div class = "export-modal">  
+                <div>
+                    <div>
+                    <h1>Exportar FaCT</h1>
+                    <button class = "statusReportButton">Status Report 1</button>
+                    <button class = "statusReportButton">Status Report 2</button>
+                    </div>
+                    
+                    
+                    <button id = "cancel">Cancelar</button>
+                    
+
+                </div>  
+
+
+            </div>
+
+            <div class = "groupHeader">
+            
+                <h1>{{ group.nome }}</h1>
+
+                <div class = "myGroupButtons">
+                    <button id = "exportButton">Exportar FACT</button>
+                    <button>Gerar FACT</button>
+                    <button style="background-color: yellow;">Editar</button>
+                </div>
+
+            
+            </div>
             <div class="alunos-container">
                 {% for aluno in alunos %}
                     <div class="aluno">
@@ -114,5 +149,35 @@
                 totalParagraph[0].textContent = somaTotal;
             }
         });
+    </script>
+
+    <script>
+
+        document.getElementById("exportButton")?.addEventListener("click", modalForExport);
+
+        function modalForExport(){
+            const modal = document.getElementById("exportModal");
+
+
+
+        }
+        
+        
+        document.addEventListener("DOMContentLoaded", () => { // n tava funcionando sem esperar o DOM
+            const cancelButton = document.getElementById("cancel");
+            console.log(cancelButton); 
+            cancelButton.addEventListener("click", fecharModal);
+            function fecharModal() {
+                console.log("can you listen to this click?");
+                const modals = document.getElementsByClassName("export-modal");
+                console.log(modals); 
+                if (modals.length > 0) {
+                    modals[0].style.display = "none";
+                }
+            }
+        });
+
+        
+
     </script>
 {% endblock %}

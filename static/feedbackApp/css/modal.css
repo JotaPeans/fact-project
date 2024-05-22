@@ -1,6 +1,16 @@
 :root {
     --beige: #F0EBE5;
     --beigeHover: #efe0ce;
+    --blue: #1E46D9;
+    --blueHover: #1c3ebb;
+    --yellow: #F7B401;
+    --yellowHover: #d69d00;
+    --red: #D72C00;
+    --redHover: #c02600;
+    --beige: #F0EBE5;
+    --beigeHover: #efe0ce;
+    --black: #292B26;
+    --blackHover: rgb(16, 16, 15);
 }
 
 * {
@@ -177,4 +187,61 @@
 
 .deleteGroup-modal > div > form > button:hover {
     background: #cec0b0;
+}
+
+
+.export-modal {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 99999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 100ms ease-in-out;
+    
+    backdrop-filter: blur(0.5rem);
+}
+
+
+.export-modal > div{
+    background-color: var(--beige);
+    border-radius: 1rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    justify-content: space-between;
+    
+}
+
+.export-modal > div > div{
+    display: flex;
+    flex-direction: column;
+    height: 8rem;
+    margin-bottom:10%;
+    justify-content: space-between;
+}
+
+.statusReportButton{
+
+    background-color: var(--blue);
+    border-radius: 1rem;
+    padding: 5%;
+    color: var(--beige);
+    
+
+}
+
+#cancel{
+    background-color: var(--red);
+    border-radius: 1rem;
+    padding: 5%;
+    margin:10%;
+    z-index: 99999;
+
+
 }
