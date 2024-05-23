@@ -45,6 +45,32 @@
 
             </div>
 
+            <div class = "editar-modal">  
+                <div>
+                    <div class = "upper-editar-modal">
+                        <button id = "adicionarAluno">+</button>
+                        <button id = "deletarAluno">Deletar</button>
+                    </div>
+                    <div id = "displayDeAlunos">
+                        {% for aluno in alunos %}
+                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"><button>{{ aluno.nome }}</button></a>
+                        {% endfor %}
+
+                    </div>
+                    
+                    <div class = "bottom-editar-modal">
+                        <button id = "save">Salvar</button>
+                        <button id = "cancel2">Cancelar</button>
+                    </div>
+                    
+                    
+
+                </div>  
+
+
+            </div>
+
+
             <div class = "groupHeader">
             
                 <h1>{{ group.nome }}</h1>
@@ -52,7 +78,7 @@
                 <div class = "myGroupButtons">
                     <button id = "exportButton">Exportar FACT</button>
                     <button>Gerar FACT</button>
-                    <button style="background-color: yellow;">Editar</button>
+                    <button id = "toEdit" style="background-color: yellow;">Editar</button>
                 </div>
 
             
@@ -154,9 +180,10 @@
     <script>
 
         document.getElementById("exportButton")?.addEventListener("click", modalForExport);
-
+        console.log("teste");
         function modalForExport(){
-            const modal = document.getElementById("exportModal");
+            const modal = document.getElementsByClassName("export-modal");
+            modal[0].style.display = "flex";
 
 
 
@@ -176,6 +203,20 @@
                 }
             }
         });
+
+        document.getElementById("cancel2")?.addEventListener("click", fecharModal2)
+
+        function fecharModal2(){
+            console.log("DOES THIS WORK?");
+            document.getElementsByClassName("editar-modal")[0].style.display = "none";
+        }
+
+        document.getElementById("toEdit").addEventListener("click", abrirModal)
+
+        function abrirModal(){
+            console.log("abrindo Modal do edit!");
+            document.getElementsByClassName("editar-modal")[0].style.display = "flex";
+        }
 
         
 

@@ -198,7 +198,7 @@
     position: fixed;
     z-index: 99999;
     
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     transition: all 100ms ease-in-out;
@@ -244,4 +244,87 @@
     z-index: 99999;
 
 
+}
+/* lets turn these two ^ v  into classes later */
+#cancel2{
+    background-color: var(--red);
+    border-radius: 1rem;
+    padding: 5%;
+    margin:10%;
+    z-index: 99999;
+
+
+}
+
+.editar-modal{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 100ms ease-in-out;
+
+    backdrop-filter: blur(0.5rem);
+}
+
+.editar-modal > div{
+    background-color: var(--beige);
+    height: 20rem;
+    width: 20rem;
+    border-radius:1rem;
+}
+
+.upper-editar-modal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left:40px;
+    margin-right:40px;
+    margin-top:25px;
+    
+
+}
+.upper-editar-modal > button{
+    margin-left:5px;
+    padding: 5px;
+    border-radius: 1rem;
+    padding: 5%;
+    box-shadow: none;
+
+}
+
+#deletarAluno{
+    background-color: var(--red);
+    color: white;
+    box-shadow: 0px 0px 0px 0px red;
+}
+
+#displayDeAlunos{
+
+    display: flex;
+    flex-direction:column;
+    margin: 15% 15% 0% 15%;
+    justify-content: space-between;
+    padding:5% 0% 5% 0%;
+    gap: 0.5rem;
+
+}
+
+#save{
+    background-color: var(--blue);
+    color: white;
+    box-shadow: 0px 0px 0px 0px red;
+    border-radius: 1rem;
+    padding: 5%;
+    margin:10%;
+    z-index: 99999;
+}
+
+#displayDeAlunos > button{
+    border-radius: 0.5rem;
+    border-color: var(white);
 }

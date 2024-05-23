@@ -165,6 +165,13 @@ class deleteGroup(View):
         groupToDelete.delete()
         return redirect("autenticacao:root")
 
+class deleteAluno(View):
+    def get(self,alunoId, req):
+        #TODO: make it safe by verifying if alumni is indeed in user's range
+
+        alumniToDelete = Aluno.objects.get(id=alunoId)
+        alumniToDelete.delete()
+        return redirect("autenticacao:root")
 class Group(View):
     def get(self, req, id):
         if(not req.user.is_authenticated):
