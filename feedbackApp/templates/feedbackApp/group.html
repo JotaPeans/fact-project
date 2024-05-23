@@ -53,7 +53,7 @@
                     </div>
                     <div id = "displayDeAlunos">
                         {% for aluno in alunos %}
-                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"><button>{{ aluno.nome }}</button></a>
+                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"><button class = "meuNomeDoAluno">{{ aluno.nome }}</button></a>
                         {% endfor %}
 
                     </div>

@@ -307,12 +307,13 @@
 
     display: flex;
     flex-direction:column;
-    margin: 15% 15% 0% 15%;
+    margin: -25% 0% 0% 12%; /* mudar esse nmargin*/
     justify-content: space-between;
     padding:5% 0% 5% 0%;
     gap: 0.5rem;
 
 }
+
 
 #save{
     background-color: var(--blue);
@@ -324,7 +325,11 @@
     z-index: 99999;
 }
 
-#displayDeAlunos > button{
+
+
+.meuNomeDoAluno{
     border-radius: 0.5rem;
-    border-color: var(white);
+    width: 15rem;
+    height: 2rem;
+    color:blue;
 }
