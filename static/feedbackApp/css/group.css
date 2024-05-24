@@ -13,6 +13,8 @@
     --zinc-100: #f4f4f5;
     --zinc-300: #d4d4d8;
     --zinc-500: #71717a;
+
+    --amareloSoft: #F7BA19;
 }
 
 main {
@@ -21,7 +23,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem;
+    padding: 2rem 5rem 0rem 3rem;
+    
 }
 
 hr {
@@ -140,6 +143,36 @@ form > button:hover {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    align-items: center;
 }
 
+.myGroupButtons{
+    display:flex;
+    margin-top: 1rem;
+    gap:3rem;
+
+}
+
+.myGroupButtons > button{
+
+    padding:1rem;
+    border-radius: 10px;
+    font-size:20px;
+    color: white;
+    background-color: var(--blue);
+}
+
+.myGroupButtons > button:hover{
+
+    background-color: var(--blueHover);
+}
+
+
+#toEdit{
+    background-color: var(--amareloSoft);
+}
+
+#toEdit:hover{
+    background-color: var(--yellowHover);
+}
 

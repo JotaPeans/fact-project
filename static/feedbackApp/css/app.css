@@ -170,5 +170,6 @@ main {
     gap: 1rem;
     border-radius: 1rem;
     display: none;
-    background-color: var(--red);
+    border-color: var(--blue);
+    
 }
