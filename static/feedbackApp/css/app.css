@@ -1,4 +1,5 @@
 :root {
+    --soft-blue: #4161D8;
     --blue: #1E46D9;
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
@@ -54,34 +55,44 @@ main {
     gap: 1rem;
 }
 
-.upperButtons{
-   display: flex;
-   justify-content: space-between;
-  
-
-}
-
 .container > h2 {
     color: var(--black);
     font-size: 2rem;
 }
 
-#trashCan {
+.upperButtons{
+    display: flex;
+    justify-content: space-between;
+    height: 48px;
+ }
+
+#addGroup {
     border: none;
     max-width: fit-content;
     max-height: fit-content;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--red);
-    font-size: 1.2rem;
+    border-radius: 10px;
+    padding: 11.5px 19.5px;
+    text-align: center;
+    background-color: var(--soft-blue);
+    color: white;
+    font-size: 20px;
     cursor: pointer;
     transition: all 150ms ease-in-out;
-    
-    
+}
 
+#addGroup:hover {
+    background-color: var(--blueHover);
+}
+
+#trashCan {
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 11.5px 19.5px;
+    background-color: var(--red);
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
 }
 
 #trashCanActivated{
@@ -136,32 +147,9 @@ main {
     font-size: 1.2rem;
 }
 
-#addGroup {
-    border: none;
-    max-width: fit-content;
-    max-height: fit-content;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--blue);
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
-    transition: all 150ms ease-in-out;
-}
-
 #editGroup{
-
     color: yellow;
-
 }
-
-#addGroup:hover {
-    background-color: var(--blueHover);
-}
-
 
 .temBorda{
     border: 2px solid white;

@@ -9,25 +9,19 @@
 
 {% block content %}
     <main>
-
-        
-        
-
         {% if alunos|length < 1 %}
-
-
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label id="uploadfile" for="uploadfileInput">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                    Envie o arquivo Excel
+                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    Selecione o arquivo Excel
+                    <div type="text"></div>
                 </label>
                 <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                 <button type="submit">Enviar</button>
             </form>
 
         {% else %}
-
             <div class = "export-modal">  
                 <div>
                     <div>
@@ -36,43 +30,50 @@
                     <button class = "statusReportButton">Status Report 2</button>
                     </div>
                     
-                    
-                    <button id = "cancel">Cancelar</button>
-                    
-
+                    <button id = "cancelExport">Cancelar</button>
                 </div>  
-
-
             </div>
 
             <div class = "editar-modal">  
-                <div>
+                <div class = "editar-modal-content">
                     <div class = "upper-editar-modal">
-                        <button id = "adicionarAluno">+</button>
+                        <button id = "adicionarAluno">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-plus"
+                            >
+                                <path d="M5 12h14"/>
+                                <path d="M12 5v14"/>
+                            </svg>
+                        </button>
                         <button id = "deletarAluno">Deletar</button>
                     </div>
                     <div id = "displayDeAlunos">
                         {% for aluno in alunos %}
-                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"><button class = "meuNomeDoAluno">{{ aluno.nome }}</button></a>
+                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}">{{ aluno.nome }}</a>
                         {% endfor %}
 
                     </div>
-                    
                     <div class = "bottom-editar-modal">
                         <button id = "save">Salvar</button>
-                        <button id = "cancel2">Cancelar</button>
+                        <button id = "cancel-editar">Cancelar</button>
                     </div>
-                    
-                    
-
+                    <div class = bottom-editar-modal2>
+                        <button id = "cancel-editar">Cancelar</button>
+                        <button id = "cancel-editar">lixinho</button>
+                    </div>
                 </div>  
-
-
             </div>
 
-
             <div class = "groupHeader">
-            
                 <h1>{{ group.nome }}</h1>
 
                 <div class = "myGroupButtons">
@@ -80,9 +81,8 @@
                     <button>Gerar FACT</button>
                     <button id = "toEdit" style="background-color: yellow;">Editar</button>
                 </div>
-
-            
             </div>
+
             <div class="alunos-container">
                 {% for aluno in alunos %}
                     <div class="aluno">
@@ -131,7 +131,6 @@
                     {% endif %}
                 {% endfor %}
             </div>
-
         {% endif %}
     </main>
 
@@ -191,7 +190,7 @@
         
         
         document.addEventListener("DOMContentLoaded", () => { // n tava funcionando sem esperar o DOM
-            const cancelButton = document.getElementById("cancel");
+            const cancelButton = document.getElementById("cancelExport");
             console.log(cancelButton); 
             cancelButton.addEventListener("click", fecharModal);
             function fecharModal() {
@@ -204,7 +203,7 @@
             }
         });
 
-        document.getElementById("cancel2")?.addEventListener("click", fecharModal2)
+        document.getElementById("cancel-editar")?.addEventListener("click", fecharModal2)
 
         function fecharModal2(){
             console.log("DOES THIS WORK?");

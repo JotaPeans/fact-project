@@ -1,16 +1,23 @@
 :root {
     --beige: #F0EBE5;
     --beigeHover: #efe0ce;
+    --soft-blue: #4161D8;
     --blue: #1E46D9;
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
     --yellowHover: #d69d00;
     --red: #D72C00;
     --redHover: #c02600;
-    --beige: #F0EBE5;
-    --beigeHover: #efe0ce;
     --black: #292B26;
     --blackHover: rgb(16, 16, 15);
+    --zinc400: #a1a1aa;
+    --zinc200: #e4e4e7;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    background-color: red;
+    color: red;
 }
 
 * {
@@ -227,33 +234,48 @@
 }
 
 .statusReportButton{
-
     background-color: var(--blue);
     border-radius: 1rem;
     padding: 5%;
     color: var(--beige);
-    
-
 }
 
-#cancel{
+button{
+    border:none;
+}
+
+#cancelExport{
     background-color: var(--red);
     border-radius: 1rem;
     padding: 5%;
     margin:10%;
     z-index: 99999;
-
-
 }
-/* lets turn these two ^ v  into classes later */
-#cancel2{
-    background-color: var(--red);
-    border-radius: 1rem;
-    padding: 5%;
-    margin:10%;
-    z-index: 99999;
 
+#cancel-editar{
+    background-color: #F9F6F3;
+    border-radius: 10px;
+    padding: 11.5px 19.5px;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
 
+#cancel-editar:hover{
+    background-color: white;
+}
+
+#save{
+    background-color: var(--soft-blue);
+    color: white;
+    border-radius: 10px;
+    padding: 11.5px 19.5px;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+#save:hover {
+    background-color: var(--blue);
 }
 
 .editar-modal{
@@ -267,69 +289,81 @@
     align-items: center;
     justify-content: center;
     transition: all 100ms ease-in-out;
-
     backdrop-filter: blur(0.5rem);
 }
 
-.editar-modal > div{
+.bottom-editar-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.bottom-editar-modal2{
+    display:none;
+}
+
+.bottom-editar-modal2.active{
+    display:flex;
+}
+
+.editar-modal-content{
     background-color: var(--beige);
-    height: 20rem;
-    width: 20rem;
+    padding: 2rem;
+    width: 668px;
     border-radius:1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
 }
 
 .upper-editar-modal{
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin-left:40px;
-    margin-right:40px;
-    margin-top:25px;
-    
-
+    align-items: center;
 }
-.upper-editar-modal > button{
-    margin-left:5px;
-    padding: 5px;
-    border-radius: 1rem;
-    padding: 5%;
-    box-shadow: none;
 
+#adicionarAluno{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #deletarAluno{
     background-color: var(--red);
+    cursor: pointer;
     color: white;
-    box-shadow: 0px 0px 0px 0px red;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 11.5px 27px;
 }
 
 #displayDeAlunos{
-
     display: flex;
     flex-direction:column;
-    margin: -25% 0% 0% 12%; /* mudar esse nmargin*/
+    height: 16.25rem;
     justify-content: space-between;
-    padding:5% 0% 5% 0%;
     gap: 0.5rem;
-
+    overflow-y:auto;
 }
 
-
-#save{
-    background-color: var(--blue);
-    color: white;
-    box-shadow: 0px 0px 0px 0px red;
-    border-radius: 1rem;
-    padding: 5%;
-    margin:10%;
-    z-index: 99999;
+#displayDeAlunos::-webkit-scrollbar {
+    display: none;
 }
 
-
-
-.meuNomeDoAluno{
+#displayDeAlunos > a{
     border-radius: 0.5rem;
-    width: 15rem;
-    height: 2rem;
-    color:blue;
+    width: 100%;
+    padding: 12px;
+    color: var(--black);
+    text-decoration: none;
+    background-color: white; 
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
 }

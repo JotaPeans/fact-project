@@ -11,6 +11,11 @@
     --blackHover: rgb(16, 16, 15);
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 * {
     margin: 0;
     padding: 0;
