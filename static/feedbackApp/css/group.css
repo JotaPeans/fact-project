@@ -1,4 +1,5 @@
 :root {
+    --soft-blue: #4161D8;
     --blue: #1E46D9;
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
@@ -23,7 +24,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem 5rem 0rem 3rem;
+    padding: 3rem;
     
 }
 
@@ -35,7 +36,7 @@ hr {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     color: var(--black);
 }
 
@@ -115,11 +116,37 @@ form > button:hover {
 .alunos-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-    border-radius: 2rem;
-    border: 1px solid var(--zinc-500);
-    background-color: var(--zinc-100);
+    gap: 1rem;
+}
+
+.notas-aluno {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.notas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notas > h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--zinc-500);
+}
+
+.notas > p {
+    font-size: 30px;
+    color: black;
+}
+
+.notas-aluno > hr {
+    width: 1px;
+    height: 48px;
+    border-left: 2px solid var(--zinc-500);
 }
 
 .aluno {
@@ -147,24 +174,24 @@ form > button:hover {
 }
 
 .myGroupButtons{
-    display:flex;
-    margin-top: 1rem;
-    gap:3rem;
-
+    display: flex;
+    gap: 1.5rem;
 }
 
 .myGroupButtons > button{
 
-    padding:1rem;
+    padding: 11.5px 28px;
     border-radius: 10px;
-    font-size:20px;
+    font-size: 20px;
     color: white;
-    background-color: var(--blue);
+    background-color: var(--soft-blue);
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
 }
 
 .myGroupButtons > button:hover{
 
-    background-color: var(--blueHover);
+    background-color: var(--blue);
 }
 
 
@@ -176,3 +203,39 @@ form > button:hover {
     background-color: var(--yellowHover);
 }
 
+details {
+    padding: 16px 32px;
+    border-radius: 10px;
+    background-color: var(--beige);
+}
+
+details > summary {
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+details > summary > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+details[open] summary ~ * {
+    animation: fade 500ms ease-in-out;
+}
+
+details[open] > summary {
+    margin-bottom: 1rem;
+}
+
+summary::marker {
+    content: none;
+}
+
+@keyframes fade {
+    0%    {opacity: 0;}
+    100%  {opacity: 1;}
+}
