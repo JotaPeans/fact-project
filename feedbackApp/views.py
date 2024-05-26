@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .models import Aluno, Grupo
+from .models import Aluno, Grupo, Fact
 from .functions import getMediaAluno, transformNotasToObject
 import pandas as pd
 from django.contrib import messages
@@ -69,9 +69,6 @@ class FeedBackView(View):
     def deleteGroup(self,req,context,user,id):
         group_to_delete = Grupo.objects.get(id=id)
         group_to_delete.delete()
-    
-
-
 
 
 class GroupView(View):
@@ -84,9 +81,48 @@ class GroupView(View):
         if(not group.exists()):
             return redirect("feedbackApp:root")
         
+        alunos = []
+
+        for aluno in group[0].alunos.all():
+            # filtra os facts pelo aluno e pelo grupo atual
+            fact = list(filter(lambda x: x.grupo.nome == group[0].nome, list(aluno.fact_set.all())))
+            sr1 = 0
+            sr2 = 0
+
+            if(len(list(fact)) == 1):
+                # TODO REALIZAR CALCULO SR1
+                #! O CALCULO ABAIXO ESTA SOMANDO APENAS O FACT
+                sr1 = (
+                    fact[0].pensamento_critico_criatividade + 
+                    fact[0].comunicacao + 
+                    fact[0].colaboracao + 
+                    fact[0].qualidade_entregas + 
+                    fact[0].presenca + 
+                    fact[0].entrega_prazos
+                )
+
+            if(len(list(fact)) == 2):
+                sr2 = (
+                    fact[1].pensamento_critico_criatividade + 
+                    fact[1].comunicacao + 
+                    fact[1].colaboracao + 
+                    fact[1].qualidade_entregas + 
+                    fact[1].presenca + 
+                    fact[1].entrega_prazos
+                )
+
+            alunos.append({
+                "id": aluno.id,
+                "nome": aluno.nome,
+                "email": aluno.email,
+                "sr1": round(sr1, 2),
+                "sr2": round(sr2, 2),
+                "media": round((sr1 + sr2) / 2, 2)
+            })
+        
         context = {
             "group": group[0],
-            "alunos": group[0].alunos.all()
+            "alunos": alunos
         }
         
         return render(req, "feedbackApp/group.html", context=context)
@@ -133,15 +169,21 @@ class GroupView(View):
                 aluno = Aluno.objects.create(
                     nome=aluno_object["nome"],
                     email=aluno_object["email"],
+                )
+
+                fact = Fact.objects.create(
                     pensamento_critico_criatividade=aluno_object["pensamento_crítico_e_criatividade"],
                     comunicacao=aluno_object["comunicação"],
                     colaboracao=aluno_object["colaboração"],
                     qualidade_entregas=aluno_object["qualidade_das_entregas"],
                     presenca=aluno_object["presença"],
-                    entrega_prazos=aluno_object["entregas_e_prazos"]
+                    entrega_prazos=aluno_object["entregas_e_prazos"],
+                    aluno=aluno,
+                    grupo=group[0]
                 )
 
                 aluno.save()
+                fact.save()
 
                 group[0].alunos.add(aluno)
                 group[0].save()
@@ -165,6 +207,7 @@ class deleteGroup(View):
         groupToDelete.delete()
         return redirect("autenticacao:root")
 
+
 class deleteAluno(View):
     def get(self, req, alunoId):
         #TODO: make it safe by verifying if aluno is indeed in user's range
@@ -172,23 +215,6 @@ class deleteAluno(View):
         alunoToDelete = Aluno.objects.get(id=alunoId)
         alunoToDelete.delete()
         return redirect("autenticacao:root")
-class Group(View):
-    def get(self, req, id):
-        if(not req.user.is_authenticated):
-            return JsonResponse({"message": "Unauthorized"}, status=401)
-        
-        group = Grupo.objects.filter(pk=id)
-
-        if(not group.exists()):
-            return JsonResponse({"message": "Grupo não existe"}, status=404)
-        
-        alunos = group[0].alunos.all()
-
-        data = {
-            'group': list(group.values()),
-            'alunos': list(alunos.values())
-        }
-        return JsonResponse(data)
 
 
 def logoutFunction(req):
