@@ -22,17 +22,17 @@
             </form>
 
         {% else %}
-            <div class = "export-modal">  
-                <div>
-                    <div>
-                    <h1>Exportar FaCT</h1>
-                    <button class = "statusReportButton">Status Report 1</button>
-                    <button class = "statusReportButton">Status Report 2</button>
-                    </div>
-                    
-                    <button id = "cancelExport">Cancelar</button>
-                </div>  
-            </div>
+        <div class="export-modal">  
+            <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 10px;">
+                    <h1 style="margin-bottom: 10px;">Exportar FaCT</h1>
+                    <button class="statusReportButton" style="margin-bottom: 10px;">Status Report 1</button>
+                    <button class="statusReportButton" style="margin-bottom: 10px;">Status Report 2</button>
+                </div>
+                
+                <button id="cancelExport" style="margin-top: 20px;">Cancelar</button>
+            </div>  
+        </div>
 
             <div class = "editar-modal">  
                 <div class = "editar-modal-content">
@@ -54,11 +54,18 @@
                                 <path d="M12 5v14"/>
                             </svg>
                         </button>
-                        <button id = "deletarAluno">Deletar</button>
+                        <button id = "deletarAluno">
+                            Deletar
+                        </button>
+                        <button id = "deletarAlunoActive">
+                            Deletar
+                        </button>
                     </div>
                     <div id = "displayDeAlunos">
                         {% for aluno in alunos %}
-                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}">{{ aluno.nome }}</a>
+                        <a class="aluno-unit">{{ aluno.nome }}</a>
+                        
+                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"class="deleteAluno"> <p>{{aluno.nome}}</p> </a>
                         {% endfor %}
 
                     </div>
@@ -219,5 +226,39 @@
 
         
 
+    </script>
+
+    <script>
+        function activateToDelete(action){
+            allAlunosToHide = document.getElementsByClassName("aluno-unit")
+            allAlunosToShow = document.getElementsByClassName("deleteAluno")
+
+            document.getElementById("deletarAluno").style.display = "none";
+            document.getElementById("deletarAlunoActive").style.display = "flex";
+
+            for(let i = 0; i < allAlunosToHide.length; i++){
+
+                allAlunosToHide[i].style.display = "none";
+                allAlunosToShow[i].style.display = "flex";
+            }
+
+        }
+        function deactivateToDelete(action){
+            allAlunosToHide = document.getElementsByClassName("aluno-unit")
+            allAlunosToShow = document.getElementsByClassName("deleteAluno")
+
+            document.getElementById("deletarAluno").style.display = "flex";
+            document.getElementById("deletarAlunoActive").style.display = "none";
+
+            for(let i = 0; i < allAlunosToHide.length; i++){
+
+                allAlunosToHide[i].style.display = "flex";
+                allAlunosToShow[i].style.display = "none";
+            }
+
+        }
+
+        document.getElementById("deletarAluno")?.addEventListener("click", activateToDelete);
+        document.getElementById("deletarAlunoActive")?.addEventListener("click", deactivateToDelete);
     </script>
 {% endblock %}

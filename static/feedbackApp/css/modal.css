@@ -246,6 +246,7 @@ button{
 
 #cancelExport{
     background-color: var(--red);
+    color: white;
     border-radius: 1rem;
     padding: 5%;
     margin:10%;
@@ -338,6 +339,15 @@ button{
 
 #deletarAluno{
     background-color: var(--red);
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 11.5px 27px;
+}
+
+#deletarAlunoActive{
+    background-color: var(--blue);
     cursor: pointer;
     color: white;
     border-radius: 10px;

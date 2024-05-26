@@ -166,11 +166,11 @@ class deleteGroup(View):
         return redirect("autenticacao:root")
 
 class deleteAluno(View):
-    def get(self,alunoId, req):
-        #TODO: make it safe by verifying if alumni is indeed in user's range
+    def get(self, req, alunoId):
+        #TODO: make it safe by verifying if aluno is indeed in user's range
 
-        alumniToDelete = Aluno.objects.get(id=alunoId)
-        alumniToDelete.delete()
+        alunoToDelete = Aluno.objects.get(id=alunoId)
+        alunoToDelete.delete()
         return redirect("autenticacao:root")
 class Group(View):
     def get(self, req, id):
