@@ -203,9 +203,6 @@ form > button:hover {
     background-color: var(--yellowHover);
 }
 
-<<<<<<< HEAD
-
-=======
 details {
     padding: 16px 32px;
     border-radius: 10px;
@@ -242,4 +239,3 @@ summary::marker {
     0%    {opacity: 0;}
     100%  {opacity: 1;}
 }
->>>>>>> ed9bab1d084ad49100c1c4f78cc9757e9386a8ab

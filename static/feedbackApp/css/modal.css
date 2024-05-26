@@ -338,6 +338,7 @@ button{
 }
 
 #deletarAluno{
+    display: flex;
     background-color: var(--red);
     cursor: pointer;
     color: white;
@@ -347,6 +348,7 @@ button{
 }
 
 #deletarAlunoActive{
+    display: none;
     background-color: var(--blue);
     cursor: pointer;
     color: white;
