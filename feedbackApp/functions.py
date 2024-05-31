@@ -16,7 +16,7 @@ def alunoAtualInAlunos(aluno):
         if(aluno in alunos[index]):
             return True
         
-    return False;
+    return False
 
 def getAlunoEmail(aluno):
     for _, valor in alunos.items():

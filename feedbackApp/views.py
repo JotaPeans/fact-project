@@ -223,12 +223,13 @@ def delete_alunos(request, id):
         data = json.loads(request.body)
         aluno_ids = data.get("ids", [])
 
-        for i in aluno_ids:
-            Aluno.objects.get(id=i).delete()
+        grupo = Grupo.objects.get(id=id)
+
+        for aluno_id in aluno_ids:
+            aluno = Aluno.objects.get(id=aluno_id)
+            grupo.alunos.remove(aluno)
+        
         return JsonResponse({"success": True})
-
-    return JsonResponse({"success": False})
-
 def logoutFunction(req):
     logout(req)
     return redirect("autenticacao:root")
