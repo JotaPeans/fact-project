@@ -217,6 +217,19 @@ class deleteAluno(View):
         return redirect("autenticacao:root")
 
 
+def delete_alunos(request, id):
+    if request.method == "POST":
+        import json
+        data = json.loads(request.body)
+        aluno_ids = data.get("ids", [])
+
+        for i in aluno_ids:
+            Aluno.objects.get(id=i).delete()
+        return JsonResponse({"success": True})
+
+    return JsonResponse({"success": False})
+
 def logoutFunction(req):
     logout(req)
     return redirect("autenticacao:root")
+

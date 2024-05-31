@@ -36,47 +36,41 @@
 
             <div class = "editar-modal">  
                 <div class = "editar-modal-content">
+
+                    <div class = "modalTitleAndSubtitle">
+                        <h2>Editar Grupo</h2>
+                        <h4>Adicione ou remova alunos do grupo</h4>
+                        
+                        <h3 id = "descricaoParaRemoverAluno">Selecione o(s) aluno(s) que deseja remover do grupo</h3>
+                        <h3 id = "descricaoParaAdicionarAluno">Digite o nome do aluno que deseja adicionar</h3>
+
+                    </div>
+
                     <div class = "upper-editar-modal">
                         <button id = "adicionarAluno">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-plus"
-                            >
-                                <path d="M5 12h14"/>
-                                <path d="M12 5v14"/>
-                            </svg>
+                            Adicionar
                         </button>
                         <button id = "deletarAluno">
-                            Deletar
+                            Remover
                         </button>
-                        <button id = "deletarAlunoActive">
-                            Deletar
-                        </button>
+
                     </div>
                     <div id = "displayDeAlunos">
                         {% for aluno in alunos %}
-                        <a class="aluno-unit">{{ aluno.nome }}</a>
+                        <a class="aluno-unit" data-id="{{ aluno.id }}" data-group-id = "{{group.id}}" >{{ aluno.nome }}</a>
                         
-                        <a href="{% url 'feedbackApp:deleteAluno' alunoId=aluno.id  %}"class="deleteAluno"> <p>{{aluno.nome}}</p> </a>
+
                         {% endfor %}
 
                     </div>
                     <div class = "bottom-editar-modal">
+                        <button id = "cancel-editar">Cancelar</button>
                         <button id = "save">Salvar</button>
-                        <button id = "cancel-editar">Cancelar</button>
+                        <button id = "remover-confirmation">Remover</button>
+                        <button id = "adicionar-confirmation">Ok</button>
+
                     </div>
-                    <div class = bottom-editar-modal2>
-                        <button id = "cancel-editar">Cancelar</button>
-                        <button id = "cancel-editar">lixinho</button>
-                    </div>
+
                 </div>  
             </div>
 
@@ -185,10 +179,99 @@
 
         document.getElementById("cancel-editar")?.addEventListener("click", fecharModal2)
 
+
+        //classes que devo retirar na hora do CANCEL: "deletarAlunoActive" , "selectedToDelete
+
+        
+
+        //classes que devo retirar na hora do SAVE: "deletarAlunoActive"
+
+        function cancelAndTurnModal2BackToBase(){ // esse é o do cancel
+            console.log("cancelAndturnModal2BackToBase()");
+            document.getElementById("descricaoParaRemoverAluno").style.display = "none";
+            document.getElementById("descricaoParaAdicionarAluno").style.display = "none";
+
+            document.getElementsByClassName("upper-editar-modal")[0].style.display = "flex";
+            document.getElementById("adicionarAluno").style.display = "flex";
+            document.getElementById("deletarAluno").style.display = "flex";
+
+            alunos = document.getElementsByClassName("aluno-unit");
+
+            for (let i = 0; i < alunos.length; i++){
+                alunos[i].classList.remove("deletarAlunoActive");
+                alunos[i].classList.remove("selectedToDelete");
+                alunos[i].style.color = "var(--zinc400)";
+                alunos[i].style.borderColor = "#000000"; 
+                alunos[i].style.borderStyle = "none";
+                alunos[i].style.borderWidth = "100%";
+                // with this, we can ensure that the operation has been cancelled for real.
+            }
+
+            document.getElementById("save").style.display = "flex";
+            document.getElementById("remover-confirmation").style.display = "none";
+            document.getElementById("adicionar-confirmation").style.display = "none";
+
+        }
+
+        function removeAndTurnModal2BackToBase(){
+            console.log("removeAndTurnModal2BackToBase()");
+            document.getElementById("descricaoParaRemoverAluno").style.display = "none";
+            document.getElementById("descricaoParaAdicionarAluno").style.display = "none";
+            
+            document.getElementsByClassName("upper-editar-modal")[0].style.display = "flex";
+            document.getElementById("adicionarAluno").style.display = "flex";
+            document.getElementById("deletarAluno").style.display = "flex";
+            
+            alunos = document.getElementsByClassName("aluno-unit");
+
+            for (let i = 0; i < alunos.length; i++){
+                alunos[i].classList.remove("deletarAlunoActive");
+                alunos[i].style.color = "var(--zinc400)";
+                alunos[i].style.borderColor = "#000000"; 
+                alunos[i].style.borderStyle = "none";
+                alunos[i].style.borderWidth = "100%";
+
+                if (alunos[i].classList.contains("selectedToDelete")){
+                    alunos[i].style.color = "red";
+                }
+
+
+            }
+
+            document.getElementById("save").style.display = "flex";
+            document.getElementById("remover-confirmation").style.display = "none";
+            document.getElementById("adicionar-confirmation").style.display = "none";
+        
+        }
+
+        document.getElementById("remover-confirmation").addEventListener("click", removeAndTurnModal2BackToBase);
+
+
+        
+
         function fecharModal2(){
             console.log("DOES THIS WORK?");
+            if (this.classList.contains("cancelDeleteHasBeenToggled")){
+                console.log("I got in the if");
+                //time to turn the modal back to normal
+
+                //primeiro remover os ToDelete de todos os alunos
+                alunosUnit = document.getElementsByClassName("aluno-unit");
+
+                for (var i = 0; i < alunosUnit.length; i++){
+                    alunosUnit[i].classList.remove("selectedToDelete");
+                }
+
+                //activate function turnModalBackToBase
+                cancelAndTurnModal2BackToBase();
+
+                this.classList.remove("cancelDeleteHasBeenToggled");
+
+                return;
+            }
             document.getElementsByClassName("editar-modal")[0].style.display = "none";
         }
+
 
         document.getElementById("toEdit").addEventListener("click", abrirModal)
 
@@ -242,36 +325,90 @@
     </script>
 
     <script>
-        function activateToDelete(action){
-            allAlunosToHide = document.getElementsByClassName("aluno-unit")
-            allAlunosToShow = document.getElementsByClassName("deleteAluno")
+        document.addEventListener("DOMContentLoaded", () => { // borda só pegou com o DOM carregado(?)
+    function activateToDelete() {
 
-            document.getElementById("deletarAluno").style.display = "none";
-            document.getElementById("deletarAlunoActive").style.display = "flex";
+        let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
+        botoesDeCima.style.display = "none";
 
-            for(let i = 0; i < allAlunosToHide.length; i++){
+        let descricaoRemover = document.getElementById("descricaoParaRemoverAluno");
+        descricaoRemover.style.display = "flex";
 
-                allAlunosToHide[i].style.display = "none";
-                allAlunosToShow[i].style.display = "flex";
-            }
+        document.getElementById("save").style.display = "none";
+        document.getElementById("remover-confirmation").style.display = "flex";
 
-        }
-        function deactivateToDelete(action){
-            allAlunosToHide = document.getElementsByClassName("aluno-unit")
-            allAlunosToShow = document.getElementsByClassName("deleteAluno")
+        document.getElementById("cancel-editar").classList.add("cancelDeleteHasBeenToggled");
+        const allAlunosToDelete = document.getElementsByClassName("aluno-unit");
 
-            document.getElementById("deletarAluno").style.display = "flex";
-            document.getElementById("deletarAlunoActive").style.display = "none";
-
-            for(let i = 0; i < allAlunosToHide.length; i++){
-
-                allAlunosToHide[i].style.display = "flex";
-                allAlunosToShow[i].style.display = "none";
-            }
-
+        for (let i = 0; i < allAlunosToDelete.length; i++) {
+            allAlunosToDelete[i].classList.add("deletarAlunoActive");
         }
 
-        document.getElementById("deletarAluno")?.addEventListener("click", activateToDelete);
-        document.getElementById("deletarAlunoActive")?.addEventListener("click", deactivateToDelete);
+        var alunosParaSeremDeletados = Array.from(document.getElementsByClassName("deletarAlunoActive"));
+
+        alunosParaSeremDeletados.forEach(function(aluno) {
+            aluno.addEventListener("click", function() {
+
+                if(this.classList.contains("deletarAlunoActive")){
+                    console.log("Clicked: ", this);
+                    
+                    this.style.borderColor = "blue";
+                    this.style.borderStyle = "solid";
+                    this.style.borderWidth = "2px";
+                    this.classList.toggle("selectedToDelete");
+                }
+
+            });
+        });
+    }
+
+    document.getElementById("deletarAluno").addEventListener("click", activateToDelete);
+});
+
+        
+    document.getElementById("save").addEventListener("click", async () =>{
+
+        let selectedAlunos = document.querySelectorAll(".aluno-unit.selectedToDelete");
+        let alunoIds = [];
+
+        selectedAlunos.forEach(aluno => {
+            
+            alunoIds.push(aluno.dataset.id); //push é igual ao append de python
+                                            //dataset é uma propriedade do js que pega todos os data do html. eu posso escrever data-id, data-teste, data-oi no html
+        });
+
+        let groupId = document.getElementsByClassName("aluno-unit")[0].dataset.groupId;
+        let url = `${groupId}/delete_alunos/`;
+        let urlParaRetornar = `${groupId}`;
+
+        console.log("TESTE Constructed URL:", url); 
+
+
+        if (alunoIds.length >= 0){
+            
+            let response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ ids:alunoIds})
+                
+
+            })
+            .then(await (response => response.json()));
+            
+            window.location.href = urlParaRetornar;
+             
+
+            
+        }
+       
+
+
+
+    }   
+    )
+
     </script>
 {% endblock %}

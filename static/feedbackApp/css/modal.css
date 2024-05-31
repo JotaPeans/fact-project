@@ -12,6 +12,7 @@
     --blackHover: rgb(16, 16, 15);
     --zinc400: #a1a1aa;
     --zinc200: #e4e4e7;
+    --cream: #F9F6F3;
 }
 
 ::-webkit-scrollbar {
@@ -300,14 +301,6 @@ button{
     width: 100%;
 }
 
-.bottom-editar-modal2{
-    display:none;
-}
-
-.bottom-editar-modal2.active{
-    display:flex;
-}
-
 .editar-modal-content{
     background-color: var(--beige);
     padding: 2rem;
@@ -325,36 +318,58 @@ button{
     align-items: center;
 }
 
+
 #adicionarAluno{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
-    background-color: white;
+    background-color: var(--cream);
     cursor: pointer;
-    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    color: var(--black);
     border-radius: 10px;
+    font-size: 20px;
+    padding: 11.5px 27px;
 }
 
 #deletarAluno{
     display: flex;
-    background-color: var(--red);
+    background-color: var(--cream);
     cursor: pointer;
-    color: white;
+    color: var(--black);
     border-radius: 10px;
     font-size: 20px;
     padding: 11.5px 27px;
 }
 
-#deletarAlunoActive{
-    display: none;
-    background-color: var(--blue);
-    cursor: pointer;
+
+#remover-confirmation{
+    display: none; /* confirmations should only be displayed when certain modes have been activated for the modal(adicionar ou remover) */ 
+    background-color: var(--red); 
     color: white;
     border-radius: 10px;
-    font-size: 20px;
-    padding: 11.5px 27px;
+    padding: 11.5px 19.5px;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+#remover-confirmation:hover{
+    background-color: var(--redHover);
+}
+
+#adicionar-confirmation{
+   display:none;
+   background-color: var(--soft-blue);
+   color: white;
+   border-radius: 10px;
+   padding: 11.5px 19.5px;
+   cursor: pointer;
+   transition: all 150ms ease-in-out;
+}
+
+#adicionar-confirmation:hover{
+    background-color: var(--blue);
+}
+
+.modalTitleAndSubtitle > h3{
+    display: none; /* Assim como as confirmações, desejo esconder as descrições de adicionar ou remover até que sejam selecionados*/
 }
 
 #displayDeAlunos{
@@ -362,7 +377,7 @@ button{
     flex-direction:column;
     height: 16.25rem;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 1rem;
     overflow-y:auto;
 }
 
@@ -374,8 +389,27 @@ button{
     border-radius: 0.5rem;
     width: 100%;
     padding: 12px;
-    color: var(--black);
+    color: var(--zinc400);
     text-decoration: none;
     background-color: white; 
     box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    border-color:#1c3ebb;
 }
+
+.modalTitleAndSubtitle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+    gap:10px;
+}
+
+.modalTitleAndSubtitle > h2{
+    margin: auto;
+}
+
+.modalTitleAndSubtitle > h4{
+    margin: auto;
+    color: var(--zinc400);
+}
+
