@@ -205,7 +205,6 @@
     left: 0;
     position: fixed;
     z-index: 99999;
-    
     display: none;
     align-items: center;
     justify-content: center;
@@ -214,45 +213,52 @@
     backdrop-filter: blur(0.5rem);
 }
 
-
-.export-modal > div{
+.exportar-modal-content{
     background-color: var(--beige);
-    border-radius: 1rem;
-    height: 20rem;
+    padding: 2rem;
+    width: 369px;
+    border-radius:1rem;
     display: flex;
     flex-direction: column;
-    padding: 5%;
-    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+}
+
+.exportar-modal-content > h2{
+    font-size: 26px;
+    margin: auto;
+}
+
+.exportar-modal-content > button{
+    border-radius:1rem;
+    background-color: var(--soft-blue);
+    color:white;
+    padding:5%;
+    height: 48px;
+    width:200px;
+    margin: auto;
+    font-size:20px;
     
+    /* pro texto do botão ficar alinhado:*/
+    display: inline-flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.export-modal > div > div{
-    display: flex;
-    flex-direction: column;
-    height: 8rem;
-    margin-bottom:10%;
-    justify-content: space-between;
+#cancelExport{
+    background-color: var(--cream);
+    color:black;
+    width:122px;
+
 }
 
-.statusReportButton{
-    background-color: var(--blue);
-    border-radius: 1rem;
-    padding: 5%;
-    color: var(--beige);
-}
+
 
 button{
     border:none;
 }
 
-#cancelExport{
-    background-color: var(--red);
-    color: white;
-    border-radius: 1rem;
-    padding: 5%;
-    margin:10%;
-    z-index: 99999;
-}
+
 
 #cancel-editar{
     background-color: #F9F6F3;
