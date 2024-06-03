@@ -192,11 +192,7 @@ class GroupView(View):
                 group[0].alunos.add(aluno[0])
                 group[0].save()
 
-        group = Grupo.objects.get(pk=id)
-
-        context["alunos"] = group.alunos.all()
-
-        return render(req, "feedbackApp/group.html", context=context)
+        return redirect("feedbackApp:group", id)
 
 
 class deleteGroup(View):

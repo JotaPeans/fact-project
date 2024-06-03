@@ -25,6 +25,7 @@ main {
     flex-direction: column;
     gap: 2rem;
     padding: 2rem;
+    background-color: #F9F6F3;
 }
 
 .error {

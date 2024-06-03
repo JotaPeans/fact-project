@@ -35,10 +35,8 @@
                 
             
         </div>
-
             <div class = "editar-modal">  
                 <div class = "editar-modal-content">
-
                     <div class = "modalTitleAndSubtitle">
                         <h2>Editar Grupo</h2>
                         <h4>Adicione ou remova alunos do grupo</h4>
@@ -55,24 +53,20 @@
                         <button id = "deletarAluno">
                             Remover
                         </button>
-
                     </div>
+
                     <div id = "displayDeAlunos">
                         {% for aluno in alunos %}
-                        <a class="aluno-unit" data-id="{{ aluno.id }}" data-group-id = "{{group.id}}" >{{ aluno.nome }}</a>
-                        
-
+                            <a class="aluno-unit" data-id="{{ aluno.id }}" data-group-id = "{{group.id}}" >{{ aluno.nome }}</a>
                         {% endfor %}
-
                     </div>
+
                     <div class = "bottom-editar-modal">
                         <button id = "cancel-editar">Cancelar</button>
                         <button id = "save">Salvar</button>
                         <button id = "remover-confirmation">Remover</button>
                         <button id = "adicionar-confirmation">Ok</button>
-
                     </div>
-
                 </div>  
             </div>
 
@@ -134,8 +128,6 @@
             </div>
         {% endif %}
     </main>
-
-    <div class="background"></div>
 {% endblock %}
 
 {% block script %}
