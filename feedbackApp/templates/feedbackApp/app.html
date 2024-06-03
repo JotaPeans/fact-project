@@ -14,18 +14,6 @@
             <button id="addGroup">
                 Adicionar Grupo
             </button>
-
-            <button id="trashCan">
-                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.5 6H5.5H21.5" stroke="#F9F6F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.5 6V20C19.5 20.5304 19.2893 21.0391 18.9142 21.4142C18.5391 21.7893 18.0304 22 17.5 22H7.5C6.96957 22 6.46086 21.7893 6.08579 21.4142C5.71071 21.0391 5.5 20.5304 5.5 20V6M8.5 6V4C8.5 3.46957 8.71071 2.96086 9.08579 2.58579C9.46086 2.21071 9.96957 2 10.5 2H14.5C15.0304 2 15.5391 2.21071 15.9142 2.58579C16.2893 2.96086 16.5 3.46957 16.5 4V6" stroke="#F9F6F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <button id="trashCanActivated">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.77273H9.2M19 6.77273H14.8M9.2 6.77273V5.5C9.2 4.94772 9.64772 4.5 10.2 4.5H13.8C14.3523 4.5 14.8 4.94772 14.8 5.5V6.77273M9.2 6.77273H14.8M6.4 8.59091V15.8636C6.4 17.5778 6.4 18.4349 6.94673 18.9675C7.49347 19.5 8.37342 19.5 10.1333 19.5H13.8667C15.6266 19.5 16.5065 19.5 17.0533 18.9675C17.6 18.4349 17.6 17.5778 17.6 15.8636V8.59091M9.2 10.4091V15.8636M12 10.4091V15.8636M14.8 10.4091V15.8636" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-            </button>
-
         </div>
 
         {% else %}
@@ -42,19 +30,31 @@
             
             {% if groups %}
                 {% for group in groups %}
-                <a href="{% url 'feedbackApp:group' id=group.id %}" class="group">
+                <div class="group">
                     <div class="img">
                         <img src="{% static 'images/factLogo.png' %}" alt="FACT">
                     </div>
-                    <p>{{group.nome}}</p>
-                </a>
+                    <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
+                    <div class="popover-container">
+                        <button id="{{group.id}}" class="popover-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                        </button>
 
-                <a href="{% url 'feedbackApp:deleteGroup' groupId=group.id  %}" class="deleteGroup">
-                    <div class="img">
-                        <img src="{% static 'images/factLogo.png' %}" alt="FACT">
+                        <div data-groupid="{{group.id}}" class="popover-content">
+                            <h3>{{group.nome}}</h3>
+
+                            <hr>
+                            
+                            <button data-groupid="{{group.id}}" class="delete-group">
+                                deletar
+                                <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.5 6H5.5H21.5" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M19.5 6V20C19.5 20.5304 19.2893 21.0391 18.9142 21.4142C18.5391 21.7893 18.0304 22 17.5 22H7.5C6.96957 22 6.46086 21.7893 6.08579 21.4142C5.71071 21.0391 5.5 20.5304 5.5 20V6M8.5 6V4C8.5 3.46957 8.71071 2.96086 9.08579 2.58579C9.46086 2.21071 9.96957 2 10.5 2H14.5C15.0304 2 15.5391 2.21071 15.9142 2.58579C16.2893 2.96086 16.5 3.46957 16.5 4V6" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <p>{{group.nome}}</p>
-                </a>
+                </div>
                 {% endfor %}
             {% endif %}
         </div>
@@ -62,9 +62,9 @@
     </main>
     <div class="background"></div>
 
-    <div class="addGroup-modal">
+    <div class="modal-root">
         <div>
-            <button id="closeModal">
+            <button class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
             </button>
 
@@ -87,15 +87,29 @@
         </div>
     </div>
 
+    <div class="modal-root">
+        <div>
+            <button class="close-modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+            </button>
+            
+            <h2>Deletar Grupo</h2>
+
+            <h4>Voce deseja realmente deletar esse grupo?</h4>
+
+            <div class="delete-actions-container">
+                <button class="close-modal">Cancelar</button>
+                <a href="" id="delete-group-link" class="delete-group">Deletar</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block script %}
     <script>
-
-
-
         function toggleModal(action) {
-            const modal = document.getElementsByClassName("addGroup-modal")[0];
+            const modal = document.getElementsByClassName("modal-root")[0];
             if(action === "close") {
                 modal.classList.remove("active");
                 return;
@@ -108,8 +122,18 @@
             modal.classList.toggle("active");
         }
 
+        function closeModals() {
+            const modals = document.querySelectorAll(".modal-root")
+
+            modals.forEach(modal => {
+                modal.classList.remove("active");
+            });
+        }
+
         document.getElementById("addGroup")?.addEventListener("click", toggleModal);
-        document.getElementById("closeModal")?.addEventListener("click", toggleModal);
+        document.querySelectorAll(".close-modal").forEach(close => {
+            close.addEventListener("click", closeModals);
+        })
             
         window.addEventListener("load", () => {
             const errors = document.querySelectorAll(".error");
@@ -121,42 +145,39 @@
 
         window.addEventListener("keydown", (key) => {
             if(key.key === "Escape") toggleModal("close");
-        })
+        });
 
-        function activateToDelete(action){
-            allGroupsToHide = document.getElementsByClassName("group")
-            allGroupsToShow = document.getElementsByClassName("deleteGroup")
+        function togglePopoverGroup(popoverid) {
+            const popoverContents = document.querySelectorAll(".popover-content");
 
-            document.getElementById("trashCan").style.display = "none";
-            document.getElementById("trashCanActivated").style.display = "flex";
-            document.getElementById("mensagemDeDelete").style.display = "flex";
-
-            for(let i = 0; i < allGroupsToHide.length; i++){
-
-                allGroupsToHide[i].style.display = "none";
-                allGroupsToShow[i].style.display = "flex";
-            }
-
-        }
-        function deactivateToDelete(action){
-            allGroupsToHide = document.getElementsByClassName("group")
-            allGroupsToShow = document.getElementsByClassName("deleteGroup")
-
-            document.getElementById("trashCan").style.display = "flex";
-            document.getElementById("trashCanActivated").style.display = "none";
-            document.getElementById("mensagemDeDelete").style.display = "none";
-
-            for(let i = 0; i < allGroupsToHide.length; i++){
-
-                allGroupsToHide[i].style.display = "flex";
-                allGroupsToShow[i].style.display = "none";
-            }
-
+            popoverContents.forEach(content => {
+                if(content.dataset.groupid === popoverid) {
+                    content.classList.toggle("active");
+                }
+            });
         }
 
-        document.getElementById("trashCan")?.addEventListener("click", activateToDelete);
-        document.getElementById("trashCanActivated")?.addEventListener("click", deactivateToDelete);
+        const popoverGroupButtons = document.querySelectorAll(".popover-button");
+        popoverGroupButtons.forEach(btn => {
+            btn.addEventListener("click", () => togglePopoverGroup(btn.id))
+        });
 
+        function confirmDeleteGroupPopup(groupId) {
+            const modal = document.getElementsByClassName("modal-root")[1];
+            modal.classList.toggle("active")
+
+            const deleteGroupLink = document.getElementById("delete-group-link"); 
+            const newLink = `/app/group/deleting/${groupId}`;
+
+            deleteGroupLink.setAttribute("href", newLink);
+        }
+
+        const deleteGroupButton = document.querySelectorAll(".delete-group");
+        deleteGroupButton.forEach(btn => {
+            if(!btn.id) {
+                btn.addEventListener("click", () => confirmDeleteGroupPopup(btn.dataset.groupid))
+            }
+        });
 
     </script>
 {% endblock %}

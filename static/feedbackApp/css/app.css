@@ -4,12 +4,18 @@
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
     --yellowHover: #d69d00;
-    --red: #D72C00;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-600: #dc2626;
     --redHover: #c02600;
     --beige: #F0EBE5;
     --beigeHover: #efe0ce;
     --black: #292B26;
     --blackHover: rgb(16, 16, 15);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 main {
@@ -25,7 +31,7 @@ main {
     text-align: center;
     font-weight: 600;
     font-size: 0.8rem;
-    color: var(--red);
+    color: var(--red-600);
     margin: 1rem 0;
 }
 
@@ -116,9 +122,8 @@ main {
 }
 
 .group {
+    position: relative;
     text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
     width: auto;
     height: 15rem;
     background-color: var(--beigeHover);
@@ -129,6 +134,94 @@ main {
     justify-content: space-between;
     gap: 1rem;
     border-radius: 1rem;
+}
+
+.group > a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;   
+}
+
+.group > a:hover {
+    text-decoration: underline;
+}
+
+.popover-container {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.popover-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms ease-in-out;
+    border-radius: 0.5rem;
+}
+
+.popover-button:hover {
+    background: white;
+}
+
+.popover-content {
+    position: absolute;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+    transition: all 150ms ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.popover-content.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popover-content > h3 {
+    font-size: 1.1rem;
+}
+
+.popover-content > hr {
+    margin: 0 -0.5rem;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+
+.delete-group {
+    border-radius: 0.6rem;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: var(--red-200);
+    color: var(--red-600);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+.delete-group:hover {
+    background-color: var(--red-300);
 }
 
 .img {
@@ -154,22 +247,4 @@ main {
 .temBorda{
     border: 2px solid white;
     border-radius: 5%;
-}
-
-.deleteGroup{
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
-    width: auto;
-    height: 15rem;
-    background-color: var(--beigeHover);
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-radius: 1rem;
-    display: none;
-    border-color: var(--blue);
-    
 }
