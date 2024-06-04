@@ -29,9 +29,11 @@
             
             {% if groups %}
                 {% for group in groups %}
-                <div class="group">
+                
+
+                <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
                     <div class="img">
-                        <img src="{% static 'images/factLogo.png' %}" alt="FACT">
+                        <img class = "imagemDoGrupo" src="{% static 'images/factLogo.png' %}" alt="FACT">
                     </div>
                     <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
                     <div class="popover-container">
@@ -54,6 +56,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 {% endfor %}
             {% endif %}
         </div>
@@ -176,6 +180,26 @@
                 btn.addEventListener("click", () => confirmDeleteGroupPopup(btn.dataset.groupid))
             }
         });
+
+    </script>
+
+    <script>
+        //let meusGrupos = document.getElementsByClassName("group")
+
+        //for ( let i = 0; i < meusGrupos.length; i++){
+        //    meusGrupos[i].addEventListener("click", () =>
+        //    window.location.href = meusGrupos[i].getAttribute('data-href')
+        
+        //)
+
+
+        //}
+
+    
+        //instance of this
+
+    
+    
 
     </script>
 {% endblock %}

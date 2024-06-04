@@ -164,6 +164,7 @@ main {
     justify-content: center;
     transition: all 150ms ease-in-out;
     border-radius: 0.5rem;
+    z-index: 50;
 }
 
 .popover-button:hover {
@@ -232,10 +233,12 @@ main {
     max-height: 80%;
 }
 
-.img > img {
+.img >  img {
     height: 100%;
     object-fit: cover;
 }
+
+
 
 .group > p {
     font-size: 1.2rem;
