@@ -12,9 +12,5 @@ describe('Importar Planilha', () => {
       cy.get('#name').type("Grupo")
       cy.get('form > button').click()
       cy.get('.group > a').click()
-
-      const tabela = 'Copy_of_Fake_FACT_-_Grupo_0X_respostas_arrumado.xlsx'
-
-      cy.get('#uploadfile > div').file
   })
 })
