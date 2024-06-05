@@ -6,16 +6,20 @@ describe('Deletar ALuno', () => {
       cy.get('[placeholder="Senha"]').type('senha123')
       cy.get('button').click()
 
-      //cy.get('#addGroup').click()
-      //cy.get('#name').type("Deletar A")
-      //cy.get('form > button').click()
+      cy.get('#addGroup').click()
+      cy.get('#name').type("Deletar A")
+      cy.get('form > button').click()
       
       cy.get('.group > a').contains('Deletar A').closest('.group').as('DA')
-      cy.get('@DA').within(() => { //define um contexto restrito ao elemento pai capturado
+      cy.get('@DA').within(() => { 
         cy.get('a').click()
     })
 
-      //importar planilha
+     
+      const fileName = 'Copy_of_Fake_FACT_-_Grupo_0X_respostas_arrumado.xlsx' 
+
+      cy.get('#uploadfileInput').attachFile(fileName)
+      cy.get('button').click()
 
       cy.get('#toEdit').click()
       cy.get('#deletarAluno').click()
