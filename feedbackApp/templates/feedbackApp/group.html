@@ -56,6 +56,11 @@
                     </div>
 
                     <div id = "displayDeAlunos">
+
+                            <form action="">
+                                <input type="text" class = "aluno-unit textBoxNovoAluno">
+
+                            </form>
                         {% for aluno in alunos %}
                             <a class="aluno-unit" data-id="{{ aluno.id }}" data-group-id = "{{group.id}}" >{{ aluno.nome }}</a>
                         {% endfor %}
@@ -71,7 +76,7 @@
             </div>
 
             <div class = "groupHeader">
-                <h1>{{ group.nome }}</h1>
+                <h1 id = "groupName" data-group-id = "{{group.id}}">{{ group.nome }}</h1>
 
                 <div class = "myGroupButtons">
                     <button id = "exportButton">Exportar FACT</button>
@@ -150,38 +155,36 @@
             }
         });
 
+    </script>
+
+
+    <script>
+
         document.getElementById("exportButton")?.addEventListener("click", modalForExport);
 
         function modalForExport(){
             const modal = document.getElementsByClassName("export-modal");
             modal[0].style.display = "flex";
         }
-        
-        
-        document.addEventListener("DOMContentLoaded", () => { // n tava funcionando sem esperar o DOM
-            const cancelButton = document.getElementById("cancelExport");
-            cancelButton.addEventListener("click", fecharModal);
-            function fecharModal() {
-                console.log("can you listen to this click?");
+
+
+
+        const cancelButton = document.getElementById("cancelExport");
+        cancelButton.addEventListener("click", fecharModal);
+        function fecharModal() {
                 const modals = document.getElementsByClassName("export-modal");
-                console.log(modals); 
-                if (modals.length > 0) {
-                    modals[0].style.display = "none";
-                }
-            }
-        });
-
-        document.getElementById("cancel-editar")?.addEventListener("click", fecharModal2)
+                
+                modals[0].style.display = "none";
+        }
 
 
-        //classes que devo retirar na hora do CANCEL: "deletarAlunoActive" , "selectedToDelete
+    </script>
 
-        
+    <script>
+        document.getElementById("cancel-editar")?.addEventListener("click", fecharModalDeEditar)
 
-        //classes que devo retirar na hora do SAVE: "deletarAlunoActive"
-
-        function cancelAndTurnModal2BackToBase(){ // esse é o do cancel
-            console.log("cancelAndturnModal2BackToBase()");
+        function cancelAndTurnModalDeEditarBackToBase(){ 
+            
             document.getElementById("descricaoParaRemoverAluno").style.display = "none";
             document.getElementById("descricaoParaAdicionarAluno").style.display = "none";
 
@@ -198,7 +201,7 @@
                 alunos[i].style.borderColor = "#000000"; 
                 alunos[i].style.borderStyle = "none";
                 alunos[i].style.borderWidth = "100%";
-                // with this, we can ensure that the operation has been cancelled for real.
+                //if aluno[i] for um dos adicionados, delete a div
             }
 
             document.getElementById("save").style.display = "flex";
@@ -207,8 +210,8 @@
 
         }
 
-        function removeAndTurnModal2BackToBase(){
-            console.log("removeAndTurnModal2BackToBase()");
+        function removeAndTurnModalDeEditarBackToBase(){
+            
             document.getElementById("descricaoParaRemoverAluno").style.display = "none";
             document.getElementById("descricaoParaAdicionarAluno").style.display = "none";
             
@@ -238,31 +241,44 @@
         
         }
 
-        document.getElementById("remover-confirmation").addEventListener("click", removeAndTurnModal2BackToBase);
+        document.getElementById("remover-confirmation").addEventListener("click", removeAndTurnModalDeEditarBackToBase);
 
+        function modalSubtitleReset(){
 
+            document.getElementById("descricaoParaRemoverAluno").style.display = "none";
+            document.getElementById("descricaoParaAdicionarAluno").style.display = "none";
+
+            document.getElementsByClassName("upper-editar-modal")[0].style.display = "flex";
+            document.getElementById("adicionarAluno").style.display = "flex";
+            document.getElementById("deletarAluno").style.display = "flex";
+
+        }
         
 
-        function fecharModal2(){
+        function fecharModalDeEditar(){
             console.log("DOES THIS WORK?");
+
             if (this.classList.contains("cancelDeleteHasBeenToggled")){
                 console.log("I got in the if");
-                //time to turn the modal back to normal
-
-                //primeiro remover os ToDelete de todos os alunos
+                 
                 alunosUnit = document.getElementsByClassName("aluno-unit");
-
                 for (var i = 0; i < alunosUnit.length; i++){
                     alunosUnit[i].classList.remove("selectedToDelete");
                 }
-
-                //activate function turnModalBackToBase
-                cancelAndTurnModal2BackToBase();
-
+                cancelAndTurnModalDeEditarBackToBase();
                 this.classList.remove("cancelDeleteHasBeenToggled");
-
                 return;
             }
+
+            if (document.getElementsByClassName("textBoxNovoAluno")[0].style.display == "flex"){
+
+                modalSubtitleReset();
+                document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "none";
+                document.getElementById("adicionar-confirmation").style.display = "none";
+                document.getElementById("save").style.display = "flex";
+                return;
+            }
+            
             document.getElementsByClassName("editar-modal")[0].style.display = "none";
         }
 
@@ -273,7 +289,8 @@
             console.log("abrindo Modal do edit!");
             document.getElementsByClassName("editar-modal")[0].style.display = "flex";
         }
-
+        </script>
+        <script>
         let accordions = document.querySelectorAll(".accordions");
         accordions.forEach((accordion, index) => {
             accordion.addEventListener("toggle", () => {
@@ -319,8 +336,8 @@
     </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => { // borda só pegou com o DOM carregado(?)
-    function activateToDelete() {
+    
+        function activateToDelete() {
 
         let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
         botoesDeCima.style.display = "none";
@@ -357,52 +374,100 @@
     }
 
     document.getElementById("deletarAluno").addEventListener("click", activateToDelete);
-});
+
+    function activateToAdd(){
+        let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
+        botoesDeCima.style.display = "none";
+
+        let descricaoRemover = document.getElementById("descricaoParaAdicionarAluno");
+        descricaoRemover.style.display = "flex";
+
+        document.getElementById("save").style.display = "none";
+        document.getElementById("adicionar-confirmation").style.display = "flex";
+
+
+        document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "flex";
+    }
+
+    document.getElementById("adicionarAluno").addEventListener("click", activateToAdd);
+
+    function addedAlunoToList(){
+        let nomeDoAluno = document.getElementsByClassName("textBoxNovoAluno")[0].value;
+        var novaDiv = document.createElement("a"); //
+        var container = document.getElementById("displayDeAlunos");
+
+        novaDiv.textContent = nomeDoAluno;
+        novaDiv.classList.add("aluno-unit");
+        novaDiv.classList.add("aluno-to-be-added");
+        container.insertBefore(novaDiv, container.children[1]);
+        
+        modalSubtitleReset();
+        document.getElementById("adicionar-confirmation").style.display = "none";
+        document.getElementById("save").style.display = "flex";
+        document.getElementsByClassName("textBoxNovoAluno")[0].value = "";
+        document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "none";
+
+    }    
+
+    document.getElementById("adicionar-confirmation").addEventListener("click", addedAlunoToList); // this is where we add the blue ones
 
         
     document.getElementById("save").addEventListener("click", async () =>{
 
-        let selectedAlunos = document.querySelectorAll(".aluno-unit.selectedToDelete");
-        let alunoIds = [];
+        let selectedAlunosToDelete = document.querySelectorAll(".aluno-unit.selectedToDelete");
+        let selectedAlunosToAdd = document.querySelectorAll(".aluno-unit.aluno-to-be-added");
+        let alunoIdsParaDeletar = [];
+        let alunoNomesParaAdicionar = [];
 
-        selectedAlunos.forEach(aluno => {
+        selectedAlunosToDelete.forEach(aluno => {
             
-            alunoIds.push(aluno.dataset.id); //push é igual ao append de python
+            alunoIdsParaDeletar.push(aluno.dataset.id); //push é igual ao append de python
                                             //dataset é uma propriedade do js que pega todos os data do html. eu posso escrever data-id, data-teste, data-oi no html
         });
 
-        let groupId = document.getElementsByClassName("aluno-unit")[0].dataset.groupId;
-        let url = `${groupId}/delete_alunos/`;
-        let urlParaRetornar = `${groupId}`;
+        selectedAlunosToAdd.forEach(aluno =>{
+            alunoNomesParaAdicionar.push(aluno.textContent.trim()); // push names to the add array
+    });
 
-        console.log("TESTE Constructed URL:", url); 
+    let groupId = document.getElementById("groupName").dataset.groupId;
+    let urlParaDeletar = `${groupId}/delete_alunos/`;
+    let urlParaAdicionar = `${groupId}/add_alunos/`;
+    let urlParaRetornar = `${groupId}`;
 
+    console.log("teste");
+    console.log("URL pra deletar:", urlParaDeletar);
+    console.log("URL pra add:", urlParaAdicionar);
 
-        if (alunoIds.length >= 0){
-            
-            let response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: JSON.stringify({ ids:alunoIds})
-                
+    
+    if (alunoIdsParaDeletar.length > 0) {
+        console.log("alunoIdsParaDeletar: " , alunoIdsParaDeletar);
+        await fetch(urlParaDeletar, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ ids: alunoIdsParaDeletar })
+        })
+        .then(response => response.json());
+    }
 
-            })
-            .then(await (response => response.json()));
-            
-            window.location.href = urlParaRetornar;
-             
+    
+    if (alunoNomesParaAdicionar.length > 0) {
+        await fetch(urlParaAdicionar, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ names: alunoNomesParaAdicionar, group: groupId})
+        })
+        .then(response => response.json());
+    }
 
-            
-        }
-       
-
-
-
-    }   
-    )
+    
+    window.location.href = urlParaRetornar;
+    });
 
     </script>
 {% endblock %}

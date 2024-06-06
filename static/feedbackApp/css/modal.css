@@ -319,7 +319,11 @@ button{
     display: none;
 }
 
-#displayDeAlunos > a{
+.textBoxNovoAluno{
+    display: none;
+}
+
+.aluno-unit{
     border-radius: 0.5rem;
     width: 100%;
     padding: 12px;
@@ -345,5 +349,9 @@ button{
 .modalTitleAndSubtitle > h4{
     margin: auto;
     color: var(--zinc400);
+}
+
+.aluno-to-be-added{
+    color: blue;
 }
 

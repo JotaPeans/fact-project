@@ -16,6 +16,7 @@ class FeedBackView(View):
         
         user = User.objects.get(username=req.user.username)
         groups = Grupo.objects.filter(professor=user)
+        #dá append em grupos q foram compartilhados tbm
 
         context = {
             "user": user,
@@ -219,6 +220,7 @@ def delete_alunos(request, id):
         data = json.loads(request.body)
         aluno_ids = data.get("ids", [])
 
+        print("esse é o id: ", id)
         grupo = Grupo.objects.get(id=id)
 
         for aluno_id in aluno_ids:
@@ -226,6 +228,25 @@ def delete_alunos(request, id):
             grupo.alunos.remove(aluno)
         
         return JsonResponse({"success": True})
+    
+def add_alunos(request, id):
+    if request.method == "POST":
+        import json
+        data = json.loads(request.body)
+        print("esse é o data: ", data)
+        getMyGroup = data.get("group")
+        print("esse é o value de getMyGroup", getMyGroup)
+        myGroup = Grupo.objects.get(pk = getMyGroup)
+        aluno_names_pra_add = data.get("names", []) # [] não é necessário, é um default value em casos onde não vem nada
+
+        for aluno_name in aluno_names_pra_add:            
+            
+            aluno_novo, created = Aluno.objects.get_or_create(nome=aluno_name) #this ensures that we don't create an extra aluno if they already exist
+            myGroup.alunos.add(aluno_novo)
+            aluno_novo.save()
+        
+        return JsonResponse({"success": True})
+
 def logoutFunction(req):
     logout(req)
     return redirect("autenticacao:root")

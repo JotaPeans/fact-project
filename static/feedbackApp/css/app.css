@@ -187,6 +187,8 @@ main {
     transition: all 150ms ease-in-out;
     opacity: 0;
     pointer-events: none;
+    z-index: 999;
+    
 }
 
 .popover-content.active {
@@ -225,6 +227,26 @@ main {
 .delete-group:hover {
     background-color: var(--red-300);
 }
+
+.gerenciar-group{
+
+    border-radius: 0.6rem;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: var(--yellow);
+    color: var(--blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+
 
 .img {
     display: flex;
