@@ -27,16 +27,14 @@ describe('Deletar ALuno', () => {
       cy.get('#remover-confirmation').click()
       cy.get('#save').click()
 
-      // Verifica se o seletor está selecionando o elemento correto
-      cy.get('header > a').then(($link) => {
-        if ($link.length) {
-            // Se o link for encontrado, clique nele
-            cy.wrap($link).click();
-        }
-      })
+      // Wait for the header link to be available and clickable
+    cy.get('header > a').should('be.visible').then(($link) => {
+      if ($link.length) {
+        // If the link is found, click it
+        cy.wrap($link).click();
+      }
+    })
 
-
-      cy.get('.group > a').contains('Deletar A').closest('.group').as('DA')
       cy.get('@DA').within(() => {
           cy.get('.popover-button').click()
           cy.get('.popover-content > .delete-group').click()
