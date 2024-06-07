@@ -1,19 +1,12 @@
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-import os
+from .models import GoogleCredentials
 import json
-from pathlib import Path
-from dotenv import load_dotenv
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-dotenvpath = os.path.join(BASE_DIR, '.env')
-load_dotenv(dotenvpath)
 
 SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
 SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
 
-CREDENTIALS_JSON = json.loads(os.environ.get("CREDENTIALS_GOOGLE_API"))
+CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
 
 credentials_forms = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_FORMS)
 credentials_drive = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_DRIVE)
