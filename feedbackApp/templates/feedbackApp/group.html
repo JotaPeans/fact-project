@@ -51,6 +51,8 @@
                         <button id = "adicionarAluno">
                             Adicionar
                         </button>
+
+
                         <button id = "deletarAluno">
                             Remover
                         </button>
@@ -71,9 +73,23 @@
                         <button id = "cancel-editar">Cancelar</button>
                         <button id = "save">Salvar</button>
                         <button id = "remover-confirmation">Remover</button>
-                        <button id = "adicionar-confirmation">Ok</button>
+                        <button id = "adicionar-confirmation">Confirmar</button>
                     </div>
                 </div>  
+            </div>
+
+            <div id = "modalEditarAluno">
+                <div class = "modal-editar-aluno-content">
+                    <h1> Editar Aluno x </h1>
+                    <h3 id = "subtitulo-modal-editar-aluno"> Altere as informações pessoais do alunox </h3>
+
+                    <form action="">
+
+
+
+                    </form>
+
+                </div>
             </div>
 
             <div class = "groupHeader">
@@ -82,7 +98,7 @@
                 <div class = "myGroupButtons">
                     <button id = "exportButton">Exportar FACT</button>
                     <button>Gerar FACT</button>
-                    <button id = "toEdit">Editar</button>
+                    <button id = "toEdit">Editar Grupo</button>
                 </div>
             </div>
 
@@ -128,6 +144,10 @@
                                 <h5>Media Final</h5>
                                 <p>{{aluno.media}}</p>
                             </div>
+                        </div>
+                        <div class = "detalhesLowerButtons">
+                            <button id = "editarAluno">Editar Aluno</button>
+                            <button id = "maisDetalhes">Mais detalhes</button>
                         </div>
                     </details>
                 {% endfor %}
