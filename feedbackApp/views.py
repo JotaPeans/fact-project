@@ -16,13 +16,16 @@ class FeedBackView(View):
         
         user = User.objects.get(username=req.user.username)
         groups = Grupo.objects.filter(professor=user)
+        allUsers = User.objects.all()
+        print("minha lista de allUsers é: ", allUsers)
         #dá append em grupos q foram compartilhados tbm
 
         context = {
             "user": user,
-            "groups": groups
+            "groups": groups,
+            "allUsers": allUsers
         }
-        print(f"groups de context é: {context['groups']}")
+        #print(f"groups de context é: {context['groups']}")
         
         return render(req, "feedbackApp/app.html", context=context)
 

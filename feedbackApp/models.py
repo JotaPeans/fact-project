@@ -14,6 +14,7 @@ class Grupo(models.Model):
     nome = models.CharField(max_length=200)  
     alunos = models.ManyToManyField(Aluno, related_name='grupos')
     professor = models.ForeignKey(User, on_delete=models.CASCADE)
+    sharedToProfessor = models.ManyToManyField(User, related_name='professoresAdmins')
 
     def __str__(self) -> str:
         return self.nome
