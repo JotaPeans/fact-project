@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from .models import Aluno, Grupo, Fact
-from .functions import getMediaAluno, transformNotasToObject
+from .get_fact_grade import getMediaAluno, transformNotasToObject
 import pandas as pd
 from django.contrib import messages
 from django.contrib.messages import constants
