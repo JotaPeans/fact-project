@@ -8,7 +8,7 @@ describe('Criar um grupo', () => {
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 1")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
   })
 
   it('Criar Grupo 2', () => {
@@ -20,7 +20,7 @@ describe('Criar um grupo', () => {
 
     cy.get('#addGroup').click()
     cy.get('#name').type("Grupo 2")
-    cy.get('form > button').click()
+    cy.get('form > button').contains('Enviar').click()
 
     cy.get('.group > a').contains('Grupo 2').closest('.group').as('G2') //captura elemento pai
     cy.get('@G2').within(() => { //define um contexto restrito ao elemento pai capturado

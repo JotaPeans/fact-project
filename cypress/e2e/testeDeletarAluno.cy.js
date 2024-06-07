@@ -8,7 +8,7 @@ describe('Deletar ALuno', () => {
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Deletar A")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
       
       cy.get('.group > a').contains('Deletar A').closest('.group').as('DA')
       cy.get('@DA').within(() => { 

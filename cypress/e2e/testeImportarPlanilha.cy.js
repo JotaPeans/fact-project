@@ -8,7 +8,7 @@ describe('Importar Planilha', () => {
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
       
       cy.get('.group > a').contains('Grupo').closest('.group').as('G')
       cy.get('@G').within(() => { 

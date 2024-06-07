@@ -8,15 +8,15 @@ describe('Visitar grupos', () => {
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 1")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 2")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 3")
-      cy.get('form > button').click()
+      cy.get('form > button').contains('Enviar').click()
 
 
       cy.get('.group > a').contains('Grupo 3').closest('.group').as('G3')
