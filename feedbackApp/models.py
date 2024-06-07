@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, default="")
+    matricula = models.CharField(max_length=15, default="")
     
 
     def __str__(self) -> str:
