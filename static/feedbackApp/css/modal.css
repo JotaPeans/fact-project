@@ -173,11 +173,37 @@
     justify-content:center;
 }
 
+
+#fact1, #fact2 {
+    background-color: var(--soft-blue); /* cor de fundo */
+    color: white; /* cor do texto */
+    padding: 10px 20px; /* espaçamento interno */
+    border-radius: 5px; /* bordas arredondadas */
+    border: none; /* sem borda */
+    cursor: pointer; /* cursor como ponteiro */
+    transition: background-color 0.3s; /* transição suave para hover */
+}
+
+#fact1:hover, #fact2:hover {
+    background-color: var(--blueHover); /* cor de fundo ao passar o mouse */
+}
+
+
 #cancelExport{
     background-color: var(--cream);
     color:black;
     width:122px;
+    border-radius: 10px;
+    padding: 11.5px 19.5px;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
 
+}
+
+
+#cancelExport:hover{
+    background-color: white;
 }
 
 
