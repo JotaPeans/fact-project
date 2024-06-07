@@ -15,6 +15,8 @@
     --zinc-300: #d4d4d8;
     --zinc-500: #71717a;
 
+    --cremeQuaseBranco: #F9F6F3;
+
     --amareloSoft: #F7BA19;
 }
 
@@ -181,6 +183,34 @@ form > button:hover {
     gap: 1.5rem;
 }
 
+.detalhesLowerButtons{
+    display: flex;
+    justify-content:space-evenly;
+    margin-top: 20px;
+}
+
+.detalhesLowerButtons > button{
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    padding: 2px 35px;
+
+}
+
+#editarAluno{
+    color: white;
+    background-color: var(--amareloSoft);
+}
+
+#maisDetalhes{
+
+    background-color: var(--cremeQuaseBranco);
+    color: black;
+
+}
+
 .myGroupButtons > button{
 
     padding: 11.5px 28px;
@@ -193,7 +223,6 @@ form > button:hover {
 }
 
 .myGroupButtons > button:hover{
-
     background-color: var(--blue);
 }
 
