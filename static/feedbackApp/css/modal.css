@@ -80,13 +80,14 @@
 
 .modal-root > div > form > input {
     border: none;
-    background: var(--beigeHover);
+    background: white;
     border-radius: 1rem;
     width: auto;
     max-width: 100%;
     font-size: 1rem;
     resize: none;
     padding: 1rem;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .modal-root > div > form > label {
@@ -94,7 +95,8 @@
 }
 
 .modal-root > div > form > button {
-    background: var(--beigeHover);
+    background: var(--soft-blue);
+    color: white;
     cursor: pointer;
     border: none;
     padding: 1rem;
@@ -105,10 +107,11 @@
     height: auto;
     border-radius: 0.5rem;
     transition: all 150ms ease-in-out;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .modal-root > div > form > button:hover {
-    background: #cec0b0;
+    background: var(--blueHover);
 }
 
 .delete-actions-container {
