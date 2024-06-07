@@ -20,38 +20,39 @@
         <div class="content">
             {% if groups %}
                 {% for group in groups %}
-                <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
-                    <div class="img">
-                        <img class = "imagemDoGrupo" src="{% static 'images/factLogo.png' %}" alt="FACT">
-                    </div>
-                    <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
-                    <div class="popover-container">
-                        <button id="{{group.id}}" class="popover-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                        </button>
-
-                        <div data-groupid="{{group.id}}" class="popover-content">
-                            <h3>{{group.nome}}</h3>
-
-                            <hr>
-                            
-                            <button data-groupid="{{group.id}}" class="delete-group">
-                                Deletar
-                                <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3.5 6H5.5H21.5" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M19.5 6V20C19.5 20.5304 19.2893 21.0391 18.9142 21.4142C18.5391 21.7893 18.0304 22 17.5 22H7.5C6.96957 22 6.46086 21.7893 6.08579 21.4142C5.71071 21.0391 5.5 20.5304 5.5 20V6M8.5 6V4C8.5 3.46957 8.71071 2.96086 9.08579 2.58579C9.46086 2.21071 9.96957 2 10.5 2H14.5C15.0304 2 15.5391 2.21071 15.9142 2.58579C16.2893 2.96086 16.5 3.46957 16.5 4V6" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                    <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
+                        <div class="img">
+                            <img class = "imagemDoGrupo" src="{% static 'images/factLogo.png' %}" alt="FACT">
+                        </div>
+                        <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
+                        <div class="popover-container">
+                            <button id="{{group.id}}" class="popover-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                             </button>
-                            <button data-groupid = "{{group.id}}" data-groupname = "{{group.nome}}" data-professor = "{{group.professor}}" class = "gerenciar-group">
-                                Gerenciar
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
-                                    <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
-                                    <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
-                                    <path d="m21 3 1 11h-2"/>
-                                    <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
-                                    <path d="M3 4h8"/>
-                                </svg>
-                            </button>
+
+                            <div data-groupid="{{group.id}}" class="popover-content">
+                                <h3>{{group.nome}}</h3>
+
+                                <hr>
+                                
+                                <button data-groupid="{{group.id}}" class="delete-group">
+                                    Deletar
+                                    <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.5 6H5.5H21.5" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M19.5 6V20C19.5 20.5304 19.2893 21.0391 18.9142 21.4142C18.5391 21.7893 18.0304 22 17.5 22H7.5C6.96957 22 6.46086 21.7893 6.08579 21.4142C5.71071 21.0391 5.5 20.5304 5.5 20V6M8.5 6V4C8.5 3.46957 8.71071 2.96086 9.08579 2.58579C9.46086 2.21071 9.96957 2 10.5 2H14.5C15.0304 2 15.5391 2.21071 15.9142 2.58579C16.2893 2.96086 16.5 3.46957 16.5 4V6" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button data-groupid = "{{group.id}}" data-groupname = "{{group.nome}}" data-professor = "{{group.professor}}" class = "gerenciar-group">
+                                    Gerenciar
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
+                                        <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
+                                        <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
+                                        <path d="m21 3 1 11h-2"/>
+                                        <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/>
+                                        <path d="M3 4h8"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -69,7 +70,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="action" value="addGroup">
                 <label for="name">Nome do Grupo</label>
-                <input id="name" name="groupName" required></input>
+                <input id="name" name="groupName" placeholder="Nome do grupo" required></input>
 
                 {% if messages %}
                     {% for message in messages %}
@@ -120,13 +121,13 @@
                 <input type="hidden" name="action" value="addStudent">
 
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome">
+                <input type="text" id="nome" name="nome" placeholder="Nome">
 
                 <label for="email School">Email School</label>
-                <input type="text" id="email School" name="email-school">
+                <input type="text" id="email School" name="email-school" placeholder="Email da School">
 
                 <label for="matricula">Matricula</label>
-                <input type="text" id="matricula" name="matricula">
+                <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
     
                 <button type="submit">Enviar</button>
             </form>
