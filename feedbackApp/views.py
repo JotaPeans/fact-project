@@ -15,15 +15,36 @@ class FeedBackView(View):
             return redirect("autenticacao:root")
         
         user = User.objects.get(username=req.user.username)
-        groups = Grupo.objects.filter(professor=user)
-        allUsers = User.objects.all()
-        print("minha lista de allUsers é: ", allUsers)
+
+        allowed_groups = []
+
+        groups = Grupo.objects.all()
+        for group in groups:
+            professors = list(group.sharedToProfessor.all())
+
+            if(group.professor.email == user.email):
+                allowed_groups.append(group)
+
+            else:
+                for professor in professors:
+                    if(user == professor):
+                        allowed_groups.append(group)
+        
+        all_users = list(User.objects.all())
+        users_to_list = []
+
+        for current_user in all_users:
+            if(current_user == user):
+                continue
+            else:
+                users_to_list.append(current_user)
+
         #dá append em grupos q foram compartilhados tbm
 
         context = {
             "user": user,
-            "groups": groups,
-            "allUsers": allUsers
+            "groups": allowed_groups,
+            "allUsers": users_to_list
         }
         #print(f"groups de context é: {context['groups']}")
         
@@ -44,6 +65,10 @@ class FeedBackView(View):
 
         if(action == "addGroup"):
             return self.addGroup(req, context, user)
+        #if(action == "addAdmin"):
+        #    return self.addAdmin(req,context,user)    
+
+
         #if(action =="removeGroup"):
         #    id = Group.objects.get(id=pk)
         #    return self.deleteGroup(req,context,user,id)
@@ -249,6 +274,19 @@ def add_alunos(request, id):
             aluno_novo.save()
         
         return JsonResponse({"success": True})
+    
+def addAdmin(req):
+    if req.method == "POST": # ({ professorEscolhido: valorEscolhido, group: groupId})
+        import json
+        data = json.loads(req.body)
+        print("esse é o data do meu addAdmin:", data)
+        getMyGroup = data.get("group")
+        professorEscolhido = data.get("professorEscolhido")
+
+        myGroup = Grupo.objects.get(pk=getMyGroup)
+        myGroup.sharedToProfessor.add(professorEscolhido)
+        return JsonResponse({"success": True})
+
 
 def logoutFunction(req):
     logout(req)
