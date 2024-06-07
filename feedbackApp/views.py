@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .models import Aluno, Grupo, Fact
-from .functions import getMediaAluno, transformNotasToObject
 import pandas as pd
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
+from .models import Aluno, Grupo, Fact
+from .get_fact_grade import getMediaAluno, transformNotasToObject
+from .get_students_excel import getStudents
 
 class FeedBackView(View):
     def get(self, req):
@@ -46,7 +47,6 @@ class FeedBackView(View):
             "groups": allowed_groups,
             "allUsers": users_to_list
         }
-        #print(f"groups de context é: {context['groups']}")
         
         return render(req, "feedbackApp/app.html", context=context)
 
@@ -65,14 +65,9 @@ class FeedBackView(View):
 
         if(action == "addGroup"):
             return self.addGroup(req, context, user)
-        #if(action == "addAdmin"):
-        #    return self.addAdmin(req,context,user)    
-
-
-        #if(action =="removeGroup"):
-        #    id = Group.objects.get(id=pk)
-        #    return self.deleteGroup(req,context,user,id)
-
+        
+        if(action == "addStudent"):
+            return self.addStudent(req, context)
     
     def addGroup(self, req, context, user):
         groupName = req.POST.get("groupName")
@@ -93,6 +88,27 @@ class FeedBackView(View):
 
         context["groups"] = groups
 
+        return render(req, "feedbackApp/app.html", context=context)
+    
+    def addStudent(self, req, context):
+        file = None
+
+        try:
+            file = req.FILES["alunos"]
+            df = pd.read_excel(file)
+
+            getStudents(df)
+
+        except Exception as e:
+            print("exeption at 'addStudent' method - ", e)
+
+        if(not file):
+            matricula = req.POST.get("matricula")
+            nome = req.POST.get("nome")
+            email_school = req.POST.get("email-school")
+
+            Aluno.objects.create(matricula=matricula, nome=nome, email=email_school)
+        
         return render(req, "feedbackApp/app.html", context=context)
     
     def deleteGroup(self,req,context,user,id):

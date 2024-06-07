@@ -8,29 +8,18 @@
 
 {% block content %}
     <main>
-        {% if groups %}
-        <div class = "upperButtons">
+        <div class="upperButtons">
             <button id="addGroup">
                 Adicionar Grupo
             </button>
-        </div>
-
-        {% else %}
-        <div class="container">
-            <h2>Esse lugar está vazio...</h2>
-            <button id="addGroup">
-                Adicionar Grupo
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            <button id="addStudent">
+                Adicionar Alunos
             </button>
         </div>
-    {% endif %}
-        <h2 id = "mensagemDeDelete">Selecione o grupo que deseja deletar</h2>
+        
         <div class="content">
-            
             {% if groups %}
                 {% for group in groups %}
-                
-
                 <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
                     <div class="img">
                         <img class = "imagemDoGrupo" src="{% static 'images/factLogo.png' %}" alt="FACT">
@@ -65,13 +54,9 @@
                             </button>
                         </div>
                     </div>
-                </div>
-
-
                 {% endfor %}
             {% endif %}
         </div>
-
     </main>
 
     <div class="modal-root">
@@ -94,6 +79,55 @@
                     {% endfor %}
                 {% endif %}
 
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-root">
+        <div>
+            <button class="close-modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+            </button>
+            
+            <h2 style="margin-top: -16px;">Adicionar Aluno</h2>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="file">
+                    Arquivo
+                </button>
+                <button class="tab" data-tab="manually">
+                    Manualmente
+                </button>
+            </div>
+
+            <form method="post" id="upload-excel" data-tab="file" class="active" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="addStudent">
+
+                <label for="alunos-upload">Planilha de alunos</label>
+                <label for="alunos-upload" class="upload">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    <p>Clique para selecionar um arquivo</p>
+                </label>
+                <input style="display: none;" id="alunos-upload" name="alunos" required type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></input>
+
+                <button type="submit">Enviar</button>
+            </form>
+
+            <form method="post" id="add-manually" data-tab="manually">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="addStudent">
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome">
+
+                <label for="email School">Email School</label>
+                <input type="text" id="email School" name="email-school">
+
+                <label for="matricula">Matricula</label>
+                <input type="text" id="matricula" name="matricula">
+    
                 <button type="submit">Enviar</button>
             </form>
         </div>
@@ -146,8 +180,22 @@
 
 {% block script %}
     <script>
-        function toggleModal(action) {
+        function toggleAddGroupModal(action) {
             const modal = document.getElementsByClassName("modal-root")[0];
+            if(action === "close") {
+                modal.classList.remove("active");
+                return;
+            }
+            else if(action === "open") {
+                modal.classList.add("active");
+                return;
+            }
+
+            modal.classList.toggle("active");
+        }
+
+        function toggleAddStudentModal(action) {
+            const modal = document.getElementsByClassName("modal-root")[1];
             if(action === "close") {
                 modal.classList.remove("active");
                 return;
@@ -168,10 +216,57 @@
             });
         }
 
-        document.getElementById("addGroup")?.addEventListener("click", toggleModal);
+        document.getElementById("addGroup")?.addEventListener("click", toggleAddGroupModal);
+        document.getElementById("addStudent")?.addEventListener("click", toggleAddStudentModal);
         document.querySelectorAll(".close-modal").forEach(close => {
             close.addEventListener("click", closeModals);
-        })
+        });
+
+        const tabs = document.querySelectorAll(".tab");
+        const tabContents = [
+            document.getElementById("upload-excel"), 
+            document.getElementById("add-manually")
+        ];
+
+        upload = document.getElementById("alunos-upload")
+        uploadLabel = document.getElementsByClassName("upload")[0]
+
+        upload.addEventListener("change", event => {
+            const file = event.target.files[0];
+            if(file) {
+                uploadLabel.innerHTML = `<div class="currentFile">${file.name}</div>`
+            }
+        });
+
+        tabs.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.add("active")
+                
+                tabContents.forEach(content => {
+                    if(content.dataset.tab === btn.dataset.tab) {
+                        content.classList.add("active");
+                        removeActiveTabContent(content.dataset.tab)
+                    }
+                })
+
+                removeActiveTab(btn.dataset.tab)
+            });
+        });
+
+        function removeActiveTab(tab) {
+            tabs.forEach(btn => {
+                if(btn.dataset.tab !== tab) {
+                    btn.classList.remove("active")
+                }
+            })
+        }
+        function removeActiveTabContent(tab) {
+            tabContents.forEach(content => {
+                if(content.dataset.tab !== tab) {
+                    content.classList.remove("active")
+                }
+            })
+        }
             
         window.addEventListener("load", () => {
             const errors = document.querySelectorAll(".error");
@@ -179,7 +274,7 @@
             if(errors.length >= 1) {
                 toggleModal("open")
             }
-        })
+        });
 
         window.addEventListener("keydown", (key) => {
             if(key.key === "Escape") toggleModal("close");
@@ -201,7 +296,7 @@
         });
 
         function confirmDeleteGroupPopup(groupId) {
-            const modal = document.getElementsByClassName("modal-root")[1];
+            const modal = document.getElementsByClassName("modal-root")[2];
             modal.classList.toggle("active")
 
             const deleteGroupLink = document.getElementById("delete-group-link"); 
@@ -217,30 +312,21 @@
             }
         });
 
-
         function showGerenciarGroupModal(idDoMeuGrupo, nomeDoMeuGrupo, nomeDoMeuProfessor){
-
-            const modal = document.getElementsByClassName("modal-root")[2];
-            console.log("id do meu grupo é ", idDoMeuGrupo);
-            console.log("nome do meu grupo é ", nomeDoMeuGrupo);
-            console.log("professor é: ", nomeDoMeuProfessor);
+            const modal = document.getElementsByClassName("modal-root")[3];
+          
             document.getElementById("apresentandoGrupo").textContent = `Grupo ${nomeDoMeuGrupo}`;
             document.getElementById("apresentandoProfessor").textContent = `Criador do grupo: ${nomeDoMeuProfessor}`;
             document.getElementById("botaoDoConfia").setAttribute("teste", idDoMeuGrupo);
+          
             modal.classList.toggle("active");
-
         }
 
         document.querySelectorAll(".gerenciar-group").forEach(btn =>{
             let grupoNome = btn.dataset.groupname;
             let grupoId = btn.dataset.groupid;
             let professor = btn.dataset.professor;
-            //let compartilhados = btn.dataset.
             btn.addEventListener("click", () => showGerenciarGroupModal(grupoId, grupoNome, professor));
-           
-            
-
-
         });
 
 
