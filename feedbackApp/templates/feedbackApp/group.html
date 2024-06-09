@@ -65,7 +65,7 @@
 
                             </form>
                         {% for aluno in alunos %}
-                            <a class="aluno-unit" data-id="{{ aluno.id }}" data-group-id = "{{group.id}}" >{{ aluno.nome }}</a>
+                            <a class="aluno-unit" data-id="{{ aluno.id }}" data-groupId = "{{group.id}}" >{{ aluno.nome }}</a>
                         {% endfor %}
                     </div>
 
@@ -80,14 +80,24 @@
 
             <div id = "modalEditarAluno">
                 <div class = "modal-editar-aluno-content">
-                    <h1> Editar Aluno x </h1>
+                    
+                    <h1 id = "nomeAlunoToEdit"> Editar Aluno x </h1>
                     <h3 id = "subtitulo-modal-editar-aluno"> Altere as informações pessoais do alunox </h3>
 
-                    <form action="">
-
-
+                    <form id = "formDeEditarAluno" action="">
+                        <label for="nomeDoAluno">Nome</label>
+                        <input type="text" id = "nomeDoAluno" >
+                        <label for="emailDoAluno">Email</label>
+                        <input type="text" id = "emailDoAluno">
+                        <label for="matriculaDoAluno">Matrícula</label>
+                        <input type="text" id = "matriculaDoAluno">
 
                     </form>
+                    
+                    <div id = "editar-aluno-lower-buttons">
+                        <button id = "cancelar-editar-aluno">Cancelar</button>
+                        <button id = "confirmar-editar-aluno">Salvar</button>
+                    </div>
 
                 </div>
             </div>
@@ -146,8 +156,8 @@
                             </div>
                         </div>
                         <div class = "detalhesLowerButtons">
-                            <button id = "editarAluno">Editar Aluno</button>
-                            <button id = "maisDetalhes">Mais detalhes</button>
+                            <button class = "editarAluno" data-aluno = {{aluno}} data-alunoid="{{aluno.id}}" data-alunonome="{{aluno.nome}}" data-alunoemail="{{aluno.email}}" data-matricula="{{aluno.matricula}}" >Editar Aluno</button>
+                            <button class = "maisDetalhes" data-alunoid="{{aluno.id}}">Mais detalhes</button>
                         </div>
                     </details>
                 {% endfor %}
@@ -489,6 +499,73 @@
     
     window.location.href = urlParaRetornar;
     });
+
+    </script>
+
+    <script>
+
+
+        function openEditarAlunoModal(alunoId, alunoNome, alunoEmail, alunoMatricula) {
+            console.log(alunoNome);
+
+            //essas linhas abaixo é pra textbox já começar com os valores certos
+            document.getElementById("nomeDoAluno").value = alunoNome;
+            document.getElementById("emailDoAluno").value = alunoEmail;
+            document.getElementById("matriculaDoAluno").value = alunoMatricula;
+
+            document.getElementById("confirmar-editar-aluno").dataset.alunoid = alunoId;
+
+            document.getElementById("nomeAlunoToEdit").textContent = `Editar Aluno ${alunoNome}`;
+            document.getElementById("subtitulo-modal-editar-aluno").textContent = `Altere as informações pessoais do ${alunoNome}`
+            document.getElementById("modalEditarAluno").style.display = "flex";
+        }
+
+
+        document.querySelectorAll(".editarAluno").forEach(botao => {
+            botao.addEventListener("click", () =>{
+                console.log("apertei!!!");
+                let alunoid = botao.dataset.alunoid;
+                let alunonome = botao.dataset.alunonome;
+                let alunoemail = botao.dataset.alunoemail;
+                let alunomatricula = botao.dataset.matricula;
+                console.log("aluno email é: ", alunoemail);
+                console.log("aluno matricula é: ", alunomatricula);
+                openEditarAlunoModal(alunoid, alunonome, alunoemail, alunomatricula);
+                // open modal with my aluno id function
+
+            })
+        });
+
+
+        document.getElementById("confirmar-editar-aluno").addEventListener("click", async function(){
+
+            let idDoGrupo = document.getElementById("groupName").dataset.groupId;
+            console.log("id do grupo e´:", idDoGrupo);
+            let idDoAluno = this.dataset.alunoid;
+            let novoNomeDoAluno = document.getElementById("nomeDoAluno").value;
+            let novoEmailDoAluno = document.getElementById("emailDoAluno").value;
+            let novaMatriculaDoAluno = document.getElementById("matriculaDoAluno").value;
+
+            await fetch(`../changeInfo`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ alunoId: idDoAluno, novoNomeDoAluno: novoNomeDoAluno, novoEmailDoAluno: novoEmailDoAluno, novaMatriculaDoAluno: novaMatriculaDoAluno, idDoGrupo: idDoGrupo})
+
+            })
+            .then(response => response.json())
+            .then(data => location.reload())
+
+        })
+
+
+        document.getElementById("cancelar-editar-aluno").addEventListener("click", function(){
+
+            document.getElementById("modalEditarAluno").style.display = "none";
+
+        });
 
     </script>
 {% endblock %}

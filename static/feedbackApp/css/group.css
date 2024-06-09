@@ -108,6 +108,8 @@ form > button:hover {
     background: url("/static/images/background-principal.png") repeat;
 }
 
+
+
 .currentFile {
     padding: 1rem;
     background-color: white;
@@ -199,17 +201,11 @@ form > button:hover {
 
 }
 
-#editarAluno{
+.editarAluno{
     color: white;
     background-color: var(--amareloSoft);
 }
 
-#maisDetalhes{
-
-    background-color: var(--cremeQuaseBranco);
-    color: black;
-
-}
 
 .myGroupButtons > button{
 
@@ -220,6 +216,13 @@ form > button:hover {
     background-color: var(--soft-blue);
     cursor: pointer;
     transition: all 150ms ease-in-out;
+}
+
+.maisDetalhes{
+
+    background-color: var(--cremeQuaseBranco);
+    color: black;
+
 }
 
 .myGroupButtons > button:hover{

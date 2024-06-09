@@ -19,7 +19,6 @@ describe('Adicionar admin a um grupo', () => {
       })
       cy.get('#usuariosProfessores').select('coordenador')
       cy.get('#botaoDoConfia').click()
-      cy.get('#gerenciarGroupModal > div > .close-modal').click()
 
       cy.visit('/')
 

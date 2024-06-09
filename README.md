@@ -40,31 +40,70 @@ A aplicação é:
 
 ## Histórias e Validações 📜
 
-1. Eu, como usuário, desejo criar um grupo;
-2. Eu, como usuário, desejo importar uma planilha FACT;
-3. Eu, como usuário, desejo visualizar informações de um grupo;
-4. Eu, como usuário, desejo adicionar um aluno a um grupo já cadastrado;
-5. Eu, como usuário, desejo excluir um aluno de um grupo.
+1. Eu, como usuário professor, gostaria de criar um grupo;
+2. Eu, como usuário professor, desejo importar uma planilha FACT;
+3. Eu, como usuário professor, gostaria de visitar a página de cada grupo;
+4. Eu, como usuário professor, gostaria de criar um aluno manualmente;
+5. Eu, como usuário professor, desejo excluir um aluno de um grupo;
+6. Eu, como usuario professor, gostaria de adicionar outros usuários professor para gerenciar o grupo;
+7. Eu, como usuário professor, gostaria de excluir grupos existentes;
+8. Eu, como usuário professor, gostaria de mudar qualquer informação relacionado aos alunos;
+9. Eu, como usuario professor, gostaria de criar um form de avaliação para cada grupo automaticamente;
+10. Eu, como usuário professor, gostaria de adicionar um aluno novo manualmente ao grupo.
 
 
     ## Validações
       
     - **História 1**: Criar um Grupo  <br/>
-      - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu importo uma planilha com as informações dos alunos participantes do gurpo,
+                                   Então o novo grupo deve ser adicionado à lista de grupos e uma mensagem de confirmação deve ser exibida.
 
     - **História 2**: Importar Planilha <br/> 
-      - **Validação de história**: Eu, como professor, para registrar os membros do grupo no sistema, visito a página de um grupo e importo uma planilha preenchida.
-      - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados. 
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono a opção de importar planilhas, faço o upload do arquivo correto e confirmo a importação,
+                                   Então os dados da planilha devem ser importados e atualizados no sistema, e uma mensagem de confirmação deve ser exibida. 
 
     - **História 3**: Visualizar Informações de Grupo <br/>
-      - **Validação de história**: Eu, como professor, visito a página de cada grupo para monitorar o progresso dos projetos, contribuir com recursos didáticos, e facilitar a comunicação entre os membros.
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu clico no nome de um grupo na lista de grupos,
+                                   Então eu devo ser redirecionado para a página desse grupo específico, onde posso ver detalhes e gerenciar o grupo.
 
     - **História 4**: Adicionar um Aluno <br/>
-      - **Validação de história**: Eu, como professor, adiciono um novo membro ao grupo no sistema para refletir as mudanças feitas na sala de aula, um novo integrante entrou na equipe que supervisiono. 
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu preencho os dados do aluno e clico no botão de criar aluno,
+                                   Então o novo aluno deve ser adicionado à lista de alunos e uma mensagem de confirmação deve ser exibida. 
 
     - **História 5**: Excluir um Aluno <br/>
-      - **Validação de história**: Eu, como professor, removo um membro do grupo no sistema para refletir as mudanças feitas na sala de aula, um integrante saiu da equipe que supervisiono.
-
+      - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para gerenciar alunos em um grupo,
+                                   Quando eu acesso a lista de alunos do grupo, seleciono o aluno que desejo excluir e clico na opção de excluir,
+                                   Então o aluno deve ser removido da lista de alunos do grupo e uma mensagem de confirmação deve ser exibida.
+        
+    - **História 6**: Adicionar outros usuários professor para gerenciar o grupo <br/>
+       - **Validação de história**: Dado que eu sou um usuário professor autenticado e tenho permissões de administrador do grupo,
+                                    Quando eu seleciono a opção de adicionar professor, insiro os detalhes do novo professor e confirmo,
+                                    Então o novo professor deve ser adicionado à lista de administradores do grupo e uma notificação de sucesso deve ser exibida.
+         
+    - **História 7**: Excluir grupos existentes <br/>
+      - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para excluir grupos,
+                                   Quando eu seleciono um grupo existente e clico na opção de excluir,
+                                   Então o grupo deve ser removido da lista de grupos.
+        
+    - **História 8**: Mudar qualquer informação relacionada aos alunos <br/>
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono um aluno, edito as informações desejadas e salvo as alterações,
+                                   Então as novas informações do aluno devem ser atualizadas no sistema e uma mensagem de confirmação deve ser exibida.
+        
+    - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <br/>
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono a opção de criar um formulário de avaliação e confirmo a criação para cada grupo,
+                                   Então um formulário de avaliação deve ser gerado automaticamente para cada grupo e uma mensagem de confirmação deve ser exibida.
+        
+    - **História 10**: Adicionar um aluno novo manualmente ao grupo <br/>
+         - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono um grupo, insiro os detalhes do novo aluno e confirmo a adição,
+                                   Então o aluno deve ser adicionado à lista de alunos do grupo selecionado e uma mensagem de confirmação deve ser exibida.
+   
 
 ## Link de produção
 ### <a target="_blank">https://fact-project.azurewebsites.net</a>
@@ -126,6 +165,65 @@ A aplicação é:
 
    <br/><br/>
   ![LOGO FACT](https://github.com/JotaPeans/fact-project/assets/130470569/873cab2c-2c03-45fb-8791-952a7ddc7a7b)
+</details>
+
+<details>
+  <summary><h1>Segunda Entrega 📦</h1></summary>
+  
+  <details>
+     <summary><h3>Relatos Pair Programing</h3></summary>
+   <details>
+
+      
+   <summary>Antonio e Clara</summary>
+   
+   Empregamos o pair programming para desenvolver a funcionalidade de adicionar outros usuários professores ao sistema, permitindo o gerenciamento de grupos.
+
+   **Resultado**: A sessão de programação conjunta resultou na implementação eficaz de uma interface intuitiva e segura, onde professores podem adicionar e gerenciar outros colegas de profissão. Durante o desenvolvimento, focamos em assegurar que a funcionalidade fosse simples e direta, otimizando o fluxo de trabalho do usuário e garantindo a segurança dos dados.
+
+   **Conclusão**: O pair programming provou ser uma abordagem valiosa para o desenvolvimento desta funcionalidade, melhorando não apenas a qualidade técnica do produto, mas também a colaboração e comunicação entre os membros da equipe. A experiência trouxe benefícios significativos em termos de eficiência de desenvolvimento e confiança mútua, reforçando nossa habilidade de enfrentar desafios técnicos de forma coesa.
+   </details>
+
+   
+   <details>
+   <summary>Leonardo e Davi</summary>
+   
+   Empregaram o pair programming para desenvolver a funcionalidade que permite aos professores modificar informações de alunos no sistema educacional.
+
+
+   **Resultado**: A sessão de programação conjunta resultou na implementação de um sistema flexível e seguro, onde professores podem alterar informações dos alunos de forma eficaz. Durante o desenvolvimento, focamos em criar uma interface amigável e intuitiva, garantindo que as alterações sejam feitas com precisão e que os dados dos alunos sejam protegidos adequadamente.
+
+   **Conclusão**: O uso do pair programming foi crucial não apenas para a qualidade técnica do desenvolvimento, mas também para fortalecer a colaboração e comunicação entre Leonardo e Davi. Essa abordagem melhorou significativamente a eficiência do processo de desenvolvimento e reforçou a confiança e a habilidade de trabalhar em conjunto diante de desafios técnicos.
+   </details>
+   <details>
+      <summary>João Pedro e Antonio</summary>
+    
+   Utilizaram o pair programming para desenvolver a funcionalidade que permite aos professores criar automaticamente um formulário de avaliação para cada grupo de alunos.
+
+   **Resultado**: A colaboração direta resultou na implementação de uma funcionalidade que automatiza a criação de formulários de avaliação, melhorando significativamente a eficiência do processo educacional. Durante o desenvolvimento, eles se concentraram em garantir que a interface fosse intuitiva e que os formulários gerados atendessem às necessidades específicas de cada grupo, com opções de personalização flexíveis.
+
+   **Conclusão**: A estratégia de pair programming mostrou-se extremamente valiosa, não só para a qualidade técnica do projeto, mas também para fomentar uma forte colaboração entre João Pedro e Antonio. Essa metodologia não apenas facilitou a resolução de problemas complexos durante o desenvolvimento, mas também fortaleceu a comunicação e a confiança mútua, ampliando a capacidade de ambos para lidar com futuros desafios técnicos.
+   </details>
+   <details>
+   <summary>Tanaka e Larissa</summary>
+
+   Utilizaram o pair programming para implementar a funcionalidade de exclusão de grupos existentes no sistema educacional, com o auxílio de Cypress para testes automatizados.
+
+   **Resultado**: A sessão de codificação conjunta permitiu a criação de uma solução robusta que possibilita aos professores excluir grupos de maneira eficiente e segura. Durante o processo, aprimoramos a interface para garantir uma experiência de usuário clara e sem erros, permitindo que decisões sobre a exclusão de grupos sejam feitas de forma informada e precisa. A utilização do Cypress como ferramenta de testes automatizados assegurou que todos os cenários críticos fossem rigorosamente testados, garantindo a estabilidade e a confiabilidade da funcionalidade.
+
+   **Conclusão**: A estratégia de pair programming, enriquecida pela integração de testes automatizados com Cypress, mostrou-se essencial para a qualidade técnica e a segurança da nova funcionalidade. Além disso, a colaboração intensa entre Tanaka e Larissa durante o desenvolvimento fortaleceu a comunicação e o trabalho em equipe, ampliando a capacidade de lidar com desafios técnicos complexos e reforçando a confiança mútua entre os desenvolvedores.
+   </details>
+   <details>
+      <summary>João Pedro e Leonardo</summary>
+   
+   
+   Utilizaram o pair programming para desenvolver a funcionalidade que permite aos professores adicionar manualmente novos alunos aos grupos no sistema educacional.
+
+   **Resultado**: A sessão de programação conjunta facilitou a implementação de uma interface amigável e eficiente para adicionar alunos. Durante o desenvolvimento, eles se concentraram em criar uma experiência de usuário intuitiva, com validações claras para garantir que os dados do aluno sejam inseridos corretamente. Essa funcionalidade simplifica o processo de gestão de grupos, permitindo aos professores personalizar suas turmas conforme necessário.
+
+   **Conclusão**: A estratégia de pair programming se mostrou extremamente valiosa, melhorando não apenas a qualidade técnica do desenvolvimento, mas também a colaboração entre João Pedro e Leonardo. A metodologia promoveu uma comunicação efetiva e permitiu que ambos os desenvolvedores compartilhassem conhecimentos, resultando em uma solução mais robusta e confiável.
+   </details>
+  </details>
 </details>
 
 <br/>
