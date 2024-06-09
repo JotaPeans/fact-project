@@ -59,9 +59,28 @@
     border-radius: 0.7rem;
     width: 30rem;
     height: auto;
-    padding: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
+}
+
+.modal-root > div > h2 {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0rem;
+    align-items: center;
+}
+
+.modal-root > div > h3 {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    align-items: center;
+    color: var(--zinc400);
+}
+
+.tabs > button{
+    font-size: 20px;
 }
 
 .modal-root > div > button {
