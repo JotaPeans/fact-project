@@ -40,31 +40,70 @@ A aplicação é:
 
 ## Histórias e Validações 📜
 
-1. Eu, como usuário, desejo criar um grupo;
-2. Eu, como usuário, desejo importar uma planilha FACT;
-3. Eu, como usuário, desejo visualizar informações de um grupo;
-4. Eu, como usuário, desejo adicionar um aluno a um grupo já cadastrado;
-5. Eu, como usuário, desejo excluir um aluno de um grupo.
+1. Eu, como usuário professor, gostaria de criar um grupo;
+2. Eu, como usuário professor, desejo importar uma planilha FACT;
+3. Eu, como usuário professor, gostaria de visitar a página de cada grupo;
+4. Eu, como usuário professor, gostaria de criar um aluno manualmente;
+5. Eu, como usuário professor, desejo excluir um aluno de um grupo;
+6. Eu, como usuario professor, gostaria de adicionar outros usuários professor para gerenciar o grupo;
+7. Eu, como usuário professor, gostaria de excluir grupos existentes;
+8. Eu, como usuário professor, gostaria de mudar qualquer informação relacionado aos alunos;
+9. Eu, como usuario professor, gostaria de criar um form de avaliação para cada grupo automaticamente;
+10. Eu, como usuário professor, gostaria de adicionar um aluno novo manualmente ao grupo.
 
 
     ## Validações
       
     - **História 1**: Criar um Grupo  <br/>
-      - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu importo uma planilha com as informações dos alunos participantes do gurpo,
+                                   Então o novo grupo deve ser adicionado à lista de grupos e uma mensagem de confirmação deve ser exibida.
 
     - **História 2**: Importar Planilha <br/> 
-      - **Validação de história**: Eu, como professor, para registrar os membros do grupo no sistema, visito a página de um grupo e importo uma planilha preenchida.
-      - **Validação de história**: Eu, como professor, importo planilhas para poder usar do sistema FACT com base nos dados registrados. 
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono a opção de importar planilhas, faço o upload do arquivo correto e confirmo a importação,
+                                   Então os dados da planilha devem ser importados e atualizados no sistema, e uma mensagem de confirmação deve ser exibida. 
 
     - **História 3**: Visualizar Informações de Grupo <br/>
-      - **Validação de história**: Eu, como professor, visito a página de cada grupo para monitorar o progresso dos projetos, contribuir com recursos didáticos, e facilitar a comunicação entre os membros.
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu clico no nome de um grupo na lista de grupos,
+                                   Então eu devo ser redirecionado para a página desse grupo específico, onde posso ver detalhes e gerenciar o grupo.
 
     - **História 4**: Adicionar um Aluno <br/>
-      - **Validação de história**: Eu, como professor, adiciono um novo membro ao grupo no sistema para refletir as mudanças feitas na sala de aula, um novo integrante entrou na equipe que supervisiono. 
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu preencho os dados do aluno e clico no botão de criar aluno,
+                                   Então o novo aluno deve ser adicionado à lista de alunos e uma mensagem de confirmação deve ser exibida. 
 
     - **História 5**: Excluir um Aluno <br/>
-      - **Validação de história**: Eu, como professor, removo um membro do grupo no sistema para refletir as mudanças feitas na sala de aula, um integrante saiu da equipe que supervisiono.
-
+      - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para gerenciar alunos em um grupo,
+                                   Quando eu acesso a lista de alunos do grupo, seleciono o aluno que desejo excluir e clico na opção de excluir,
+                                   Então o aluno deve ser removido da lista de alunos do grupo e uma mensagem de confirmação deve ser exibida.
+        
+    - **História 6**: Adicionar outros usuários professor para gerenciar o grupo <br/>
+       - **Validação de história**: Dado que eu sou um usuário professor autenticado e tenho permissões de administrador do grupo,
+                                    Quando eu seleciono a opção de adicionar professor, insiro os detalhes do novo professor e confirmo,
+                                    Então o novo professor deve ser adicionado à lista de administradores do grupo e uma notificação de sucesso deve ser exibida.
+         
+    - **História 7**: Excluir grupos existentes <br/>
+      - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para excluir grupos,
+                                   Quando eu seleciono um grupo existente e clico na opção de excluir,
+                                   Então o grupo deve ser removido da lista de grupos.
+        
+   - **História 8**: Mudar qualquer informação relacionada aos alunos <br/>
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono um aluno, edito as informações desejadas e salvo as alterações,
+                                   Então as novas informações do aluno devem ser atualizadas no sistema e uma mensagem de confirmação deve ser exibida.
+        
+   - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <br/>
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono a opção de criar um formulário de avaliação e confirmo a criação para cada grupo,
+                                   Então um formulário de avaliação deve ser gerado automaticamente para cada grupo e uma mensagem de confirmação deve ser exibida.
+        
+   - **História 10**: Adicionar um aluno novo manualmente ao grupo
+      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+                                   Quando eu seleciono um grupo, insiro os detalhes do novo aluno e confirmo a adição,
+                                   Então o aluno deve ser adicionado à lista de alunos do grupo selecionado e uma mensagem de confirmação deve ser exibida.
+   
 
 ## Link de produção
 ### <a target="_blank">https://fact-project.azurewebsites.net</a>
