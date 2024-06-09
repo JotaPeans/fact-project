@@ -335,7 +335,6 @@
 
             let groupId = document.getElementById("botaoDoConfia").getAttribute("teste");
             let valorEscolhido = document.getElementById("usuariosProfessores").value;
-            console.log(`isso foi o que eu peguei de opcaoAddAdmin: ${valorEscolhido}`);
             
             await fetch(`addAdminToGroup`, {
             method: "POST",
@@ -345,7 +344,9 @@
             },
             body: JSON.stringify({ professorEscolhido: valorEscolhido, group: groupId})
             })
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(data => location.reload())
+            
             
         }
 

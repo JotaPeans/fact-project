@@ -122,6 +122,7 @@ class GroupView(View):
             return redirect("autenticacao:root")
         
         group = Grupo.objects.filter(pk=id)
+        
 
         if(not group.exists()):
             return redirect("feedbackApp:root")
@@ -160,6 +161,7 @@ class GroupView(View):
                 "id": aluno.id,
                 "nome": aluno.nome,
                 "email": aluno.email,
+                "matricula": aluno.matricula,
                 "sr1": round(sr1, 2),
                 "sr2": round(sr2, 2),
                 "media": round((sr1 + sr2) / 2, 2)
@@ -302,7 +304,24 @@ def addAdmin(req):
         myGroup = Grupo.objects.get(pk=getMyGroup)
         myGroup.sharedToProfessor.add(professorEscolhido)
         return JsonResponse({"success": True})
+    
+def changeAlunoInfo(req):
+    if req.method == "POST":
+        import json
+        data = json.loads(req.body)
+        print("esse é o data que coletei: ", data)
+        getMyAlunoId = data.get("alunoId")
+        getMyGroupId = data.get("idDoGrupo")
+        
+        aluno = Aluno.objects.get(id = getMyAlunoId)
+        print("achei o aluno, sua matricula é: ", aluno.matricula)
 
+
+        aluno.nome = data.get("novoNomeDoAluno")
+        aluno.email = data.get("novoEmailDoAluno")
+        aluno.matricula = data.get("novaMatriculaDoAluno")
+        aluno.save()
+        return JsonResponse({"success": True})
 
 def logoutFunction(req):
     logout(req)
