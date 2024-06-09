@@ -167,6 +167,65 @@ A aplicação é:
   ![LOGO FACT](https://github.com/JotaPeans/fact-project/assets/130470569/873cab2c-2c03-45fb-8791-952a7ddc7a7b)
 </details>
 
+<details>
+  <summary><h1>Segunda Entrega </h1></summary>
+  
+  <details>
+     <summary><h3>Relatos Pair Programing</h3></summary>
+   <details>
+
+      
+   <summary>Antonio e Clara</summary>
+   
+   Empregamos o pair programming para desenvolver a funcionalidade de adicionar outros usuários professores ao sistema, permitindo o gerenciamento de grupos.
+
+   **Resultado**: A sessão de programação conjunta resultou na implementação eficaz de uma interface intuitiva e segura, onde professores podem adicionar e gerenciar outros colegas de profissão. Durante o desenvolvimento, focamos em assegurar que a funcionalidade fosse simples e direta, otimizando o fluxo de trabalho do usuário e garantindo a segurança dos dados.
+
+   **Conclusão**: O pair programming provou ser uma abordagem valiosa para o desenvolvimento desta funcionalidade, melhorando não apenas a qualidade técnica do produto, mas também a colaboração e comunicação entre os membros da equipe. A experiência trouxe benefícios significativos em termos de eficiência de desenvolvimento e confiança mútua, reforçando nossa habilidade de enfrentar desafios técnicos de forma coesa.
+   </details>
+
+   
+   <details>
+   <summary>Leonardo e Davi</summary>
+   
+   Empregaram o pair programming para desenvolver a funcionalidade que permite aos professores modificar informações de alunos no sistema educacional.
+
+
+   **Resultado**: A sessão de programação conjunta resultou na implementação de um sistema flexível e seguro, onde professores podem alterar informações dos alunos de forma eficaz. Durante o desenvolvimento, focamos em criar uma interface amigável e intuitiva, garantindo que as alterações sejam feitas com precisão e que os dados dos alunos sejam protegidos adequadamente.
+
+   **Conclusão**: O uso do pair programming foi crucial não apenas para a qualidade técnica do desenvolvimento, mas também para fortalecer a colaboração e comunicação entre Leonardo e Davi. Essa abordagem melhorou significativamente a eficiência do processo de desenvolvimento e reforçou a confiança e a habilidade de trabalhar em conjunto diante de desafios técnicos.
+   </details>
+   <details>
+      <summary>João Pedro e Antonio</summary>
+    
+   Utilizaram o pair programming para desenvolver a funcionalidade que permite aos professores criar automaticamente um formulário de avaliação para cada grupo de alunos.
+
+   **Resultado**: A colaboração direta resultou na implementação de uma funcionalidade que automatiza a criação de formulários de avaliação, melhorando significativamente a eficiência do processo educacional. Durante o desenvolvimento, eles se concentraram em garantir que a interface fosse intuitiva e que os formulários gerados atendessem às necessidades específicas de cada grupo, com opções de personalização flexíveis.
+
+   **Conclusão**: A estratégia de pair programming mostrou-se extremamente valiosa, não só para a qualidade técnica do projeto, mas também para fomentar uma forte colaboração entre João Pedro e Antonio. Essa metodologia não apenas facilitou a resolução de problemas complexos durante o desenvolvimento, mas também fortaleceu a comunicação e a confiança mútua, ampliando a capacidade de ambos para lidar com futuros desafios técnicos.
+   </details>
+   <details>
+   <summary>Tanaka e Larissa</summary>
+
+   Utilizaram o pair programming para implementar a funcionalidade de exclusão de grupos existentes no sistema educacional, com o auxílio de Cypress para testes automatizados.
+
+   **Resultado**: A sessão de codificação conjunta permitiu a criação de uma solução robusta que possibilita aos professores excluir grupos de maneira eficiente e segura. Durante o processo, aprimoramos a interface para garantir uma experiência de usuário clara e sem erros, permitindo que decisões sobre a exclusão de grupos sejam feitas de forma informada e precisa. A utilização do Cypress como ferramenta de testes automatizados assegurou que todos os cenários críticos fossem rigorosamente testados, garantindo a estabilidade e a confiabilidade da funcionalidade.
+
+   **Conclusão**: A estratégia de pair programming, enriquecida pela integração de testes automatizados com Cypress, mostrou-se essencial para a qualidade técnica e a segurança da nova funcionalidade. Além disso, a colaboração intensa entre Tanaka e Larissa durante o desenvolvimento fortaleceu a comunicação e o trabalho em equipe, ampliando a capacidade de lidar com desafios técnicos complexos e reforçando a confiança mútua entre os desenvolvedores.
+   </details>
+   <details>
+      <summary>João Pedro e Leonardo</summary>
+   
+   
+   Utilizaram o pair programming para desenvolver a funcionalidade que permite aos professores adicionar manualmente novos alunos aos grupos no sistema educacional.
+
+   **Resultado**: A sessão de programação conjunta facilitou a implementação de uma interface amigável e eficiente para adicionar alunos. Durante o desenvolvimento, eles se concentraram em criar uma experiência de usuário intuitiva, com validações claras para garantir que os dados do aluno sejam inseridos corretamente. Essa funcionalidade simplifica o processo de gestão de grupos, permitindo aos professores personalizar suas turmas conforme necessário.
+
+   **Conclusão**: A estratégia de pair programming se mostrou extremamente valiosa, melhorando não apenas a qualidade técnica do desenvolvimento, mas também a colaboração entre João Pedro e Leonardo. A metodologia promoveu uma comunicação efetiva e permitiu que ambos os desenvolvedores compartilhassem conhecimentos, resultando em uma solução mais robusta e confiável.
+   </details>
+  </details>
+</details>
+
 <br/>
 
 # Contribuidores 👨‍👩‍👧‍👦
