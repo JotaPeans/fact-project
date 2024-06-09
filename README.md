@@ -89,18 +89,18 @@ A aplicação é:
                                    Quando eu seleciono um grupo existente e clico na opção de excluir,
                                    Então o grupo deve ser removido da lista de grupos.
         
-   - **História 8**: Mudar qualquer informação relacionada aos alunos <br/>
+    - **História 8**: Mudar qualquer informação relacionada aos alunos <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono um aluno, edito as informações desejadas e salvo as alterações,
                                    Então as novas informações do aluno devem ser atualizadas no sistema e uma mensagem de confirmação deve ser exibida.
         
-   - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <br/>
+    - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono a opção de criar um formulário de avaliação e confirmo a criação para cada grupo,
                                    Então um formulário de avaliação deve ser gerado automaticamente para cada grupo e uma mensagem de confirmação deve ser exibida.
         
-   - **História 10**: Adicionar um aluno novo manualmente ao grupo <br/>
-      - **Validação de história**: Dado que eu sou um usuário professor autenticado,
+    - **História 10**: Adicionar um aluno novo manualmente ao grupo <br/>
+         - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono um grupo, insiro os detalhes do novo aluno e confirmo a adição,
                                    Então o aluno deve ser adicionado à lista de alunos do grupo selecionado e uma mensagem de confirmação deve ser exibida.
    
