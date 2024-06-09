@@ -168,7 +168,7 @@ A aplicação é:
 </details>
 
 <details>
-  <summary><h1>Segunda Entrega </h1></summary>
+  <summary><h1>Segunda Entrega 📦</h1></summary>
   
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
