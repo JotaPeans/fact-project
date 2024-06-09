@@ -99,7 +99,7 @@ A aplicação é:
                                    Quando eu seleciono a opção de criar um formulário de avaliação e confirmo a criação para cada grupo,
                                    Então um formulário de avaliação deve ser gerado automaticamente para cada grupo e uma mensagem de confirmação deve ser exibida.
         
-   - **História 10**: Adicionar um aluno novo manualmente ao grupo
+   - **História 10**: Adicionar um aluno novo manualmente ao grupo <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono um grupo, insiro os detalhes do novo aluno e confirmo a adição,
                                    Então o aluno deve ser adicionado à lista de alunos do grupo selecionado e uma mensagem de confirmação deve ser exibida.
