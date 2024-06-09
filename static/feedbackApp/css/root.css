@@ -68,10 +68,10 @@ aside {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 0;
     gap: 1rem;
     width: 15rem;
     max-width: 15rem;
+    padding: 3rem;
 }
 
 aside > div {
@@ -83,17 +83,21 @@ aside > div {
 
 aside > div > p {
     text-transform: capitalize;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: white;
 }
 
 .logout {
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     text-decoration: none;
-    background-color: var(--red);
-    border-radius: 1rem;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 0.625rem;
     cursor: pointer;
     transition: all 150ms ease-in-out;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
     color: white;
 }
 
