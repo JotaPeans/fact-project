@@ -1,5 +1,5 @@
-describe('Deletar ALuno', () => {
-  it('Deletar Aluno X9', () => {
+describe('Remover ALuno', () => {
+  it('Remover Aluno X9', () => {
       cy.visit('/')
 
       cy.get('[placeholder="Usuário"]').type("professor")
