@@ -65,7 +65,7 @@
 
                                 <select class = "aluno-unit textBoxNovoAluno" name="alunosASelecionar" id="alunosASelecionar">
                                     {% for aluno in alunos %}
-                                        <option id value="{{aluno.id}}">{{aluno.nome}}</option>
+                                        <option id = "opcaoEscolhida" value="{{aluno.id}}">{{aluno.nome}}</option>
                                     {% endfor %}
                                 </select>
 
