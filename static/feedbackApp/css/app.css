@@ -23,8 +23,8 @@ main {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding: 2.5rem;
+    gap: 1.5rem;
+    padding: 2rem;
     background-color: #F9F6F3;
 }
 
@@ -51,6 +51,7 @@ main {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+   /* overflow-y: auto; */
 }
 
 .container {
@@ -69,10 +70,11 @@ main {
 
 .upperButtons{
     display: flex;
-    justify-content: end;
+    justify-content: start;
     align-items: center;
     gap: 1rem;
     height: 48px;
+    padding-left: 1rem;
  }
 
 #addGroup, #addStudent {
@@ -162,29 +164,73 @@ main {
     position: relative;
     text-decoration: none;
     width: auto;
-    height: 15rem;
-    background-color: var(--beigeHover);
+    height: auto;
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     gap: 1rem;
     border-radius: 1rem;
 }
 
-.group > a {
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 600;   
+.group > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0rem 1.2rem;
 }
 
-.group > a:hover {
+.group > div > a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.group > div > p {
     text-decoration: underline;
 }
 
+.img {
+    width: 100%;
+    min-width: 16rem;
+    display: flex;
+    justify-content: center;
+    background-color: #EBE2D8;
+    border-radius: 1rem;
+}
+
+.img >  img {
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.group > div > p {
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .popover-container {
-    position: absolute;
     right: 1rem;
     bottom: 1rem;
 }
@@ -203,21 +249,16 @@ main {
     z-index: 50;
 }
 
-.popover-button:hover {
-    background: white;
-}
-
 .popover-content {
     position: absolute;
-    top: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 83%;
+    top: 99%;
     min-width: 10rem;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    border-radius: 0.375rem;
-    background-color: white;
+    border-radius: 0.7rem;
+    background-color: #F0EBE5;
+    border: 0.1rem solid #B9AD9E;
     padding: 4px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
     transition: all 150ms ease-in-out;
@@ -239,12 +280,10 @@ main {
 
 .popover-content > hr {
     margin: 0 -4px;
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    border: 0.05rem solid #B9AD9E;
 }
 
-.popover-button {
+/*.popover-button {
     border: none;
     font-weight: 500;
     font-size: 14px;
@@ -257,16 +296,84 @@ main {
     padding: 6px 8px;
     border-radius: 0.125rem;
     cursor: pointer;
-    /* transition: all 150ms ease-in-out; */
+    /* transition: all 150ms ease-in-out; 
 }
 
+.popover-button:hover {
+    background: white;
+}
+*/
 .delete {
-    color: var(--red-600);
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    background-color: var(--red-600);
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin: 0.4rem 0rem;
+    gap: 0.3rem;
+    font-size: 15px;
 }
 
 .delete:hover {
-    background-color: var(--red-200);
+    background-color: var(--redHover);
 }
+
+.delete > svg {
+    width: 18px;
+}
+
+.gerenciar{
+    color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #B9AD9E;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-bottom: 0.2rem;
+    gap: 0.3rem;
+    font-size: 15px;
+}
+
+.gerenciar:hover {
+    background-color: var(--redHover);
+}
+
+.gerenciar > svg {
+    width: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .delete-group {
     text-decoration: none;
@@ -281,30 +388,22 @@ main {
     background-color: var(--red-300);
 }
 
+
+
+
+
+
+
+
+
+
+
 .gerenciar:hover {
     background-color: rgba(200, 200, 200, 0.2);
 }
 
 .gerenciar-group:hover{
     background-color: grey;
-}
-
-.img {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-height: 80%;
-}
-
-.img >  img {
-    height: 100%;
-    object-fit: cover;
-}
-
-
-
-.group > p {
-    font-size: 1.2rem;
 }
 
 #editGroup{

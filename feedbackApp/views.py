@@ -163,9 +163,12 @@ class GroupView(View):
                 "media": round((sr1 + sr2) / 2, 2)
             })
         
+
+        todosAlunos = Aluno.objects.all()
         context = {
             "group": group[0],
-            "alunos": alunos
+            "alunos": alunos,
+            "todosAlunos": todosAlunos
         }
         
         return render(req, "feedbackApp/group.html", context=context)
