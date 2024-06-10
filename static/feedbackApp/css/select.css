@@ -8,13 +8,13 @@
 }
 
 select {
-    /* Reset */
     appearance: none;
     border: 0;
     outline: 0;
     font: inherit;
-    padding: 1rem 4rem 1rem 1rem;
-    background: var(--arrow-icon) no-repeat right 0.8em center / 1em, white;
+    padding: 4px;
+    padding-right: 2.3rem;
+    background: var(--arrow-icon) no-repeat right 0.5em center / 0.6em, white;
     color: black;
     border-radius: 0.25em;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
