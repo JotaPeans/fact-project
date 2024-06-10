@@ -4,12 +4,18 @@
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
     --yellowHover: #d69d00;
-    --red: #D72C00;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-600: #dc2626;
     --redHover: #c02600;
     --beige: #F0EBE5;
     --beigeHover: #efe0ce;
     --black: #292B26;
     --blackHover: rgb(16, 16, 15);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 main {
@@ -18,14 +24,15 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem;
+    padding: 2.5rem;
+    background-color: #F9F6F3;
 }
 
 .error {
     text-align: center;
     font-weight: 600;
     font-size: 0.8rem;
-    color: var(--red);
+    color: var(--red-600);
     margin: 1rem 0;
 }
 
@@ -62,53 +69,89 @@ main {
 
 .upperButtons{
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
     height: 48px;
  }
 
-#addGroup {
+#addGroup, #addStudent {
     border: none;
     max-width: fit-content;
     max-height: fit-content;
     border-radius: 10px;
     padding: 11.5px 19.5px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     background-color: var(--soft-blue);
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 150ms ease-in-out;
 }
 
-#addGroup:hover {
+#addGroup:hover, #addStudent:hover {
     background-color: var(--blueHover);
 }
 
-#trashCan {
-    border: none;
-    border-radius: 10px;
+.upload {
+    width: 100%;
+    border: 2px dashed rgba(0, 0, 0, 0.4);
+    color: rgb(156, 156, 156);
+    background-color: white;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 200px;
+}
+
+.tabs {
     display: flex;
     align-items: center;
-    padding: 11.5px 19.5px;
-    background-color: var(--red);
+    justify-content: center;
+    background-color: white;
+    gap: 4px;
+    margin: 0.7rem auto;
+    padding: 4px;
+    border-radius: 0.7rem;
+}
+
+.tabs > button{
+    font-size: 20px;
+}
+
+.tab {
+    padding: 4px 8px;
+    border-radius: 0.25rem;
+    background: none;
     cursor: pointer;
     transition: all 150ms ease-in-out;
 }
 
-#trashCanActivated{
-    border: none;
-    max-width: fit-content;
-    max-height: fit-content;
-    border-radius: 1rem;
+.tab.active {
+    background-color: var(--soft-blue);
+    color: white;
+    border-radius: 0.5rem;
+}
+
+#upload-excel, #add-manually {
     display: none;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--beigeHover);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 150ms ease-in-out;
-    
+}
+
+#upload-excel.active, #add-manually.active {
+    display: flex;
+}
+
+.currentFile {
+    border-radius: 0.5rem;
+    padding: 16px;
+    color: var(--black);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 #mensagemDeDelete{
@@ -116,19 +159,124 @@ main {
 }
 
 .group {
+    position: relative;
     text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
     width: auto;
     height: 15rem;
     background-color: var(--beigeHover);
     padding: 1rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     border-radius: 1rem;
+}
+
+.group > a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;   
+}
+
+.group > a:hover {
+    text-decoration: underline;
+}
+
+.popover-container {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.popover-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms ease-in-out;
+    border-radius: 0.5rem;
+    z-index: 50;
+}
+
+.popover-button:hover {
+    background: white;
+}
+
+.popover-content {
+    position: absolute;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 0.5rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+    transition: all 150ms ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.popover-content.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popover-content > h3 {
+    font-size: 1.1rem;
+}
+
+.popover-content > hr {
+    margin: 0 -0.5rem;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+
+.delete-group {
+    border-radius: 0.6rem;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: var(--red-200);
+    color: var(--red-600);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+.delete-group:hover {
+    background-color: var(--red-300);
+}
+
+.gerenciar-group{
+    border-radius: 0.6rem;
+    border: none;
+    font-weight: 500;
+    font-size: 14px;
+    background-color: var(--yellow);
+    color: var(--blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
 }
 
 .img {
@@ -138,10 +286,12 @@ main {
     max-height: 80%;
 }
 
-.img > img {
+.img >  img {
     height: 100%;
     object-fit: cover;
 }
+
+
 
 .group > p {
     font-size: 1.2rem;
@@ -154,22 +304,4 @@ main {
 .temBorda{
     border: 2px solid white;
     border-radius: 5%;
-}
-
-.deleteGroup{
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
-    width: auto;
-    height: 15rem;
-    background-color: var(--beigeHover);
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    border-radius: 1rem;
-    display: none;
-    border-color: var(--blue);
-    
 }

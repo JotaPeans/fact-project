@@ -1,10 +1,22 @@
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-
-CREDENTIALS_PATH = "./credentials.json"
+from .models import GoogleCredentials
+import json
 
 SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
 SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
+
+CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
+
+credentials_forms = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_FORMS)
+credentials_drive = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_DRIVE)
+
+service = build("forms", "v1", credentials=credentials_forms)
+
+drive_service = build("drive", "v3", credentials=credentials_drive)
+
+# Acessar https://console.developers.google.com/apis/api/forms.googleapis.com/overview para ativar a api do forms caso esteja desativada
+# Acessar https://console.developers.google.com/apis/api/drive.googleapis.com/overview para ativar a api do drive caso esteja desativada
 
 descricao_fact = '''No uso do FACT, os membros do time atribuem notas individuais (exceto a si próprios), tomando como referência os Critérios de Avaliação.
 
@@ -25,37 +37,6 @@ Ao atribuir qualquer nota entre 1 e 9, não anteceder o número com "0" (zero). 
 Lembre-se, o somatório das notas atribuídas aos seus colegas de time não deve ultrapassar a quantidade de PONTOS informado em cada critério. 
 
 O FACT não contempla autoavaliação, portanto ao chegar em sua própria avaliação, o estudante deverá colocar "0" (zero) em todas as notas, e justificar dizendo "sou eu".'''
-
-
-
-credentials_forms = service_account.Credentials.from_service_account_file(CREDENTIALS_PATH, scopes=SCOPES_FORMS)
-credentials_drive = service_account.Credentials.from_service_account_file(CREDENTIALS_PATH, scopes=SCOPES_DRIVE)
-
-service = build("forms", "v1", credentials=credentials_forms)
-
-drive_service = build("drive", "v3", credentials=credentials_drive)
-
-
-def add_permission(file_id: str, email_address: str):
-    permission = {
-        "type": "user",
-        "role": "writer",
-        "emailAddress": email_address
-    }
-
-    try:
-        drive_service.permissions().create(
-            fileId=file_id,
-            body=permission,
-            fields="id"
-        ).execute()
-
-    except Exception as e:
-        print("error: ", e)
-
-
-
-alunos = ["ADRIANA SOUZA LIMA","ALBERTO CARVALHO SANTOS","ALESSANDRA PEREIRA SILVA","ALEXANDRE COSTA BARBOSA","ALICE FERREIRA GOMES","AMANDA ALVES RIBEIRO","ANA BEATRIZ CASTRO OLIVEIRA","ANA CAROLINA MORAES ROCHA","ANDRÉ LUIZ CARDOSO ALMEIDA","ANTÔNIO CARLOS BATISTA MARTINS","ARIANE CUNHA MELO","BRUNA SOUZA SANTOS","BRUNO HENRIQUE LIMA FERREIRA"]
 
 title_images = [
     {
@@ -88,25 +69,49 @@ title_images = [
     },
 ]
 
-def create_new_form(lista_perguntas):
+def create_new_form() -> str:
     form = {
         "info": {
             "title": "FACT - Fator de Contribuição Técnica",
-        }
+        },
     }
     created_form = service.forms().create(body=form).execute()
 
     formId = created_form["formId"]
 
+    return formId
+
+
+def add_permission(formId: str, email_address: str):
+    permission = {
+        "type": "user",
+        "role": "writer",
+        "emailAddress": email_address
+    }
+
+    try:
+        drive_service.permissions().create(
+            fileId=formId,
+            body=permission,
+            fields="id"
+        ).execute()
+
+    except Exception as e:
+        print("error: ", e)
+
+
+def update_form(formId, lista_perguntas):
     updates = {
-        "requests": lista_perguntas
+        "requests": lista_perguntas,
     }
 
     service.forms().batchUpdate(formId=formId, body=updates).execute()
 
-    add_permission(formId, "apabs@gmail.com") #esse email corresponde a permissão para editar o forms. Ou seja, o email do professor fica aqui.
+    URL = f"https://docs.google.com/forms/d/{formId}"
 
-    print(f"URL for {aluno}'s form: https://docs.google.com/forms/d/{formId}")
+    print(f"URL form: {URL}")
+
+    return URL
 
 
 def create_item(title, aluno, image, count):
@@ -151,6 +156,55 @@ def create_item(title, aluno, image, count):
                 }
             },
         }
+    
+
+def create_select_name_section(formId, alunos, emails):
+    updates = {
+        "requests": [
+            {
+                "createItem": {
+                    "item": {
+                        "title": "Selecione seu NOME",
+                        "questionItem": {
+                            "question": {
+                                "required": True,
+                                "choiceQuestion": {
+                                    "type": "RADIO",
+                                    "options": [{"value": aluno} for aluno in alunos],
+                                    "shuffle": False
+                                }
+                            }
+                        }
+                    },
+                    "location": {
+                        "index": 0
+                    }
+                },
+            },
+            {
+                "createItem": {
+                    "item": {
+                        "title": "Selecione seu EMAIL",
+                        "questionItem": {
+                            "question": {
+                                "required": True,
+                                "choiceQuestion": {
+                                    "type": "RADIO",
+                                    "options": [{"value": email} for email in emails],
+                                    "shuffle": False
+                                }
+                            }
+                        }
+                    },
+                    "location": {
+                        "index": 1
+                    }
+                },
+            },
+        ]
+    }
+
+    service.forms().batchUpdate(formId=formId, body=updates).execute()
 
 
 def create_page_break(title, count):
@@ -179,20 +233,26 @@ def update_form_info():
     }
 
 
-for aluno in alunos:
-    count = 0
-    lista_perguntas = []
-    alunosSemAlunoAtual = filter(lambda x: x != aluno, alunos)
+def create_fact(email_address, alunos, emails):
+    formId = create_new_form()
+    add_permission(formId=formId, email_address=email_address)
+    create_select_name_section(formId, alunos, emails)
 
-    lista_perguntas.append(update_form_info())
+    alunos_ordenados = sorted(alunos, key=lambda nome: nome, reverse=True)
 
-    for other_student in alunosSemAlunoAtual:
-        lista_perguntas.append(create_page_break(count=count, title=other_student))
+    lista_perguntas = [] 
+
+    for aluno in alunos_ordenados:
+        count = 2
+
+        lista_perguntas.append(update_form_info())
+
+        lista_perguntas.append(create_page_break(count=count, title=aluno))
         count += 1
 
         for title_images_index in range(7):
             question_item = create_item(
-                aluno=other_student, 
+                aluno=aluno, 
                 count=count, 
                 title=title_images[title_images_index]["title"], 
                 image=title_images[title_images_index]["image"]
@@ -201,5 +261,12 @@ for aluno in alunos:
             lista_perguntas.append(question_item)
             count += 1
 
-    create_new_form(lista_perguntas)
+    update_form(formId, lista_perguntas)
 
+
+if __name__ == "__main__":
+    alunos = ["ADRIANA SOUZA LIMA","ALBERTO CARVALHO SANTOS","ALESSANDRA PEREIRA SILVA","ALEXANDRE COSTA BARBOSA","ALICE FERREIRA GOMES","AMANDA ALVES RIBEIRO","ANA BEATRIZ CASTRO OLIVEIRA","ANA CAROLINA MORAES ROCHA","ANDRÉ LUIZ CARDOSO ALMEIDA","ANTÔNIO CARLOS BATISTA MARTINS","ARIANE CUNHA MELO","BRUNA SOUZA SANTOS","BRUNO HENRIQUE LIMA FERREIRA"]
+
+    emails = ["ADRIANA SOUZA LIMA","ALBERTO CARVALHO SANTOS","ALESSANDRA PEREIRA SILVA","ALEXANDRE COSTA BARBOSA","ALICE FERREIRA GOMES","AMANDA ALVES RIBEIRO","ANA BEATRIZ CASTRO OLIVEIRA","ANA CAROLINA MORAES ROCHA","ANDRÉ LUIZ CARDOSO ALMEIDA","ANTÔNIO CARLOS BATISTA MARTINS","ARIANE CUNHA MELO","BRUNA SOUZA SANTOS","BRUNO HENRIQUE LIMA FERREIRA"]
+
+    create_fact(email_address="jpff2@cesar.school", alunos=alunos, emails=emails)

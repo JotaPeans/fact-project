@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, default="")
+    matricula = models.CharField(max_length=15, default="")
     
 
     def __str__(self) -> str:
@@ -14,6 +15,7 @@ class Grupo(models.Model):
     nome = models.CharField(max_length=200)  
     alunos = models.ManyToManyField(Aluno, related_name='grupos')
     professor = models.ForeignKey(User, on_delete=models.CASCADE)
+    sharedToProfessor = models.ManyToManyField(User, related_name='professoresAdmins')
 
     def __str__(self) -> str:
         return self.nome
@@ -33,3 +35,6 @@ class Fact(models.Model):
 
     def __str__(self) -> str:
         return self.nome + " - " + self.aluno.nome
+    
+class GoogleCredentials(models.Model):
+    credetinals = models.CharField(max_length=3000)
