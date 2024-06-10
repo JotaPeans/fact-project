@@ -433,7 +433,7 @@
     document.getElementById("adicionarAluno").addEventListener("click", activateToAdd);
 
     function addedAlunoToList(){
-        let nomeDoAluno = document.getElementsByClassName("textBoxNovoAluno")[0].value;
+        let nomeDoAluno = document.getElementById("opcaoEscolhida");
         var novaDiv = document.createElement("a"); //
         var container = document.getElementById("displayDeAlunos");
 
