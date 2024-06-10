@@ -267,8 +267,8 @@ main {
     border: none;
     font-weight: 500;
     font-size: 14px;
-    background-color: var(--yellow);
-    color: var(--blue);
+    background-color: rgb(175, 173, 173);
+    color: var(--black);
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -277,6 +277,10 @@ main {
     padding: 0.5rem;
     cursor: pointer;
     transition: all 150ms ease-in-out;
+}
+
+.gerenciar-group:hover{
+    background-color: grey;
 }
 
 .img {
