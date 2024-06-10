@@ -65,7 +65,7 @@
 
                                 <select class = "aluno-unit textBoxNovoAluno" name="alunosASelecionar" id="alunosASelecionar">
                                     {% for aluno in alunos %}
-                                        <option id = "opcaoEscolhida" value="{{aluno.id}}">{{aluno.nome}}</option>
+                                        <option id = "opcaoEscolhida"value="{{aluno.id}}">{{aluno.nome}}</option>
                                     {% endfor %}
                                 </select>
 
@@ -433,7 +433,7 @@
     document.getElementById("adicionarAluno").addEventListener("click", activateToAdd);
 
     function addedAlunoToList(){
-        let nomeDoAluno = document.getElementById("opcaoEscolhida");
+        let nomeDoAluno = document.getElementsByClassName("textBoxNovoAluno")[0].value;
         var novaDiv = document.createElement("a"); //
         var container = document.getElementById("displayDeAlunos");
 
