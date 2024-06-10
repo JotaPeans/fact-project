@@ -67,7 +67,7 @@ class FeedBackView(View):
             return self.addGroup(req, context, user)
         
         if(action == "addStudent"):
-            return self.addStudent(req, context)
+            return self.addStudent(req)
     
     def addGroup(self, req, context, user):
         groupName = req.POST.get("groupName")
@@ -84,13 +84,9 @@ class FeedBackView(View):
         group = Grupo.objects.create(nome=groupName, professor=context["user"])
         group.save()
 
-        groups = Grupo.objects.filter(professor=user)
-
-        context["groups"] = groups
-
-        return render(req, "feedbackApp/app.html", context=context)
+        return redirect("feedbackApp:root")
     
-    def addStudent(self, req, context):
+    def addStudent(self, req):
         file = None
 
         try:
@@ -109,7 +105,7 @@ class FeedBackView(View):
 
             Aluno.objects.create(matricula=matricula, nome=nome, email=email_school)
         
-        return render(req, "feedbackApp/app.html", context=context)
+        return redirect("feedbackApp:root")
     
     def deleteGroup(self,req,context,user,id):
         group_to_delete = Grupo.objects.get(id=id)
