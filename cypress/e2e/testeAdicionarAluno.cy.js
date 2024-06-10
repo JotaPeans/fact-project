@@ -8,7 +8,7 @@ describe('Adicionar ALuno', () => {
 
     cy.get('#addGroup').click()
     cy.get('#name').type("Adicionar A")
-    cy.get('form > button').contains('Enviar').click()
+    cy.get('form > button').contains('Confirmar').click()
     
     cy.get('.group > a').contains('Adicionar A').closest('.group').as('AA')
     cy.get('@AA').within(() => { 
