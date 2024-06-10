@@ -219,7 +219,7 @@
     border-radius: 0.7rem;
     width: 30rem;
     height: auto;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -242,7 +242,7 @@
     border: none;
     border-radius: 0.7rem;
     margin: 0.5rem 0rem;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .delete-actions-container {

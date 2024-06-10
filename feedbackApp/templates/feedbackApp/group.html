@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'feedbackApp/css/group.css' %}">
     <link rel="stylesheet" href="{% static 'root/styles/animations.css' %}">
     <link rel="stylesheet" href="{% static 'feedbackApp/css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/select.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -61,9 +62,18 @@
                     <div id = "displayDeAlunos">
 
                             <form action="">
+
+                                <select class = "aluno-unit textBoxNovoAluno" name="alunosASelecionar" id="alunosASelecionar">
+                                    {% for aluno in alunos %}
+                                        <option id value="{{aluno.id}}">{{aluno.nome}}</option>
+                                    {% endfor %}
+                                </select>
+
                                 <input type="text" class = "aluno-unit textBoxNovoAluno">
 
                             </form>
+                            
+
                         {% for aluno in alunos %}
                             <a class="aluno-unit" data-id="{{ aluno.id }}" data-groupId = "{{group.id}}" >{{ aluno.nome }}</a>
                         {% endfor %}
