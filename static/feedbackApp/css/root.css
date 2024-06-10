@@ -51,6 +51,7 @@ header {
     padding: 1rem 3rem;
     width: 100%;
     height: 150px;
+    background-color: #efe0ce51;
 }
 
 header > a {
@@ -88,7 +89,7 @@ aside > div > p {
 }
 
 .logout {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     text-decoration: none;
     background-color: transparent;
     border: 2px solid white;
@@ -102,5 +103,19 @@ aside > div > p {
 }
 
 .logout:hover {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
     background-color: var(--redHover);
+    border: 2px solid var(--redHover);
+    border-radius: 0.625rem;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.logout > svg {
+    margin-left: 0.5rem;
 }
