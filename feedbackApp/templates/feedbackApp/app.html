@@ -24,7 +24,7 @@
                     <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
                        
                         <a href="{% url 'feedbackApp:group' id=group.id %}" class="img">
-                            <img class = "imagemDoGrupo" src="{% static 'images/iconeGRUPO.png' %}" alt="FACT">
+                            <img class = "imagemDoGrupo" src="{% static 'images/iconeGRUPO.png' %}" alt="FACT" data-image="{{group.image}}">
                         </a>
                         <div>
                             <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
@@ -39,8 +39,7 @@
 
                                 <div data-groupid="{{group.id}}" class="popover-content">
                                     <h3>{{group.nome}}</h3>
-
-                                    <hr>
+                                    
                                     
                                     <button data-groupid = "{{group.id}}" data-groupname = "{{group.nome}}" data-professor = "{{group.professor}}" class = "popover-button gerenciar">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
@@ -53,7 +52,6 @@
                                         Gerenciar
                                     </button>
 
-                                    <hr>
 
                                     <button data-groupid="{{group.id}}" data-groupname = "{{group.nome}}"class="popover-button delete">
                                         <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -302,19 +300,18 @@
                 if(content.dataset.groupid === popoverid) {
                     content.classList.toggle("active");
                 }
+                else{
+                    content.classList.remove("active");
+                }
             });
         }
 
         const popoverGroupButtons = document.querySelectorAll(".popover-trigger");
+        
         popoverGroupButtons.forEach(btn => {
-            let oCerto = btn;
-            oCerto.addEventListener("click", () => togglePopoverGroup(btn.id))
-            popoverGroupButtons.forEach(btn=> {
-                if (btn != oCerto){
-                    
-                    
-                }
-            })
+            btn.addEventListener("click", () => {
+                togglePopoverGroup(btn.id);
+            });
         });
 
         function confirmDeleteGroupPopup(groupId, groupName) {
@@ -376,6 +373,8 @@
 
 
     </script>
+
+
 
 
 {% endblock %}

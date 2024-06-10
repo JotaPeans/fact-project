@@ -124,6 +124,7 @@ form > button:hover {
     flex-direction: column;
     gap: 1rem;
     margin: 0 auto;
+    overflow-y: auto;
 }
 
 .notas-aluno {

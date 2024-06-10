@@ -16,6 +16,7 @@ class Grupo(models.Model):
     alunos = models.ManyToManyField(Aluno, related_name='grupos')
     professor = models.ForeignKey(User, on_delete=models.CASCADE)
     sharedToProfessor = models.ManyToManyField(User, related_name='professoresAdmins')
+    image = models.CharField(max_length=200, default = 'a')
 
     def __str__(self) -> str:
         return self.nome
