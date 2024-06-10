@@ -23,7 +23,7 @@ main {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 2.5rem;
     background-color: #F9F6F3;
 }
@@ -162,29 +162,72 @@ main {
     position: relative;
     text-decoration: none;
     width: auto;
-    height: 15rem;
-    background-color: var(--beigeHover);
+    height: auto;
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
     gap: 1rem;
     border-radius: 1rem;
 }
 
-.group > a {
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 600;   
+.group > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0rem 1.2rem;
 }
 
-.group > a:hover {
+.group > div > a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.group > div > p {
     text-decoration: underline;
 }
 
+.img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #EBE2D8;
+    border-radius: 1rem;
+}
+
+.img >  img {
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+.group > div > p {
+    font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .popover-container {
-    position: absolute;
     right: 1rem;
     bottom: 1rem;
 }
@@ -209,9 +252,7 @@ main {
 
 .popover-content {
     position: absolute;
-    top: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 85%;
     min-width: 10rem;
     display: flex;
     flex-direction: column;
@@ -287,24 +328,6 @@ main {
 
 .gerenciar-group:hover{
     background-color: grey;
-}
-
-.img {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    max-height: 80%;
-}
-
-.img >  img {
-    height: 100%;
-    object-fit: cover;
-}
-
-
-
-.group > p {
-    font-size: 1.2rem;
 }
 
 #editGroup{
