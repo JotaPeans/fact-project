@@ -35,7 +35,7 @@
 
                                 <hr>
                                 
-                                <button data-groupid="{{group.id}}" class="delete-group">
+                                <button data-groupid="{{group.id}}" data-groupname="{{group.nome}}" class="delete-group">
                                     Deletar
                                     <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M3.5 6H5.5H21.5" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -137,12 +137,12 @@
 
     <div class="modal-root">
         <div class='deletarGrupo'>
-            <button class="close-modal">
+            <button data-groupname = "{{group.nome}}" class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
             </button>
             
             <h2>Deseja deletar esse grupo?</h2>
-            <h3>nome do grupo</h3>
+            <h3 id = grupoaserdeletado>{{group.nome}}</h3>
 
             <div class="delete-actions-container">
                 <button class="close-modal">Cancelar</button>
@@ -298,11 +298,13 @@
             btn.addEventListener("click", () => togglePopoverGroup(btn.id))
         });
 
-        function confirmDeleteGroupPopup(groupId) {
+        function confirmDeleteGroupPopup(groupId, groupName) {
+            document.getElementById("grupoaserdeletado").textContent = groupName;
             const modal = document.getElementsByClassName("modal-root")[2];
             modal.classList.toggle("active")
 
-            const deleteGroupLink = document.getElementById("delete-group-link"); 
+
+            const deleteGroupLink = document.getElementById("delete-group-link");
             const newLink = `/app/group/deleting/${groupId}`;
 
             deleteGroupLink.setAttribute("href", newLink);
@@ -310,9 +312,9 @@
 
         const deleteGroupButton = document.querySelectorAll(".delete-group");
         deleteGroupButton.forEach(btn => {
-            if(!btn.id) {
-                btn.addEventListener("click", () => confirmDeleteGroupPopup(btn.dataset.groupid))
-            }
+            if(!btn.id){
+                btn.addEventListener("click", () => confirmDeleteGroupPopup(btn.dataset.groupid, btn.dataset.groupname))
+            }   
         });
 
         function showGerenciarGroupModal(idDoMeuGrupo, nomeDoMeuGrupo, nomeDoMeuProfessor){
