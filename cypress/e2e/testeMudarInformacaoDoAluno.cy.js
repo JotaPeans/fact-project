@@ -2,13 +2,13 @@ describe('Mudar Informação do Aluno', () => {
   it('Mudar Informação do Aluno X5', () => {
     cy.visit('/')
 
-    cy.get('[placeholder="Usuário"]').type("professor")
-    cy.get('[placeholder="Senha"]').type('senha123')
+    cy.get('.login > input').type("professor")
+    cy.get('.password > input').type('senha123')
     cy.get('button').click()
 
     cy.get('#addGroup').click()
     cy.get('#name').type("Mudar A")
-    cy.get('form > button').contains('Enviar').click()
+    cy.get('form > button').contains('Confirmar').click()
     
     cy.get('.group > a').contains('Mudar A').closest('.group').as('MA')
     cy.get('@MA').within(() => { 

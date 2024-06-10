@@ -2,13 +2,13 @@ describe('Importar Planilha', () => {
   it('Importando', () => {
       cy.visit('/')
 
-      cy.get('[placeholder="Usuário"]').type("professor")
-      cy.get('[placeholder="Senha"]').type('senha123')
+      cy.get('.login > input').type("professor")
+      cy.get('.password > input').type('senha123')
       cy.get('button').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo")
-      cy.get('form > button').contains('Enviar').click()
+      cy.get('form > button').contains('Confirmar').click()
       
       cy.get('.group > a').contains('Grupo').closest('.group').as('G')
       cy.get('@G').within(() => { 

@@ -2,21 +2,21 @@ describe('Visitar grupos', () => {
   it('Visitar G1, G2, G3', () => {
       cy.visit('/')
 
-      cy.get('[placeholder="Usuário"]').type("professor")
-      cy.get('[placeholder="Senha"]').type('senha123')
+      cy.get('.login > input').type("professor")
+      cy.get('.password > input').type('senha123')
       cy.get('button').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 1")
-      cy.get('form > button').contains('Enviar').click()
+      cy.get('form > button').contains('Confirmar').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 2")
-      cy.get('form > button').contains('Enviar').click()
+      cy.get('form > button').contains('Confirmar').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 3")
-      cy.get('form > button').contains('Enviar').click()
+      cy.get('form > button').contains('Confirmar').click()
 
 
       cy.get('.group > a').contains('Grupo 3').closest('.group').as('G3')

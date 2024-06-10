@@ -2,13 +2,13 @@ describe('Adicionar admin a um grupo', () => {
   it('Admin Grupo 1', () => {
       cy.visit('/')
 
-      cy.get('[placeholder="Usuário"]').type("professor")
-      cy.get('[placeholder="Senha"]').type('senha123')
+      cy.get('.login > input').type("professor")
+      cy.get('.password > input').type('senha123')
       cy.get('button').click()
 
       cy.get('#addGroup').click()
       cy.get('#name').type("Grupo 1")
-      cy.get('form > button').contains('Enviar').click()
+      cy.get('form > button').contains('Confirmar').click()
 
       cy.visit('/')
 

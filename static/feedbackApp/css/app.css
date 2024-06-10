@@ -24,7 +24,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem;
+    padding: 2.5rem;
     background-color: #F9F6F3;
 }
 
@@ -106,7 +106,6 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
     gap: 4px;
     height: 200px;
 }
@@ -117,9 +116,13 @@ main {
     justify-content: center;
     background-color: white;
     gap: 4px;
-    margin: 0 auto;
+    margin: 0.7rem auto;
     padding: 4px;
-    border-radius: 0.5rem;
+    border-radius: 0.7rem;
+}
+
+.tabs > button{
+    font-size: 20px;
 }
 
 .tab {
@@ -133,6 +136,7 @@ main {
 .tab.active {
     background-color: var(--soft-blue);
     color: white;
+    border-radius: 0.5rem;
 }
 
 #upload-excel, #add-manually {
