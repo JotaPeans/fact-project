@@ -5,7 +5,7 @@ class Aluno(models.Model):
     nome = models.CharField(max_length=200)
     email = models.CharField(max_length=200, default="")
     matricula = models.CharField(max_length=15, default="")
-    
+    turma = models.CharField(max_length=50, default="")
 
     def __str__(self) -> str:
         return self.nome

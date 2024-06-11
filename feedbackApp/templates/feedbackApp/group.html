@@ -10,19 +10,6 @@
 
 {% block content %}
     <main>
-        {% if alunos|length < 1 %}
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label id="uploadfile" for="uploadfileInput">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                    Selecione o arquivo Excel
-                    <div type="text"></div>
-                </label>
-                <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                <button type="submit">Enviar</button>
-            </form>
-
-        {% else %}
         <div class="export-modal">  
             
             <div class = "exportar-modal-content">
@@ -53,27 +40,29 @@
                             Adicionar
                         </button>
 
-
                         <button id = "deletarAluno">
                             Remover
                         </button>
                     </div>
 
                     <div id = "displayDeAlunos">
+                        <form action=""></form>
+                        <form action=""></form>
 
-                            <form action="">
+                        <form action="">
 
-                                <select class = "aluno-unit textBoxNovoAluno" name="alunosASelecionar" id="alunosASelecionar">
-                                    {% for aluno in alunos %}
-                                        <option id = "opcaoEscolhida"value="{{aluno.id}}">{{aluno.nome}}</option>
-                                    {% endfor %}
-                                </select>
-
+                            <select class = "aluno-unit textBoxNovoAluno" name="alunosASelecionar" id="alunosASelecionar">
+                                {% for aluno in alunos %}
+                                    <option id = "opcaoEscolhida"value="{{aluno.id}}">{{aluno.nome}}</option>
+                                {% endfor %}
+                            </select>
+                                <input type="text" class = "aluno-unit textBoxNovoAluno">
                                 <input type="text" class = "aluno-unit textBoxNovoAluno">
 
-                            </form>
-                            
+                            <input type="text" class = "aluno-unit textBoxNovoAluno">
 
+                        </form>
+                            
                         {% for aluno in alunos %}
                             <a class="aluno-unit" data-id="{{ aluno.id }}" data-groupId = "{{group.id}}" >{{ aluno.nome }}</a>
                         {% endfor %}
@@ -115,10 +104,11 @@
             <div class = "groupHeader">
                 <h1 id = "groupName" data-group-id = "{{group.id}}">{{ group.nome }}</h1>
 
-                <div class = "myGroupButtons">
+                <div class="myGroupButtons">
                     <button id = "exportButton">Exportar FACT</button>
                     <button>Gerar FACT</button>
-                    <button id = "toEdit">Editar Grupo</button>
+                    <!-- <button id = "toEdit">Editar Grupo</button> -->
+                    <a href="{% url 'feedbackApp:edit' id=group.id %}">Editar Grupo</a>
                 </div>
             </div>
 
@@ -172,7 +162,6 @@
                     </details>
                 {% endfor %}
             </div>
-        {% endif %}
     </main>
 {% endblock %}
 
@@ -324,14 +313,13 @@
         }
 
 
-        document.getElementById("toEdit").addEventListener("click", abrirModal)
+        document.getElementById("toEdit")?.addEventListener("click", abrirModal)
 
         function abrirModal(){
             console.log("abrindo Modal do edit!");
             document.getElementsByClassName("editar-modal")[0].style.display = "flex";
         }
-        </script>
-        <script>
+
         let accordions = document.querySelectorAll(".accordions");
         accordions.forEach((accordion, index) => {
             accordion.addEventListener("toggle", () => {
@@ -373,146 +361,134 @@
                 }
             })
         })
-
-    </script>
-
-    <script>
-    
+  
         function activateToDelete() {
+            let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
+            botoesDeCima.style.display = "none";
 
-        let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
-        botoesDeCima.style.display = "none";
+            let descricaoRemover = document.getElementById("descricaoParaRemoverAluno");
+            descricaoRemover.style.display = "flex";
 
-        let descricaoRemover = document.getElementById("descricaoParaRemoverAluno");
-        descricaoRemover.style.display = "flex";
+            document.getElementById("save").style.display = "none";
+            document.getElementById("remover-confirmation").style.display = "flex";
 
-        document.getElementById("save").style.display = "none";
-        document.getElementById("remover-confirmation").style.display = "flex";
+            document.getElementById("cancel-editar").classList.add("cancelDeleteHasBeenToggled");
+            const allAlunosToDelete = document.getElementsByClassName("aluno-unit");
 
-        document.getElementById("cancel-editar").classList.add("cancelDeleteHasBeenToggled");
-        const allAlunosToDelete = document.getElementsByClassName("aluno-unit");
+            // for (let i = 0; i <script allAlunosToDelete.length; i++) {
+            //     allAlunosToDelete[i].classList.add("deletarAlunoActive");
+            // }
 
-        for (let i = 0; i < allAlunosToDelete.length; i++) {
-            allAlunosToDelete[i].classList.add("deletarAlunoActive");
+            var alunosParaSeremDeletados = Array.from(document.getElementsByClassName("deletarAlunoActive"));
+
+            alunosParaSeremDeletados.forEach(function(aluno) {
+                aluno.addEventListener("click", function() {
+
+                    if(this.classList.contains("deletarAlunoActive")){
+                        console.log("Clicked: ", this);
+                        
+                        this.style.borderColor = "blue";
+                        this.style.borderStyle = "solid";
+                        this.style.borderWidth = "2px";
+                        this.classList.toggle("selectedToDelete");
+                    }
+
+                });
+            });
         }
 
-        var alunosParaSeremDeletados = Array.from(document.getElementsByClassName("deletarAlunoActive"));
+        document.getElementById("deletarAluno").addEventListener("click", activateToDelete);
 
-        alunosParaSeremDeletados.forEach(function(aluno) {
-            aluno.addEventListener("click", function() {
+        function activateToAdd(){
+            let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
+            botoesDeCima.style.display = "none";
 
-                if(this.classList.contains("deletarAlunoActive")){
-                    console.log("Clicked: ", this);
-                    
-                    this.style.borderColor = "blue";
-                    this.style.borderStyle = "solid";
-                    this.style.borderWidth = "2px";
-                    this.classList.toggle("selectedToDelete");
-                }
+            let descricaoRemover = document.getElementById("descricaoParaAdicionarAluno");
+            descricaoRemover.style.display = "flex";
 
+            document.getElementById("save").style.display = "none";
+            document.getElementById("adicionar-confirmation").style.display = "flex";
+
+
+            document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "flex";
+        }
+
+        document.getElementById("adicionarAluno").addEventListener("click", activateToAdd);
+
+        function addedAlunoToList(){
+            let nomeDoAluno = document.getElementsByClassName("textBoxNovoAluno")[0].value;
+            var novaDiv = document.createElement("a"); //
+            var container = document.getElementById("displayDeAlunos");
+
+            novaDiv.textContent = nomeDoAluno;
+            novaDiv.classList.add("aluno-unit");
+            novaDiv.classList.add("aluno-to-be-added");
+            container.insertBefore(novaDiv, container.children[1]);
+            
+            modalSubtitleReset();
+            document.getElementById("adicionar-confirmation").style.display = "none";
+            document.getElementById("save").style.display = "flex";
+            document.getElementsByClassName("textBoxNovoAluno")[0].value = "";
+            document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "none";
+
+        }    
+
+        document.getElementById("adicionar-confirmation").addEventListener("click", addedAlunoToList); // this is where we add the blue ones
+
+            
+        document.getElementById("save").addEventListener("click", async () => {
+
+            let selectedAlunosToDelete = document.querySelectorAll(".aluno-unit.selectedToDelete");
+            let selectedAlunosToAdd = document.querySelectorAll(".aluno-unit.aluno-to-be-added");
+            let alunoIdsParaDeletar = [];
+            let alunoNomesParaAdicionar = [];
+
+            selectedAlunosToDelete.forEach(aluno => {
+        
+                alunoIdsParaDeletar.push(aluno.dataset.id); //push é igual ao append de python
+                                                //dataset é uma propriedade do js que pega todos os data do html. eu posso escrever data-id, data-teste, data-oi no html
+            });
+
+            selectedAlunosToAdd.forEach(aluno => {
+                alunoNomesParaAdicionar.push(aluno.textContent.trim()); // push names to the add array
             });
         });
-    }
 
-    document.getElementById("deletarAluno").addEventListener("click", activateToDelete);
+        let groupId = document.getElementById("groupName").dataset.groupId;
+        let urlParaDeletar = `${groupId}/delete_alunos/`;
+        let urlParaAdicionar = `${groupId}/add_alunos/`;
+        let urlParaRetornar = `${groupId}`;
 
-    function activateToAdd(){
-        let botoesDeCima = document.getElementsByClassName("upper-editar-modal")[0];
-        botoesDeCima.style.display = "none";
-
-        let descricaoRemover = document.getElementById("descricaoParaAdicionarAluno");
-        descricaoRemover.style.display = "flex";
-
-        document.getElementById("save").style.display = "none";
-        document.getElementById("adicionar-confirmation").style.display = "flex";
-
-
-        document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "flex";
-    }
-
-    document.getElementById("adicionarAluno").addEventListener("click", activateToAdd);
-
-    function addedAlunoToList(){
-        let nomeDoAluno = document.getElementsByClassName("textBoxNovoAluno")[0].value;
-        var novaDiv = document.createElement("a"); //
-        var container = document.getElementById("displayDeAlunos");
-
-        novaDiv.textContent = nomeDoAluno;
-        novaDiv.classList.add("aluno-unit");
-        novaDiv.classList.add("aluno-to-be-added");
-        container.insertBefore(novaDiv, container.children[1]);
-        
-        modalSubtitleReset();
-        document.getElementById("adicionar-confirmation").style.display = "none";
-        document.getElementById("save").style.display = "flex";
-        document.getElementsByClassName("textBoxNovoAluno")[0].value = "";
-        document.getElementsByClassName("textBoxNovoAluno")[0].style.display = "none";
-
-    }    
-
-    document.getElementById("adicionar-confirmation").addEventListener("click", addedAlunoToList); // this is where we add the blue ones
+        console.log("teste");
+        console.log("URL pra deletar:", urlParaDeletar);
+        console.log("URL pra add:", urlParaAdicionar);
 
         
-    document.getElementById("save").addEventListener("click", async () =>{
+        if (alunoIdsParaDeletar.length > 0) {
+            console.log("alunoIdsParaDeletar: " , alunoIdsParaDeletar);
+            await fetch(urlParaDeletar, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ ids: alunoIdsParaDeletar })
+            })
+            .then(response => response.json());
+        }
 
-        let selectedAlunosToDelete = document.querySelectorAll(".aluno-unit.selectedToDelete");
-        let selectedAlunosToAdd = document.querySelectorAll(".aluno-unit.aluno-to-be-added");
-        let alunoIdsParaDeletar = [];
-        let alunoNomesParaAdicionar = [];
-
-        selectedAlunosToDelete.forEach(aluno => {
-            
-            alunoIdsParaDeletar.push(aluno.dataset.id); //push é igual ao append de python
-                                            //dataset é uma propriedade do js que pega todos os data do html. eu posso escrever data-id, data-teste, data-oi no html
-        });
-
-        selectedAlunosToAdd.forEach(aluno =>{
-            alunoNomesParaAdicionar.push(aluno.textContent.trim()); // push names to the add array
-    });
-
-    let groupId = document.getElementById("groupName").dataset.groupId;
-    let urlParaDeletar = `${groupId}/delete_alunos/`;
-    let urlParaAdicionar = `${groupId}/add_alunos/`;
-    let urlParaRetornar = `${groupId}`;
-
-    console.log("teste");
-    console.log("URL pra deletar:", urlParaDeletar);
-    console.log("URL pra add:", urlParaAdicionar);
-
-    
-    if (alunoIdsParaDeletar.length > 0) {
-        console.log("alunoIdsParaDeletar: " , alunoIdsParaDeletar);
-        await fetch(urlParaDeletar, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-            },
-            body: JSON.stringify({ ids: alunoIdsParaDeletar })
-        })
-        .then(response => response.json());
-    }
-
-    
-    if (alunoNomesParaAdicionar.length > 0) {
-        await fetch(urlParaAdicionar, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-            },
-            body: JSON.stringify({ names: alunoNomesParaAdicionar, group: groupId})
-        })
-        .then(response => response.json());
-    }
-
-    
-    window.location.href = urlParaRetornar;
-    });
-
-    </script>
-
-    <script>
+        
+        if (alunoNomesParaAdicionar.length > 0) {
+            await fetch(urlParaAdicionar, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ names: alunoNomesParaAdicionar, group: groupId})
+            })
+            .then(response => response.json());
+        }
 
 
         function openEditarAlunoModal(alunoId, alunoNome, alunoEmail, alunoMatricula) {
@@ -576,6 +552,5 @@
             document.getElementById("modalEditarAluno").style.display = "none";
 
         });
-
     </script>
 {% endblock %}

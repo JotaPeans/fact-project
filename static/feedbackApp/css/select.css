@@ -12,7 +12,8 @@ select {
     border: 0;
     outline: 0;
     font: inherit;
-    padding: 4px;
+    width: 100%;
+    padding: .5rem;
     padding-right: 2.3rem;
     background: var(--arrow-icon) no-repeat right 0.5em center / 0.6em, white;
     color: black;
@@ -21,7 +22,11 @@ select {
     cursor: pointer;
 }
 
-option {
-    color: inherit;
-    background-color: var(--option-bg);
+select option {
+    cursor: pointer;
+}
+
+select option:disabled {
+    color: grey;          /* Muda a cor do texto para cinza */
+    background-color: #e6e6e6; /* Muda a cor de fundo para um cinza mais claro */
 }
