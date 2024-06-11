@@ -50,9 +50,8 @@ button{
 
 .close-modal {
     position: absolute;
-    right: .5rem;
-    top: .5rem;
-    margin-left: auto;
+    right: 2rem;
+    top: 2.2rem;
 }
 
 .modal-root.active {
@@ -68,13 +67,45 @@ button{
     opacity: 1;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .adicionarGrupo {
     position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 30rem;
     height: auto;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -123,6 +154,22 @@ button{
     background: var(--blueHover);
 }
 
+/*.create-group-container{  COM BOTÃO DE CANCELAR
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10rem;
+    margin-top: 0.4rem
+}*/
+
+.create-group-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10rem;
+    margin-top: 0.4rem
+}
+
 .adicionarAlunos {
     position: relative;
     background-color: var(--beige);
@@ -152,7 +199,6 @@ button{
     flex: 1 1 0%;
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
 
 }
 
@@ -164,17 +210,43 @@ button{
     max-width: 100%;
     font-size: 1rem;
     resize: none;
-    padding: 1rem;
+    padding: 0.8rem;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
 }
 
 .adicionarAlunos > form > label {
     cursor: pointer;
     font-size: 20px;
     padding-left: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
-.adicionarAlunos > form > button {
+.add-student-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10rem;
+    margin-top: 0.4rem
+}
+
+#canceleButton{
+    background: var(--cream);
+    color: var(--black);;
+    cursor: pointer;
+    border: none;
+    padding: 0.6rem;
+    width: auto;
+    max-width: fit-content;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    position: static;
+    margin-left: 0px;
+}
+
+#confirmButton {
     background: var(--soft-blue);
     color: white;
     cursor: pointer;
@@ -182,7 +254,6 @@ button{
     padding: 0.6rem;
     width: auto;
     max-width: fit-content;
-    margin-left: auto;
     height: auto;
     border-radius: 0.5rem;
     transition: all 150ms ease-in-out;
@@ -190,7 +261,7 @@ button{
     font-size: 1rem;
 }
 
-.adicionarAlunos > form > button:hover {
+#confirmButton:hover {
     background: var(--blueHover);
 }
 
@@ -203,13 +274,43 @@ button{
     font-size: 14px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .deletarGrupo {
     position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 30rem;
     height: auto;
-    padding: 1rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -232,7 +333,7 @@ button{
     border: none;
     border-radius: 0.7rem;
     margin: 0.5rem 0rem;
-    padding: 1rem;
+    padding: 0.8rem;
 }
 
 .delete-actions-container {
@@ -255,6 +356,8 @@ button{
     border-radius: 0.5rem;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
+    position: static;
+    margin-left: 0px;
 }
 
 .delete-actions-container > button:hover {
@@ -274,34 +377,63 @@ button{
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
     font-weight: 400;
+    text-decoration: none;
 }
 
 #delete-group-link:hover {
     background: var(--redHover);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .gerenciarGrupo {
     position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
-    width: 33rem;
+    width: 30rem;
     height: auto;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
 }
 
 .gerenciarGrupo > div > h2 {
-    font-size: 30px;
+    font-size: 33px;
 }
 
 .gerenciarGrupo > div > h3 {
-    font-size: 20px;
-    margin-top: 0.3rem;
+    font-size: 18px;
+    margin-top: 0.4rem;
+    color: #828080;
 }
 
 .gerenciarGrupo > h4 {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 1rem;
 }
 
@@ -309,7 +441,6 @@ button{
     flex: 1 1 0%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
 .gerenciarGrupo > form > input {
@@ -325,14 +456,19 @@ button{
 }
 
 .gerenciarGrupo > form > label {
+    display: flex;
     cursor: pointer;
-    font-size: 23px;
+    font-size: 18px;
     margin-top: 1rem;
+    color: #828080;
+    font-family: 'Helvetica', Arial, sans-serif;
+    margin-bottom: 0.5rem;
 }
 
 .gerenciarGrupo > form > button {
-    background: var(--yellow);
-    color: var(--black);
+    background: var(--blue);
+    display: flex;
+    color: white;
     cursor: pointer;
     border: none;
     padding: 0.6rem;
@@ -344,10 +480,11 @@ button{
     transition: all 150ms ease-in-out;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
+    margin-top: 1rem;
 }
 
 .gerenciarGrupo > form > button:hover {
-    background: var(--yellowHover);
+    background: var(--blueHover);
 }
 
 .modal-root > div > button {

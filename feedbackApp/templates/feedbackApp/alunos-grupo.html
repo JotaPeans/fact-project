@@ -12,11 +12,11 @@
 {% block content %}
     <main>
         <a href="{% url 'feedbackApp:group' id=group.id %}" class="back-url">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
-            {{group.nome}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            <h1>{{group.nome}}</h1>
         </a>
 
-        <h4>Selecione os alunos para o grupo: {{group.nome}}</h4>
+        <h4>Selecione os alunos do {{group.nome}}</h4>
 
         <div class="selects">
             <div class="select">
