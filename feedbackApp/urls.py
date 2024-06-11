@@ -8,10 +8,14 @@ urlpatterns = [
     path("", views.FeedBackView.as_view(), name="root"),
     path("addAdminToGroup", views.addAdmin, name = "add_admin"),
     path("changeInfo", views.changeAlunoInfo, name = "change_info"), 
+
     path("group/<int:id>", views.GroupView.as_view(), name="group"),
     path("group/deleting/<int:groupId>", views.deleteGroup.as_view(), name = "deleteGroup"),
     path("group/deletingAluno/<int:alunoId>", views.deleteGroup.as_view(), name = "deleteAluno"),
-    path("logout/", views.logoutFunction, name="logout"),
     path("group/<int:id>/delete_alunos/", views.delete_alunos, name="delete_alunos"),
-    path("group/<int:id>/add_alunos/", views.add_alunos, name="delete_alunos")
+    path("group/<int:id>/add_alunos/", views.add_alunos, name="add_alunos"),
+    path("group/<int:id>/edit/", views.GroupStudent.as_view(), name="edit"),
+    path("group/<int:id>/alunos/", views.getAlunos, name="getAlunos"),
+
+    path("logout/", views.logoutFunction, name="logout"),
 ]

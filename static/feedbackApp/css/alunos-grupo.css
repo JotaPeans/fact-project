@@ -1,0 +1,130 @@
+:root {
+    --soft-blue: #4161D8;
+    --blue: #1E46D9;
+    --blueHover: #1c3ebb;
+    --yellow: #F7B401;
+    --yellowHover: #d69d00;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-600: #dc2626;
+    --redHover: #c02600;
+    --beige: #F0EBE5;
+    --beigeHover: #efe0ce;
+    --black: #292B26;
+    --blackHover: rgb(16, 16, 15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h4 {
+    color: rgb(110, 110, 110);
+}
+
+h3, h2 {
+    color: var(--black);
+}
+
+.back-url {
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    gap: 16px;
+}
+
+.back-url {
+    color: var(--black);
+    text-decoration: none;
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+.back-url:hover {
+    text-decoration: underline;
+}
+
+.selects {
+    display: flex;
+    gap: 2rem;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+}
+
+.alunos-selected-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    flex: 1 1 0%;
+}
+
+.alunos {
+    display: flex;
+    overflow-y: auto;
+    gap: 2rem;
+}
+
+.alunos > div {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex: 1 1 0%;
+    gap: .5rem;
+}
+
+.alunos > div > p {
+    padding: .5rem;
+    width: 98%;
+    border: 1px solid var(--soft-blue);
+    background-color: white;
+    border-radius: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alunos > div > p > button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.alunos > div > p > button > svg {
+    stroke: var(--black);
+}
+
+.options {
+    display: flex;
+    gap: 1rem;
+}
+
+.options > a, .options > button {
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem;
+    text-decoration: none;
+    box-shadow: 1px 1px 2px rgba(41, 41, 41, 0.219);
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+.cancel {
+    background-color: white;
+    color: var(--black);
+}
+
+.confirm {
+    background-color: var(--soft-blue);
+    color: white;
+}

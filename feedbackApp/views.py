@@ -1,8 +1,9 @@
+import pandas as pd
+import json
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-import pandas as pd
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
@@ -102,8 +103,9 @@ class FeedBackView(View):
             matricula = req.POST.get("matricula")
             nome = req.POST.get("nome")
             email_school = req.POST.get("email-school")
+            turma = req.POST.get("turma")
 
-            Aluno.objects.create(matricula=matricula, nome=nome, email=email_school)
+            Aluno.objects.create(matricula=matricula, nome=nome, email=email_school, turma=turma)
         
         return redirect("feedbackApp:root")
     
@@ -241,6 +243,90 @@ class GroupView(View):
         return redirect("feedbackApp:group", id)
 
 
+class GroupStudent(View):
+    def get(self, req, id):
+        if(not req.user.is_authenticated):
+            return redirect("autenticacao:root")
+        
+        group = Grupo.objects.filter(pk=id)
+        
+
+        if(not group.exists()):
+            return redirect("feedbackApp:root")
+        
+        alunos = []
+
+        for aluno in group[0].alunos.all():
+            # filtra os facts pelo aluno e pelo grupo atual
+            fact = list(filter(lambda x: x.grupo.nome == group[0].nome, list(aluno.fact_set.all())))
+            sr1 = 0
+            sr2 = 0
+
+            if(len(list(fact)) == 1):
+                # TODO REALIZAR CALCULO SR1
+                #! O CALCULO ABAIXO ESTA SOMANDO APENAS O FACT
+                sr1 = (
+                    fact[0].pensamento_critico_criatividade + 
+                    fact[0].comunicacao + 
+                    fact[0].colaboracao + 
+                    fact[0].qualidade_entregas + 
+                    fact[0].presenca + 
+                    fact[0].entrega_prazos
+                )
+
+            if(len(list(fact)) == 2):
+                sr2 = (
+                    fact[1].pensamento_critico_criatividade + 
+                    fact[1].comunicacao + 
+                    fact[1].colaboracao + 
+                    fact[1].qualidade_entregas + 
+                    fact[1].presenca + 
+                    fact[1].entrega_prazos
+                )
+
+            alunos.append({
+                "id": aluno.id,
+                "nome": aluno.nome,
+                "email": aluno.email,
+                "matricula": aluno.matricula,
+                "sr1": round(sr1, 2),
+                "sr2": round(sr2, 2),
+                "media": round((sr1 + sr2) / 2, 2)
+            })
+        
+
+        todosAlunos = list(Aluno.objects.all())
+        alunos_desg = [aluno for aluno in todosAlunos if aluno.turma.startswith("DESG")]
+        alunos_comp = [aluno for aluno in todosAlunos if aluno.turma.startswith("COMP")]
+
+        # alunosCC = 
+        context = {
+            "group": group[0],
+            "alunos": alunos,
+            "todosAlunos": todosAlunos,
+            "alunosCC": alunos_comp,
+            "alunosDESIGN": alunos_desg,
+        }
+        
+        return render(req, "feedbackApp/alunos-grupo.html", context=context)
+    
+    def post(self, req, id):
+        if(not req.user.is_authenticated):
+            return redirect("autenticacao:root")
+        
+        alunos = json.loads(req.body)["alunos"]
+
+        try:
+            grupo = Grupo.objects.get(pk=id)
+
+            alunos = [Aluno.objects.get(pk=aluno.split("::")[0]) for aluno in alunos]
+
+            grupo.alunos.set(alunos)
+            
+            return JsonResponse({"message": "Alunos alterados com sucesso!"})
+        except Exception as e:
+            return JsonResponse({"message": f"Erro: {e}"}, status=400)
+
 class deleteGroup(View):
     def get(self, req, groupId):
         #TODO: make it safe by verifying if group is indeed in user's range
@@ -259,13 +345,32 @@ class deleteAluno(View):
         return redirect("autenticacao:root")
 
 
-def delete_alunos(request, id):
-    if request.method == "POST":
-        import json
-        data = json.loads(request.body)
+def getAlunos(req, id):
+    if(not req.user.is_authenticated):
+        return JsonResponse({"message": "Não autenticado"})
+    
+    if(req.method == "GET"):
+        try:
+            group = Grupo.objects.get(pk=id)
+
+            alunos = [{
+                "id": aluno.id,
+                "nome": aluno.nome,
+                "turma": aluno.turma
+            } for aluno in list(group.alunos.all())]
+
+            return JsonResponse({ "alunos": alunos })
+        except Exception as e:
+            return JsonResponse({ "message": f"Erro {e}" }, status=400)
+
+def delete_alunos(req, id):
+    if(not req.user.is_authenticated):
+        return JsonResponse({"message": "Não autenticado"})
+    
+    if req.method == "POST":
+        data = json.loads(req.body)
         aluno_ids = data.get("ids", [])
 
-        print("esse é o id: ", id)
         grupo = Grupo.objects.get(id=id)
 
         for aluno_id in aluno_ids:
@@ -274,13 +379,13 @@ def delete_alunos(request, id):
         
         return JsonResponse({"success": True})
     
-def add_alunos(request, id):
-    if request.method == "POST":
-        import json
-        data = json.loads(request.body)
-        print("esse é o data: ", data)
+def add_alunos(req, id):
+    if(not req.user.is_authenticated):
+        return JsonResponse({"message": "Não autenticado"})
+    
+    if req.method == "POST":
+        data = json.loads(req.body)
         getMyGroup = data.get("group")
-        print("esse é o value de getMyGroup", getMyGroup)
         myGroup = Grupo.objects.get(pk = getMyGroup)
         aluno_names_pra_add = data.get("names", []) # [] não é necessário, é um default value em casos onde não vem nada
 
@@ -293,10 +398,11 @@ def add_alunos(request, id):
         return JsonResponse({"success": True})
     
 def addAdmin(req):
+    if(not req.user.is_authenticated):
+        return JsonResponse({"message": "Não autenticado"})
+    
     if req.method == "POST": # ({ professorEscolhido: valorEscolhido, group: groupId})
-        import json
         data = json.loads(req.body)
-        print("esse é o data do meu addAdmin:", data)
         getMyGroup = data.get("group")
         professorEscolhido = data.get("professorEscolhido")
 
@@ -305,10 +411,11 @@ def addAdmin(req):
         return JsonResponse({"success": True})
     
 def changeAlunoInfo(req):
+    if(not req.user.is_authenticated):
+        return JsonResponse({"message": "Não autenticado"})
+    
     if req.method == "POST":
-        import json
         data = json.loads(req.body)
-        print("esse é o data que coletei: ", data)
         getMyAlunoId = data.get("alunoId")
         getMyGroupId = data.get("idDoGrupo")
         

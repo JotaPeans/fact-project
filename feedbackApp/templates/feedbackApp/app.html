@@ -42,11 +42,6 @@
                                     
                                     <hr>
 
-                                    <button data-groupid="{{group.id}}" data-groupname = "{{group.nome}}"class="popover-button delete">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                                        Deletar
-                                    </button>
-
                                     <button data-groupid = "{{group.id}}" data-groupname = "{{group.nome}}" data-professor = "{{group.professor}}" class = "popover-button gerenciar">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
                                             <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
@@ -58,6 +53,12 @@
                                         Gerenciar
                                     </button>
 
+                                    <hr>
+
+                                    <button data-groupid="{{group.id}}" data-groupname = "{{group.nome}}"class="popover-button delete">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                                        Deletar
+                                    </button>
                                 </div>
                             
                             </div>
@@ -94,7 +95,7 @@
     </div>
 
     <div class="modal-root">
-        <div class='adicionarAlunos'>
+        <div class="adicionarAlunos">
             <button class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
             </button>
@@ -137,6 +138,9 @@
 
                 <label for="matricula">Matricula</label>
                 <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
+
+                <label for="turma">Turma</label>
+                <input type="text" id="turma" name="turma" placeholder="Turma">
     
                 <button type="submit">Confirmar</button>
             </form>

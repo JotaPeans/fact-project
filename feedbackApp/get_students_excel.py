@@ -13,4 +13,4 @@ def getStudents(df: DataFrame):
         try:
             Aluno.objects.get(matricula=aluno["ALUNO"])
         except:
-            Aluno.objects.create(nome=aluno["NOME_ALUNO"], email=aluno["MAILBOX"], matricula=aluno["ALUNO"])
+            Aluno.objects.create(nome=aluno["NOME_ALUNO"], email=aluno["MAILBOX"], matricula=aluno["ALUNO"], turma=aluno["TURMA_PREF"])

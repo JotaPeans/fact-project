@@ -127,9 +127,6 @@ form > button:hover {
     overflow-y: auto;
 }
 
-#alunosASelecionar{
-    
-}
 
 .notas-aluno {
     width: 100%;
@@ -212,8 +209,8 @@ form > button:hover {
 }
 
 
-.myGroupButtons > button{
-
+.myGroupButtons > button, .myGroupButtons > a {
+    text-decoration: none;
     padding: 11.5px 28px;
     border-radius: 10px;
     font-size: 20px;
@@ -230,7 +227,7 @@ form > button:hover {
 
 }
 
-.myGroupButtons > button:hover{
+.myGroupButtons > button:hover, .myGroupButtons > a:hover {
     background-color: var(--blue);
 }
 

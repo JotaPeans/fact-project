@@ -1,0 +1,200 @@
+{% extends 'feedbackApp/base.html' %}
+{% load static %}
+
+{% block head%}
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/group.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/select.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/alunos-grupo.css' %}">
+    <link rel="stylesheet" href="{% static 'root/styles/toast.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <a href="{% url 'feedbackApp:group' id=group.id %}" class="back-url">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            {{group.nome}}
+        </a>
+
+        <h4>Selecione os alunos para o grupo: {{group.nome}}</h4>
+
+        <div class="selects">
+            <div class="select">
+                <h2>Ciência da computação</h2>
+                <select id="select-cc">
+                    {% for aluno in alunosCC %}
+                        <option class="option-cc" value="{{aluno.id}}::{{aluno.nome}}">{{aluno.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select">
+                <h2>Design</h2>
+                <select id="select-design">
+                    {% for aluno in alunosDESIGN %}
+                        <option class="option-design" value="{{aluno.id}}::{{aluno.nome}}">{{aluno.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="alunos-selected-container">
+            <h3>Alunos Selecionados:</h3>
+            <div class="alunos">
+                <div id="alunos-cc">
+
+                </div>
+                <div id="alunos-design">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="options">
+            <a href="{% url 'feedbackApp:group' id=group.id %}" class="cancel">Cancelar</a>
+            <button class="confirm">Confirmar</button>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        const selectCC = document.getElementById("select-cc");
+        const selectDesign = document.getElementById("select-design");
+        const alunosCC_Element = document.getElementById("alunos-cc");
+        const alunosDesign_Element = document.getElementById("alunos-design");
+
+        var selectedCC = [];
+        var selectedDesign = [];
+
+        window.onload = function() {
+            document.getElementById("select-cc").selectedIndex = -1;
+            document.getElementById("select-design").selectedIndex = -1;
+
+            (async () => {
+                const res = await fetch("{% url 'feedbackApp:getAlunos' id=group.id %}");
+                const { alunos } = await res.json();
+
+                alunos.forEach(aluno => {
+                    if(aluno.turma.startsWith("COMP")) 
+                        selectedCC.push(`${aluno.id}::${aluno.nome}`);
+                    
+                    else if(aluno.turma.startsWith("DESG")) 
+                        selectedDesign.push(`${aluno.id}::${aluno.nome}`);
+                });
+                
+                printAlunos();
+            })()
+        }
+
+        selectCC.addEventListener("change", () => {
+            let alunoId = parseInt(selectCC.value.split("::").shift());
+            selectedCC.push(selectCC.value);
+
+            printAlunos();
+        });
+
+        selectDesign.addEventListener("change", () => {
+            let alunoId = parseInt(selectDesign.value.split("::").shift())
+            selectedDesign.push(selectDesign.value);
+
+            printAlunos();
+        });
+
+        function printAlunos() {
+            alunosCC_Element.innerHTML = "";
+            alunosDesign_Element.innerHTML = "";
+
+            selectedCC.forEach(aluno => {
+                let alunoId = aluno.split("::").shift();
+
+                alunosCC_Element.innerHTML += `
+                    <p>
+                        ${aluno.split("::").pop()}
+                        <button class="delete-cc" data-alunoid="${alunoId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </p>
+                `;
+            });
+
+            selectedDesign.forEach(aluno => {
+                let alunoId = aluno.split("::").shift();
+
+                alunosDesign_Element.innerHTML += `
+                    <p>
+                        ${aluno.split("::").pop()}
+                        <button class="delete-design" data-alunoid="${alunoId}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                        </button>
+                    </p>
+                `;
+            });
+            
+            revalidateDeleteEvents();
+            refreshDisabledSelectedItems();
+        }
+
+        function revalidateDeleteEvents() {
+            const deleteCC = document.querySelectorAll(".delete-cc");
+            const deleteDesign = document.querySelectorAll(".delete-design");
+            
+            deleteCC.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    selectedCC = selectedCC.filter(aluno => {
+                        return aluno.split("::").shift() !== btn.dataset.alunoid;
+                    });
+
+                    printAlunos();
+                });
+            });
+
+            deleteDesign.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    selectedDesign = selectedDesign.filter(aluno => {
+                        return aluno.split("::").shift() !== btn.dataset.alunoid;
+                    });
+                    
+                    printAlunos();
+                });
+            });
+        }
+
+        function refreshDisabledSelectedItems() {
+            const optionsCC = document.querySelectorAll(".option-cc");
+            const optionsDesign = document.querySelectorAll(".option-design");
+
+            optionsCC.forEach(option => {
+                selectedCC.forEach(selected => {
+                    if(selected === option.value) {
+                        option.disabled = true;
+                    }
+                })
+            });
+        }
+
+        document.getElementsByClassName("confirm")[0].addEventListener("click", pushStudentsToGroup)
+
+        async function pushStudentsToGroup() {
+            const res = await fetch("{% url 'feedbackApp:edit' id=group.id %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ alunos: selectedCC.concat(selectedDesign) })
+            });
+
+            if(res.ok) {
+                const toast = document.getElementById("toast");
+                toast.className = "toast show";
+                toast.innerHTML = (await res.json()).message;
+                setTimeout(() => {
+                    toast.className = toast.className.replace("show", "");
+                    toast.innerHTML = ""
+                }, 2900);
+            }
+        }
+    </script>
+{% endblock %}
