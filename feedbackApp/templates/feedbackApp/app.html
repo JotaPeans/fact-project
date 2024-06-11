@@ -24,7 +24,7 @@
                     <div class="group" data-href="{% url 'feedbackApp:group' id=group.id %}">
                        
                         <a href="{% url 'feedbackApp:group' id=group.id %}" class="img">
-                            <img class = "imagemDoGrupo" src="{% static 'images/iconeGRUPO.png' %}" alt="FACT" data-image="{{group.image}}">
+                            <img class="imagemDoGrupo" src="{% static 'images/iconeGRUPO.png' %}" alt="FACT" data-image="{{group.image}}">
                         </a>
                         <div>
                             <a href="{% url 'feedbackApp:group' id=group.id %}">{{group.nome}}</a>
@@ -42,7 +42,7 @@
                                     
                                     <hr>
 
-                                    <button data-groupid = "{{group.id}}" data-groupname = "{{group.nome}}" data-professor = "{{group.professor}}" class = "popover-button gerenciar">
+                                    <button data-groupid="{{group.id}}" data-groupname="{{group.nome}}" data-professor="{{group.professor}}" class="popover-button gerenciar">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake">
                                             <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
                                             <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/>
@@ -55,7 +55,7 @@
 
                                     <hr>
 
-                                    <button data-groupid="{{group.id}}" data-groupname = "{{group.nome}}"class="popover-button delete">
+                                    <button data-groupid="{{group.id}}" data-groupname="{{group.nome}}"class="popover-button delete">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                                         Deletar
                                     </button>
@@ -149,7 +149,7 @@
 
     <div class="modal-root">
         <div class='deletarGrupo'>
-            <button data-groupname = "{{group.nome}}" class="close-modal">
+            <button data-groupname="{{group.nome}}" class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
             </button>
             
@@ -169,12 +169,12 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
             <div>
-                <h2 id = "apresentandoGrupo">Gerenciar Grupo</h2>
-                <h3 id = "apresentandoProfessor">Esse Grupo foi criado por:</h3>
+                <h2 id="apresentandoGrupo">Gerenciar Grupo</h2>
+                <h3 id="apresentandoProfessor">Esse Grupo foi criado por:</h3>
             </div>    
             <h4>Deseja adicionar alguém à equipe de administração do grupo?</h4>
 
-            <form id = "formParaAdicionarAdmins" name = "action" value = "addAdmin">
+            <form id="formParaAdicionarAdmins" name=action" value=addAdmin">
                 {% csrf_token %}
                 
                 <label for="user">Selecione um usuário a ser adicionado: </label>
@@ -183,11 +183,8 @@
                         <option value="{{user.id}}">{{user.username}}</option>
                     {% endfor %}
                 </select>
-                <button id = "botaoDoConfia" type = "submit" teste = "">Confio nessa pessoa! Quero adicioná-la!</button>
-
+                <button id="botaoDoConfia" type="submit">Confio nessa pessoa! Quero adicioná-la!</button>
             </form>
-
-
         </div>
     </div>
 
@@ -360,23 +357,15 @@
             let valorEscolhido = document.getElementById("usuariosProfessores").value;
             
             await fetch(`addAdminToGroup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}"
-            },
-            body: JSON.stringify({ professorEscolhido: valorEscolhido, group: groupId})
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: JSON.stringify({ professorEscolhido: valorEscolhido, group: groupId})
             })
             .then(response => response.json())
             .then(data => location.reload())
-            
-            
         }
-
-
     </script>
-
-
-
-
 {% endblock %}

@@ -11,11 +11,12 @@ urlpatterns = [
 
     path("group/<int:id>", views.GroupView.as_view(), name="group"),
     path("group/deleting/<int:groupId>", views.deleteGroup.as_view(), name = "deleteGroup"),
-    path("group/deletingAluno/<int:alunoId>", views.deleteGroup.as_view(), name = "deleteAluno"),
-    path("group/<int:id>/delete_alunos/", views.delete_alunos, name="delete_alunos"),
-    path("group/<int:id>/add_alunos/", views.add_alunos, name="add_alunos"),
     path("group/<int:id>/edit/", views.GroupStudent.as_view(), name="edit"),
     path("group/<int:id>/alunos/", views.getAlunos, name="getAlunos"),
+
+    path("aluno/edit", views.AlunoEdit.as_view(), name="editAluno"),
+
+    path("fact/create/<int:groupId>", views.FactCreate.as_view(), name="createFact"),
 
     path("logout/", views.logoutFunction, name="logout"),
 ]
