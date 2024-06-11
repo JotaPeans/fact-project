@@ -250,7 +250,6 @@ main {
 .popover-content {
     position: absolute;
     min-width: 9.5rem;
-    left: 266px;
     display: flex;
     flex-direction: column;
     gap: 4px;

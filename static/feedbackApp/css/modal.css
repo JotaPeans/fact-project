@@ -154,6 +154,22 @@ button{
     background: var(--blueHover);
 }
 
+/*.create-group-container{  COM BOTÃO DE CANCELAR
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10rem;
+    margin-top: 0.4rem
+}*/
+
+.create-group-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10rem;
+    margin-top: 0.4rem
+}
+
 .adicionarAlunos {
     position: relative;
     background-color: var(--beige);
@@ -206,7 +222,7 @@ button{
     margin-bottom: 0.4rem;
 }
 
-.create-group-container{
+.add-student-container{
     width: 100%;
     display: flex;
     justify-content: space-around;

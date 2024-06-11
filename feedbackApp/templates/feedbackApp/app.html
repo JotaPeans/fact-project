@@ -71,9 +71,9 @@
 
     <div class="modal-root">
         <div class='adicionarGrupo'>
-           <!--  <button class="close-modal">
+           <button class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
-            </button>-->
+            </button>
 
             <form method="post">
                 {% csrf_token %}
@@ -89,7 +89,7 @@
                     {% endfor %}
                 {% endif %}
                 <div class="create-group-container">
-                    <button class="close-modal" id="canceleButton">Cancelar</button>       
+                     <!-- <button class="close-modal" id="canceleButton">Cancelar</button>  -->     
                     <button type="submit" id="confirmButton">Confirmar</button>
                 </div>
             </form>
@@ -125,7 +125,7 @@
                 </label>
                 <input style="display: none;" id="alunos-upload" name="alunos" required type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></input>
 
-                <div class="create-group-container">
+                <div class="add-student-container">
                     <button class="close-modal" id="canceleButton">Cancelar</button>       
                     <button type="submit" id="confirmButton">Confirmar</button>
                 </div>
@@ -147,7 +147,7 @@
                 <label for="turma">Turma</label>
                 <input type="text" id="turma" name="turma" placeholder="Turma">
     
-                <div class="create-group-container">
+                <div class="add-student-container">
                     <button class="close-modal" id="canceleButton">Cancelar</button>       
                     <button type="submit" id="confirmButton">Confirmar</button>
                 </div>
