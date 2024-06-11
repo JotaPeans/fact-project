@@ -261,7 +261,7 @@ def create_fact(email_address, alunos, emails):
             lista_perguntas.append(question_item)
             count += 1
 
-    update_form(formId, lista_perguntas)
+    return update_form(formId, lista_perguntas)
 
 
 if __name__ == "__main__":

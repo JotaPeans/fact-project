@@ -7,6 +7,8 @@ from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
+
+from .create_fact import create_fact
 from .models import Aluno, Grupo, Fact
 from .get_fact_grade import getMediaAluno, transformNotasToObject
 from .get_students_excel import getStudents
@@ -326,7 +328,7 @@ class GroupStudent(View):
             return JsonResponse({"message": "Alunos alterados com sucesso!"})
         except Exception as e:
             return JsonResponse({"message": f"Erro: {e}"}, status=400)
-
+    
 class deleteGroup(View):
     def get(self, req, groupId):
         #TODO: make it safe by verifying if group is indeed in user's range
@@ -336,13 +338,51 @@ class deleteGroup(View):
         return redirect("autenticacao:root")
 
 
-class deleteAluno(View):
-    def get(self, req, alunoId):
-        #TODO: make it safe by verifying if aluno is indeed in user's range
+class AlunoEdit(View):
+    def post(self, req):
+        if(not req.user.is_authenticated):
+            return JsonResponse({"message": "Não autenticado"})
+        
+        alunoId = req.POST.get("alunoId")
+        nome = req.POST.get("nome")
+        email = req.POST.get("email")
+        matricula = req.POST.get("matricula")
+        groupId = req.POST.get("groupId")
 
-        alunoToDelete = Aluno.objects.get(id=alunoId)
-        alunoToDelete.delete()
-        return redirect("autenticacao:root")
+        try:
+            aluno = Aluno.objects.get(pk=alunoId)
+
+            aluno.nome = nome
+            aluno.email = email
+            aluno.matricula = matricula
+
+            aluno.save()
+
+            return redirect("feedbackApp:group", id=groupId)
+            
+        except:
+            return redirect("feedbackApp:group", id=groupId)
+
+
+class FactCreate(View):
+    def post(self, req, groupId):
+        if(not req.user.is_authenticated):
+            return JsonResponse({"message": "Não autenticado"})
+        
+        try:
+            grupo = Grupo.objects.get(pk=groupId)
+
+            alunos = list(grupo.alunos.all())
+
+            alunos_nomes = [aluno.nome for aluno in alunos]
+            alunos_emails = [f"{aluno.email}.test" for aluno in alunos]
+
+            fact_url = create_fact(email_address=req.user.email, alunos=alunos_nomes, emails=alunos_emails)
+
+            return JsonResponse({ "url": fact_url })
+
+        except Exception as e:
+            return JsonResponse({ "message": f"Erro {e}" }, status=400)
 
 
 def getAlunos(req, id):
@@ -362,40 +402,6 @@ def getAlunos(req, id):
             return JsonResponse({ "alunos": alunos })
         except Exception as e:
             return JsonResponse({ "message": f"Erro {e}" }, status=400)
-
-def delete_alunos(req, id):
-    if(not req.user.is_authenticated):
-        return JsonResponse({"message": "Não autenticado"})
-    
-    if req.method == "POST":
-        data = json.loads(req.body)
-        aluno_ids = data.get("ids", [])
-
-        grupo = Grupo.objects.get(id=id)
-
-        for aluno_id in aluno_ids:
-            aluno = Aluno.objects.get(id=aluno_id)
-            grupo.alunos.remove(aluno)
-        
-        return JsonResponse({"success": True})
-    
-def add_alunos(req, id):
-    if(not req.user.is_authenticated):
-        return JsonResponse({"message": "Não autenticado"})
-    
-    if req.method == "POST":
-        data = json.loads(req.body)
-        getMyGroup = data.get("group")
-        myGroup = Grupo.objects.get(pk = getMyGroup)
-        aluno_names_pra_add = data.get("names", []) # [] não é necessário, é um default value em casos onde não vem nada
-
-        for aluno_name in aluno_names_pra_add:            
-            
-            aluno_novo, created = Aluno.objects.get_or_create(nome=aluno_name) #this ensures that we don't create an extra aluno if they already exist
-            myGroup.alunos.add(aluno_novo)
-            aluno_novo.save()
-        
-        return JsonResponse({"success": True})
     
 def addAdmin(req):
     if(not req.user.is_authenticated):

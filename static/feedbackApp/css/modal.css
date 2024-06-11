@@ -7,6 +7,9 @@
     --yellow: #F7B401;
     --yellowHover: #d69d00;
     --red: #D72C00;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-600: #dc2626;
     --redHover: #c02600;
     --black: #292B26;
     --blackHover: rgb(16, 16, 15);
@@ -25,6 +28,10 @@
     font-family: "Lexend Deca", sans-serif;
 }
 
+button{
+    border:none;
+}
+
 .modal-root {
     width: 100vw;
     height: 100vh;
@@ -41,6 +48,13 @@
     font-size: 26px;
 }
 
+.close-modal {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+    margin-left: auto;
+}
+
 .modal-root.active {
     width: 100vw;
     height: 100vh;
@@ -54,12 +68,8 @@
     opacity: 1;
 }
 
-
-
-
-
-
 .adicionarGrupo {
+    position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 30rem;
@@ -113,17 +123,8 @@
     background: var(--blueHover);
 }
 
-
-
-
-
-
-
-
-
-
-
 .adicionarAlunos {
+    position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 30rem;
@@ -202,18 +203,8 @@
     font-size: 14px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .deletarGrupo {
+    position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 30rem;
@@ -289,16 +280,8 @@
     background: var(--redHover);
 }
 
-
-
-
-
-
-
-
-
-
 .gerenciarGrupo {
+    position: relative;
     background-color: var(--beige);
     border-radius: 0.7rem;
     width: 33rem;
@@ -367,20 +350,12 @@
     background: var(--yellowHover);
 }
 
-
-
-
-
-
-
-
 .modal-root > div > button {
     border: none;
     background: none;
     cursor: pointer;
     margin-left: auto;
 }
-
 
 .export-modal {
     width: 100vw;
@@ -429,7 +404,6 @@
     justify-content:center;
 }
 
-
 #fact1, #fact2 {
     background-color: var(--soft-blue); /* cor de fundo */
     color: white; /* cor do texto */
@@ -444,7 +418,6 @@
     background-color: var(--blueHover); /* cor de fundo ao passar o mouse */
 }
 
-
 #cancelExport{
     background-color: var(--cream);
     color:black;
@@ -457,248 +430,82 @@
 
 }
 
-
 #cancelExport:hover{
     background-color: white;
 }
 
-
-
-button{
-    border:none;
+.editar-aluno {
+    position: relative;
+    width: 30rem;
+    background-color: var(--beige);
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
+.editar-aluno > * {
+    color: var(--black);
+}
 
+.editar-aluno > p {
+    font-size: 1rem;
+    color: rgb(114, 114, 114);
+}
 
-#cancel-editar{
-    background-color: #F9F6F3;
-    border-radius: 10px;
-    padding: 11.5px 19.5px;
-    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+#editar-aluno-form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: .2rem;
+}
+
+#editar-aluno-form > label {
+    font-size: 1rem;
     cursor: pointer;
+}
+
+#editar-aluno-form > input {
+    width: 100%;
+    margin-bottom: .5rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: none;
+    box-shadow: 1px 1px 2px rgba(100, 100, 100, 0.3);
+}
+
+#editar-aluno-form > div {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1rem;
+}
+
+#editar-aluno-form > div > button {
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    background: none;
     transition: all 150ms ease-in-out;
 }
 
-#cancel-editar:hover{
-    background-color: white;
+#editar-aluno-form > div > button:nth-child(1) {
+    color: var(--red-600);
 }
 
-#save{
+#editar-aluno-form > div > button:nth-child(1):hover {
+    background-color: var(--red-200);
+}
+
+#editar-aluno-form > div > button:nth-child(2) {
     background-color: var(--soft-blue);
     color: white;
-    border-radius: 10px;
-    padding: 11.5px 19.5px;
-    cursor: pointer;
-    transition: all 150ms ease-in-out;
 }
 
-#save:hover {
-    background-color: var(--blue);
-}
-
-.editar-modal{
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 99999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    transition: all 100ms ease-in-out;
-    backdrop-filter: blur(0.5rem);
-}
-
-.bottom-editar-modal {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.editar-modal-content{
-    background-color: var(--beige);
-    padding: 2rem;
-    width: 668px;
-    border-radius:1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-}
-
-.upper-editar-modal{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-#adicionarAluno{
-    display: flex;
-    background-color: var(--cream);
-    cursor: pointer;
-    color: var(--black);
-    border-radius: 10px;
-    font-size: 20px;
-    padding: 11.5px 27px;
-}
-
-#deletarAluno{
-    display: flex;
-    background-color: var(--cream);
-    cursor: pointer;
-    color: var(--black);
-    border-radius: 10px;
-    font-size: 20px;
-    padding: 11.5px 27px;
-}
-
-
-#remover-confirmation{
-    display: none; /* confirmations should only be displayed when certain modes have been activated for the modal(adicionar ou remover) */ 
-    background-color: var(--red); 
-    color: white;
-    border-radius: 10px;
-    padding: 11.5px 19.5px;
-    cursor: pointer;
-    transition: all 150ms ease-in-out;
-}
-
-#remover-confirmation:hover{
-    background-color: var(--redHover);
-}
-
-#adicionar-confirmation{
-   display:none;
-   background-color: var(--soft-blue);
-   color: white;
-   border-radius: 10px;
-   padding: 11.5px 19.5px;
-   cursor: pointer;
-   transition: all 150ms ease-in-out;
-}
-
-#adicionar-confirmation:hover{
-    background-color: var(--blue);
-}
-
-.modalTitleAndSubtitle > h3{
-    display: none; /* Assim como as confirmações, desejo esconder as descrições de adicionar ou remover até que sejam selecionados*/
-}
-
-#displayDeAlunos{
-    display: flex;
-    flex-direction:column;
-    height: 16.25rem;
-    justify-content: space-between;
-    gap: 1rem;
-    overflow-y:auto;
-}
-
-#displayDeAlunos::-webkit-scrollbar {
-    display: none;
-}
-
-.textBoxNovoAluno{
-    display: none;
-}
-
-.aluno-unit{
-    border-radius: 0.5rem;
-    width: 100%;
-    padding: 12px;
-    color: var(--zinc400);
-    text-decoration: none;
-    background-color: white; 
-    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
-    border-color:#1c3ebb;
-}
-
-.modalTitleAndSubtitle{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin: auto;
-    gap:10px;
-}
-
-.modalTitleAndSubtitle > h2{
-    margin: auto;
-}
-
-.modalTitleAndSubtitle > h4{
-    margin: auto;
-    color: var(--zinc400);
-}
-
-.aluno-to-be-added{
-    color: blue;
-}
-
-#modalEditarAluno{
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 99999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    pointer-events: all;
-    backdrop-filter: blur(0.5rem);
-    opacity: 1;
-}
-
-.modal-editar-aluno-content{
-
-    background-color: var(--beige);
-    padding: 2rem;
-    width: 500px;
-    border-radius:1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-
-}
-
-#modalEditarAluno > div > h1{
-
-    font-size: 30px;
-
-}
-
-#subtitulo-modal-editar-aluno{
-
-    color: var(--zinc400);
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-#editar-aluno-lower-buttons{
-
-
-    display:flex;
-    flex-direction: row;
-    gap: 5%;
-    margin-left: 200px;
-
-}
-
-#editar-aluno-lower-buttons > button{
-
-    max-width: fit-content;
-    padding: 1rem 1.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: var(--blue);
-    color: white;
-    cursor: pointer;
-    transition: all 150ms ease-in-out;
-
+#editar-aluno-form > div > button:nth-child(2):hover {
+    background-color: var(--blueHover)
 }
