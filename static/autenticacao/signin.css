@@ -64,7 +64,7 @@ h1 {
     gap: 1rem;
     width: 26.1%;
     min-width: 300px;
-    height: 41.6%;
+    height: auto;
     min-height: 420px;
 }
 
@@ -85,7 +85,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 90%;
 }
 
@@ -99,6 +99,7 @@ button {
     cursor: pointer;
     transition: all 150ms ease-in-out;
     font-size: 18px;
+    margin-top: 0.6rem;
 }
 
 input {
