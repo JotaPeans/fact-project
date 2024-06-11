@@ -6,15 +6,13 @@ describe('Importar Planilha', () => {
       cy.get('.password > input').type('senha123')
       cy.get('button').click()
 
-      cy.get('#addGroup').click()
-      cy.get('#name').type("Grupo 1")
-      cy.get('.create-group-container > #confirmButton').click()
-
       cy.get('#addStudent').click()
       
       const fileName = 'PlanilhaFact.xlsx' 
      
 
-      cy.get('form').contains("arquivo").attachFile(fileName)
+      cy.get('#alunos-upload').attachFile(fileName)
+      cy.wait(100)
+      cy.get('#upload-excel > .add-student-container > #confirmButton').click()
   })
 })

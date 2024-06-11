@@ -264,6 +264,11 @@ form > button:hover {
     background-color: var(--yellowHover);
 }
 
+.popover-content{
+    overflow: visible;
+    position: absolute; 
+}                         
+
 details {
     padding: 16px 32px;
     border-radius: 10px;
