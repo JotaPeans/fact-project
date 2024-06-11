@@ -20,28 +20,35 @@
 
 h4 {
     color: rgb(110, 110, 110);
+    font-weight: 500;
+    font-size: 20px;
 }
 
 h3, h2 {
     color: var(--black);
 }
 
+h2{
+    font-weight: 600;
+    font-size: 30px;
+}
+
+h3{
+    font-weight: 500;
+    font-size: 22px;
+}
+
 .back-url {
     display: flex;
     align-items: center;
-    max-width: fit-content;
-    gap: 16px;
-}
-
-.back-url {
+    gap: 1rem;
     color: var(--black);
     text-decoration: none;
-    font-size: 2.4rem;
-    font-weight: 600;
 }
 
-.back-url:hover {
-    text-decoration: underline;
+.back-url > h1{
+    font-weight: 600;
+    font-size: 40px;
 }
 
 .selects {
@@ -68,6 +75,7 @@ h3, h2 {
     display: flex;
     overflow-y: auto;
     gap: 2rem;
+    color: rgb(110, 110, 110);
 }
 
 .alunos > div {
@@ -81,12 +89,13 @@ h3, h2 {
 .alunos > div > p {
     padding: .5rem;
     width: 98%;
-    border: 1px solid var(--soft-blue);
+    border: 2px solid var(--soft-blue);
     background-color: white;
-    border-radius: .3rem;
+    border-radius: .5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 1.5rem;
 }
 
 .alunos > div > p > button {
@@ -101,7 +110,7 @@ h3, h2 {
 }
 
 .alunos > div > p > button > svg {
-    stroke: var(--black);
+    color: rgb(110, 110, 110);
 }
 
 .options {

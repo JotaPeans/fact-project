@@ -25,7 +25,7 @@ main {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.3rem;
     padding: 3rem;
     background-color: #F9F6F3;
 }
@@ -108,7 +108,25 @@ form > button:hover {
     background: url("/static/images/background-principal.png") repeat;
 }
 
+.groupHeader > div{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
+#back-button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--black);
+    text-decoration: none;
+}
+
+#groupName{
+    font-weight: 600;
+    font-size: 40px;
+}
 
 .currentFile {
     padding: 1rem;
@@ -117,14 +135,20 @@ form > button:hover {
     border-radius: 0.5rem;
 }
 
+
 .alunos-container {
-    max-width: 1180px;
     min-width: 1180px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin: 0 auto;
     overflow-y: auto;
+    margin: 1rem;
+}
+
+.alunos-container > h2{
+    font-size: 30px;
+    font-weight: 600;
+    padding-left: 0.6rem;
 }
 
 

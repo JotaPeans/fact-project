@@ -249,7 +249,8 @@ main {
 
 .popover-content {
     position: absolute;
-    min-width: 10rem;
+    min-width: 9.5rem;
+    left: 266px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -273,6 +274,7 @@ main {
     font-size: 1.1rem;
     margin: 0.3rem 0;
     margin-left: 0.8rem;
+    font-weight: 500;
 }
 
 .popover-content > hr {
