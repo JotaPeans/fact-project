@@ -130,14 +130,11 @@ class GroupView(View):
         alunos = []
 
         for aluno in group[0].alunos.all():
-            # filtra os facts pelo aluno e pelo grupo atual
             fact = list(filter(lambda x: x.grupo.nome == group[0].nome, list(aluno.fact_set.all())))
             sr1 = 0
             sr2 = 0
 
             if(len(list(fact)) == 1):
-                # TODO REALIZAR CALCULO SR1
-                #! O CALCULO ABAIXO ESTA SOMANDO APENAS O FACT
                 sr1 = (
                     fact[0].pensamento_critico_criatividade + 
                     fact[0].comunicacao + 
@@ -148,6 +145,15 @@ class GroupView(View):
                 )
 
             if(len(list(fact)) == 2):
+                sr1 = (
+                    fact[0].pensamento_critico_criatividade + 
+                    fact[0].comunicacao + 
+                    fact[0].colaboracao + 
+                    fact[0].qualidade_entregas + 
+                    fact[0].presenca + 
+                    fact[0].entrega_prazos
+                )
+
                 sr2 = (
                     fact[1].pensamento_critico_criatividade + 
                     fact[1].comunicacao + 
@@ -166,7 +172,6 @@ class GroupView(View):
                 "sr2": round(sr2, 2),
                 "media": round((sr1 + sr2) / 2, 2)
             })
-        
 
         todosAlunos = Aluno.objects.all()
         context = {
@@ -197,7 +202,8 @@ class GroupView(View):
 
             notas = getMediaAluno(df)
 
-        except:
+        except Exception as e:
+            print(e)
             messages.add_message(req, constants.ERROR, 'Excel ou arquivo no formato inválido')
             return render(req, "feedbackApp/group.html", context=context)
 
@@ -212,16 +218,12 @@ class GroupView(View):
 
             aluno_object = transformNotasToObject(aluno_data)
             
-            aluno = Aluno.objects.filter(nome=aluno_object["nome"])
+            aluno = Aluno.objects.filter(nome=aluno_object["nome"])[0]
+            alunoFacts = len(aluno.fact_set.all())
 
-            if(not aluno.exists()):
-
-                aluno = Aluno.objects.create(
-                    nome=aluno_object["nome"],
-                    email=aluno_object["email"],
-                )
-
+            if(aluno):
                 fact = Fact.objects.create(
+                    nome="Status Report 1" if alunoFacts == 0 else "Status Report 2",
                     pensamento_critico_criatividade=aluno_object["pensamento_crítico_e_criatividade"],
                     comunicacao=aluno_object["comunicação"],
                     colaboracao=aluno_object["colaboração"],
@@ -232,15 +234,7 @@ class GroupView(View):
                     grupo=group[0]
                 )
 
-                aluno.save()
                 fact.save()
-
-                group[0].alunos.add(aluno)
-                group[0].save()
-
-            else:
-                group[0].alunos.add(aluno[0])
-                group[0].save()
 
         return redirect("feedbackApp:group", id)
 

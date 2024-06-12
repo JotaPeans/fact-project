@@ -28,8 +28,8 @@ def getAlunoEmail(aluno):
 reject = [
     "Timestamp",
     "Carimbo de data/hora", 
-    "Selecione seu EMAIL", 
-    "Selecione seu NOME"
+    "Endereço de e-mail", 
+    "Nome completo"
 ]
 
 
@@ -38,9 +38,9 @@ def getMediaAluno(df):
 
     for nome_coluna in df.columns:
         for index, x in enumerate(df[nome_coluna]):
-            if(nome_coluna == "Selecione seu EMAIL"):
+            if(nome_coluna == "Endereço de e-mail"):
                 alunos[index] = [x]
-            if(nome_coluna == "Selecione seu NOME"):
+            if(nome_coluna == "Nome completo"):
                 alunos[index].append(x)
 
     for nome_coluna in df.columns:
