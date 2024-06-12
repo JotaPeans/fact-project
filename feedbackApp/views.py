@@ -441,6 +441,14 @@ def changeAlunoInfo(req):
         aluno.save()
         return JsonResponse({"success": True})
 
+
+def populate(req):
+    User.objects.create_user(username="professor", email="professor@email.com", password="senha123").save()
+    User.objects.create_user(username="coordenador", email="coordenador@email.com", password="senha123").save()
+
+    return JsonResponse({"message": "Populated"})
+
+
 def logoutFunction(req):
     logout(req)
     return redirect("autenticacao:root")
