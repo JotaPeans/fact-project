@@ -6,7 +6,12 @@ import json
 # Acessar https://console.developers.google.com/apis/api/forms.googleapis.com/overview para ativar a api do forms caso esteja desativada
 # Acessar https://console.developers.google.com/apis/api/drive.googleapis.com/overview para ativar a api do drive caso esteja desativada
 
-descricao_fact = '''No uso do FACT, os membros do time atribuem notas individuais (exceto a si próprios), tomando como referência os Critérios de Avaliação.
+class Fact():
+    def __init__(self) -> None:
+        self.SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
+        self.SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
+
+        self.descricao_fact = '''No uso do FACT, os membros do time atribuem notas individuais (exceto a si próprios), tomando como referência os Critérios de Avaliação.
 
 São Avaliados os seguintes critérios:
 
@@ -26,42 +31,36 @@ Lembre-se, o somatório das notas atribuídas aos seus colegas de time não deve
 
 O FACT não contempla autoavaliação, portanto ao chegar em sua própria avaliação, o estudante deverá colocar "0" (zero) em todas as notas, e justificar dizendo "sou eu".'''
 
-title_images = [
-    {
-        "title": "Pensamento Crítico e Criatividade",
-        "image": "https://i.imgur.com/xNaDpoc.png"
-    },
-    {
-        "title": "Comunicação",
-        "image": "https://i.imgur.com/Tjhel7A.png"
-    },
-    {
-        "title": "Colaboração",
-        "image": "https://i.imgur.com/hbXn70n.png"
-    },
-    {
-        "title": "Qualidade das Entregas",
-        "image": "https://i.imgur.com/dPtDaLx.png"
-    },
-    {
-        "title": "Presença",
-        "image": "https://i.imgur.com/71kxBpq.png"
-    },
-    {
-        "title": "Entregas e Prazos",
-        "image": "https://i.imgur.com/HGmKO8V.png"
-    },
-    {
-        "title": "Justifique suas respostas",
-        "image": ""
-    },
-]
-
-
-class Fact():
-    def __init__(self) -> None:
-        self.SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
-        self.SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
+        self.title_images = [
+            {
+                "title": "Pensamento Crítico e Criatividade",
+                "image": "https://i.imgur.com/xNaDpoc.png"
+            },
+            {
+                "title": "Comunicação",
+                "image": "https://i.imgur.com/Tjhel7A.png"
+            },
+            {
+                "title": "Colaboração",
+                "image": "https://i.imgur.com/hbXn70n.png"
+            },
+            {
+                "title": "Qualidade das Entregas",
+                "image": "https://i.imgur.com/dPtDaLx.png"
+            },
+            {
+                "title": "Presença",
+                "image": "https://i.imgur.com/71kxBpq.png"
+            },
+            {
+                "title": "Entregas e Prazos",
+                "image": "https://i.imgur.com/HGmKO8V.png"
+            },
+            {
+                "title": "Justifique suas respostas",
+                "image": ""
+            },
+        ]
 
         self.CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
 
@@ -87,7 +86,7 @@ class Fact():
         return formId
 
 
-    def add_permission(self, formId: str, email_address: str):
+    def add_permission(self, email_address: str):
         permission = {
             "type": "user",
             "role": "writer",
@@ -96,7 +95,7 @@ class Fact():
 
         try:
             self.drive_service.permissions().create(
-                fileId=formId,
+                fileId=self.formId,
                 body=permission,
                 fields="id"
             ).execute()
@@ -105,21 +104,40 @@ class Fact():
             print("error: ", e)
 
 
-    def update_form(self, formId, lista_perguntas):
+    def invite_students(self, emails):
+        for email in emails:
+            permission = {
+                "type": "user",
+                "role": "reader",
+                "emailAddress": email
+            }
+
+            try:
+                self.drive_service.permissions().create(
+                    fileId=self.formId,
+                    body=permission,
+                    fields="id"
+                ).execute()
+
+            except Exception as e:
+                print("error: ", e)
+
+
+    def update_form(self, lista_perguntas):
         updates = {
             "requests": lista_perguntas,
         }
 
-        self.service.forms().batchUpdate(formId=formId, body=updates).execute()
+        self.service.forms().batchUpdate(formId=self.formId, body=updates).execute()
 
-        URL = f"https://docs.google.com/forms/d/{formId}"
+        URL = f"https://docs.google.com/forms/d/{self.formId}"
 
         print(f"URL form: {URL}")
 
         return URL
 
 
-    def create_item(title, aluno, image, count):
+    def create_item(self, title, aluno, image, count):
         if(image):
             return {
                 "createItem": {
@@ -163,7 +181,7 @@ class Fact():
             }
         
 
-    def create_select_name_section(self, formId, alunos, emails):
+    def create_select_name_section(self, alunos, emails):
         updates = {
             "requests": [
                 {
@@ -209,7 +227,7 @@ class Fact():
             ]
         }
 
-        self.service.forms().batchUpdate(formId=formId, body=updates).execute()
+        self.service.forms().batchUpdate(formId=self.formId, body=updates).execute()
 
 
     def create_page_break(self, title, count):
@@ -231,7 +249,7 @@ class Fact():
             "updateFormInfo": {
                 "info": {
                     "title": "FACT - Fator de Contribuição Técnica",
-                    "description": descricao_fact
+                    "description": self.descricao_fact
                 },
                 "updateMask": "*"
             }
@@ -239,31 +257,46 @@ class Fact():
 
 
     def create_fact(self, email_address, alunos, emails):
-        formId = self.create_new_form()
-        self.add_permission(formId=formId, email_address=email_address)
-        self.create_select_name_section(formId, alunos, emails)
+        self.formId = self.create_new_form()
+        self.add_permission(email_address=email_address)
+        self.create_select_name_section(alunos, emails)
 
         alunos_ordenados = sorted(alunos, key=lambda nome: nome, reverse=True)
 
-        lista_perguntas = [] 
+        lista_perguntas = [self.update_form_info()]
 
-        for aluno in alunos_ordenados:
-            count = 2
+        try:
+            for aluno in alunos_ordenados:
+                count = 2
 
-            lista_perguntas.append(self.update_form_info())
+                lista_perguntas.append(self.create_page_break(count=count, title=aluno))
 
-            lista_perguntas.append(self.create_page_break(count=count, title=aluno))
-            count += 1
-
-            for title_images_index in range(7):
-                question_item = self.create_item(
-                    aluno=aluno, 
-                    count=count, 
-                    title=title_images[title_images_index]["title"], 
-                    image=title_images[title_images_index]["image"]
-                )
-                
-                lista_perguntas.append(question_item)
                 count += 1
 
-        return self.update_form(formId, lista_perguntas)
+                for title_images_index in range(7):
+                    question_item = self.create_item(
+                        aluno=aluno, 
+                        count=count, 
+                        title=self.title_images[title_images_index]["title"], 
+                        image=self.title_images[title_images_index]["image"]
+                    )
+                    
+                    lista_perguntas.append(question_item)
+                    count += 1
+
+            self.invite_students(emails)
+
+            return {
+                "formUrl": self.update_form(lista_perguntas),
+                "error": None
+            }
+        
+        except Exception as e:
+            self.drive_service.files().delete(
+                fileId=self.formId
+            ).execute()
+
+            return {
+                "formId": self.formId,
+                "error": e
+            }

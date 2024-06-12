@@ -40,10 +40,21 @@
                     <input type="hidden" id="id-aluno" name="alunoId" value="{{group.id}}">
                     
                     <div>
-                        <button type="button" class="cancel-edit">Cancelar</button>
+                        <button type="button" class="cancel">Cancelar</button>
                         <button type="submit" class="save-edit">Salvar</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="modal-root">  
+            <div class="modal-fact">
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+                </button>
+                <h3>FaCT gerado</h3>
+                
+                <input type="text" disabled id="generated-fact">
             </div>
         </div>
 
@@ -53,7 +64,6 @@
             <div class="myGroupButtons">
                 <button id="exportButton">Exportar FACT</button>
                 <button id="generate-fact">Gerar FACT</button>
-                <!-- <button id="toEdit">Editar Grupo</button> -->
                 <a href="{% url 'feedbackApp:edit' id=group.id %}">Editar Grupo</a>
             </div>
         </div>
@@ -205,12 +215,12 @@
 
         document.querySelectorAll(".close-modal")?.forEach(btn => {
             btn.addEventListener("click", () => {
-                editarAluno.classList.remove("active");
+                document.querySelectorAll(".modal-root").forEach(modal => modal.classList.remove("active"));
             })
         });
-        document.querySelectorAll(".cancel-edit")?.forEach(btn => {
+        document.querySelectorAll(".cancel")?.forEach(btn => {
             btn.addEventListener("click", () => {
-                editarAluno.classList.remove("active");
+                document.querySelectorAll(".modal-root").forEach(modal => modal.classList.remove("active"));
             })
         });
 
@@ -230,13 +240,26 @@
             });
         });
 
-        document.getElementById("generate-fact")?.addEventListener("click", async () => {
+        const createFact = document.getElementById("generate-fact");
+
+        createFact?.addEventListener("click", async () => {
+            createFact.innerHTML = `<div class="animate-spin spinner"></div>`;
+            const factModal = document.querySelectorAll(".modal-root")[1];
+            const generatedFact = document.getElementById("generated-fact");
+            
             const res = await fetch("{% url 'feedbackApp:createFact' groupId=group.id %}", {
                 method: "POST",
                 headers: {
                     "X-CSRFToken": "{{ csrf_token }}"
                 }
             });
+            
+            if(res.ok) {
+                factModal.classList.add("active");
+                generatedFact.value = (await res.json()).url
+            }
+
+            createFact.innerHTML = "Gerar FACT";
         })
     </script>
 {% endblock %}

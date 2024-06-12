@@ -509,3 +509,28 @@ button{
 #editar-aluno-form > div > button:nth-child(2):hover {
     background-color: var(--blueHover)
 }
+
+.modal-fact {
+    position: relative;
+    width: 30rem;
+    background-color: var(--beige);
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-fact > h3 {
+    color: var(--black);
+}
+
+#generated-fact {
+    width: 100%;
+    margin-bottom: .5rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: none;
+    box-shadow: 0 0 2px rgba(100, 100, 100, 0.5);
+    cursor: text;
+}

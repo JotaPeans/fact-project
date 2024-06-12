@@ -375,13 +375,17 @@ class FactCreate(View):
             alunos = list(grupo.alunos.all())
 
             alunos_nomes = [aluno.nome for aluno in alunos]
-            alunos_emails = [f"{aluno.email}.test" for aluno in alunos]
+            alunos_emails = [aluno.email for aluno in alunos]
 
             fact = FactClass()
 
-            fact_url = fact.create_fact(email_address=req.user.email, alunos=alunos_nomes, emails=alunos_emails)
+            fact = fact.create_fact(email_address=req.user.email, alunos=alunos_nomes, emails=alunos_emails)
 
-            return JsonResponse({ "url": fact_url })
+            if(fact["error"] == None):
+                return JsonResponse({ "url": fact["formUrl"] })
+            
+            else:
+                raise Exception(fact["error"])
 
         except Exception as e:
             return JsonResponse({ "message": f"Erro: {e}" }, status=400)
