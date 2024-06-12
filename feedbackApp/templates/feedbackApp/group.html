@@ -257,7 +257,6 @@
         })
 
         document.getElementById("confirmFact")?.addEventListener("click", async () => {
-            console.log("Enviou fact");
             enviarFact.classList.remove("active");
             const res = await fetch("{% url 'feedbackApp:createFact' groupId=group.id %}", {
                 method: "POST",
