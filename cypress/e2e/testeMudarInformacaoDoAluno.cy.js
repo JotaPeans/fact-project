@@ -7,35 +7,75 @@ describe('Mudar Informação do Aluno', () => {
     cy.get('button').click()
 
     cy.get('#addGroup').click()
-    cy.get('#name').type("Mudar A")
-    cy.get('form > button').contains('Confirmar').click()
-    
-    cy.get('.group > a').contains('Mudar A').closest('.group').as('MA')
-    cy.get('@MA').within(() => { 
+    cy.get('#name').type("Grupo 1")
+    cy.get('.create-group-container > #confirmButton').click()
+
+    cy.get('.group > div > a').contains('Grupo 1').closest('div').as('G1')
+    cy.get('@G1').within(() => {
       cy.get('a').click()
     })
 
-    const fileName = 'Copy_of_Fake_FACT_-_Grupo_0X_respostas_arrumado.xlsx'
+    cy.get('.myGroupButtons > a').click()
+    cy.get('#select-cc').select('X7')
+    cy.get('#select-cc').select('X5')
+    cy.get('.confirm').click()
+    cy.get('.back-url').click()
 
-    cy.get('#uploadfileInput').attachFile(fileName)
-    cy.get('button').click()
+    cy.get('.alunos-container > details').contains("X5").click()
+    cy.get('.alunos-container > details > .detalhesLowerButtons > .editarAluno').contains("Editar Aluno").click()
+    cy.get('#nome-aluno').type("1")
+    cy.get('.save-edit').click()
 
-    cy.get('main > .alunos-container').contains('X5').click()
-    cy.get('[open=""] > .detalhesLowerButtons > .editarAluno').click()
-    cy.get('#nomeDoAluno').clear().type('XNovo')
-    cy.get('#emailDoAluno').clear().type('XNovo@cesar.school')
-    cy.get('#confirmar-editar-aluno').click()
-
-    cy.get('header > a').should('be.visible').then(($link) => {
+    cy.get('header > a').then(($link) => {
       if ($link.length) {
-        cy.wrap($link).click();
+          cy.wrap($link).click();
       }
     })
 
-      cy.get('@MA').within(() => {
-          cy.get('.popover-button').click()
-          cy.get('.popover-content > .delete-group').click()
-      })
-      cy.get('#delete-group-link').click()
+    cy.get('@G1').within(() => { 
+      cy.get('.popover-container').click()
+      cy.get('.popover-content > button').contains("Deletar").click()
+    })
+    cy.get('#delete-group-link').click()
+  })
+
+  it('Mudar Informação do Aluno X51', () => {
+    cy.visit('/')
+
+    cy.get('.login > input').type("professor")
+    cy.get('.password > input').type('senha123')
+    cy.get('button').click()
+
+    cy.get('#addGroup').click()
+    cy.get('#name').type("Grupo 1")
+    cy.get('.create-group-container > #confirmButton').click()
+
+    cy.get('.group > div > a').contains('Grupo 1').closest('div').as('G1')
+    cy.get('@G1').within(() => {
+      cy.get('a').click()
+    })
+
+    cy.get('.myGroupButtons > a').click()
+    cy.get('#select-cc').select('X7')
+    cy.get('#select-cc').select('X51')
+    cy.get('.confirm').click()
+    cy.get('.back-url').click()
+
+    cy.get('.alunos-container > details').contains("X5").click()
+    cy.get('.alunos-container > details > .detalhesLowerButtons > .editarAluno').contains("Editar Aluno").click()
+    cy.get('#nome-aluno').clear().type("X5")
+    cy.get('.save-edit').click()
+
+    cy.get('header > a').then(($link) => {
+      if ($link.length) {
+          cy.wrap($link).click();
+      }
+    })
+
+    cy.get('@G1').within(() => { 
+      cy.get('.popover-container').click()
+      cy.get('.popover-content > button').contains("Deletar").click()
+    })
+    cy.get('#delete-group-link').click()
   })
 })

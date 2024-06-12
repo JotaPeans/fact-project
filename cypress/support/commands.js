@@ -26,6 +26,8 @@
 
 import 'cypress-file-upload'
 
+import './file-upload-utils';
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
     // failing the test

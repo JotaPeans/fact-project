@@ -1,5 +1,5 @@
-describe('Adicionar ALuno', () => {
-  it('Adicionar Aluno X13', () => {
+describe('Criar Formulário FaCT', () => {
+  it('Criar Form', () => {
     cy.visit('/')
 
     cy.get('.login > input').type("professor")
@@ -21,10 +21,9 @@ describe('Adicionar ALuno', () => {
     cy.get('.confirm').click()
     cy.get('.back-url').click()
 
-    cy.get('.myGroupButtons > a').click()
-    cy.get('#select-design').select('X13')
-    cy.get('.confirm').click()
-    cy.get('.back-url').click()
+    cy.get('#generate-fact').click()
+
+    cy.get('#confirmFact').click()
 
     cy.get('header > a').then(($link) => {
       if ($link.length) {
@@ -37,5 +36,6 @@ describe('Adicionar ALuno', () => {
       cy.get('.popover-content > button').contains("Deletar").click()
     })
     cy.get('#delete-group-link').click()
-  })
+})
+ 
 })

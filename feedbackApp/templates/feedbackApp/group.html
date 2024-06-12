@@ -59,7 +59,12 @@
         </div>
 
         <div class="groupHeader">
-            <h1 id="groupName" data-group-id="{{group.id}}">{{ group.nome }}</h1>
+            <div>
+                <a href="{% url 'feedbackApp:root' %}" id="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+                <h1 id="groupName" data-group-id="{{group.id}}">{{ group.nome }}</h1>
+            </div>
 
             <div class="myGroupButtons">
                 <button id="exportButton">Exportar FACT</button>
@@ -206,12 +211,14 @@
             })
         });
 
+
         const editarAluno = document.querySelectorAll(".modal-root")[0];
         const subTitleAlunoModal = document.getElementById("current-aluno");
         const idAlunoModal = document.getElementById("id-aluno");
         const nomeAlunoModal = document.getElementById("nome-aluno");
         const emailAlunoModal = document.getElementById("email-aluno");
         const matriculaAlunoModal = document.getElementById("matricula-aluno");
+        const enviarFact = document.querySelectorAll(".modal-root")[1];
 
         document.querySelectorAll(".close-modal")?.forEach(btn => {
             btn.addEventListener("click", () => {
@@ -260,6 +267,8 @@
             }
 
             createFact.innerHTML = "Gerar FACT";
+
         })
+       
     </script>
 {% endblock %}

@@ -71,7 +71,7 @@
 
     <div class="modal-root">
         <div class='adicionarGrupo'>
-            <button class="close-modal">
+           <button class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
             </button>
 
@@ -79,7 +79,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="action" value="addGroup">
                 <label for="name">Nome do Grupo</label>
-                <input id="name" name="groupName" placeholder="Nome do grupo" required></input>
+                <input id="name" name="groupName" placeholder="Nome do grupo" required oninvalid="setCustomValidity('')" oninput="setCustomValidity('')"></input>
 
                 {% if messages %}
                     {% for message in messages %}
@@ -88,17 +88,19 @@
                         </p>
                     {% endfor %}
                 {% endif %}
-
-                <button type="submit">Confirmar</button>
+                <div class="create-group-container">
+                     <!-- <button class="close-modal" id="canceleButton">Cancelar</button>  -->     
+                    <button type="submit" id="confirmButton">Confirmar</button>
+                </div>
             </form>
         </div>
     </div>
 
     <div class="modal-root">
         <div class="adicionarAlunos">
-            <button class="close-modal">
+           <!--  <button class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
-            </button>
+            </button>-->
             
             <h2>Adicionar Alunos</h2>
             <h3>Selecione como deseja adicionar os alunos</h3>
@@ -123,7 +125,10 @@
                 </label>
                 <input style="display: none;" id="alunos-upload" name="alunos" required type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"></input>
 
-                <button type="submit">Confirmar</button>
+                <div class="add-student-container">
+                    <button class="close-modal" id="canceleButton">Cancelar</button>       
+                    <button type="submit" id="confirmButton">Confirmar</button>
+                </div>
             </form>
 
             <form method="post" id="add-manually" data-tab="manually">
@@ -134,7 +139,7 @@
                 <input type="text" id="nome" name="nome" placeholder="Nome">
 
                 <label for="email School">Email School</label>
-                <input type="text" id="email School" name="email-school" placeholder="Email da School">
+                <input type="text" id="emailSchool" name="email-school" placeholder="Email da School">
 
                 <label for="matricula">Matricula</label>
                 <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
@@ -142,22 +147,25 @@
                 <label for="turma">Turma</label>
                 <input type="text" id="turma" name="turma" placeholder="Turma">
     
-                <button type="submit">Confirmar</button>
+                <div class="add-student-container">
+                    <button class="close-modal" id="canceleButton">Cancelar</button>       
+                    <button type="submit" id="confirmButton">Confirmar</button>
+                </div>
             </form>
         </div>
     </div>
 
     <div class="modal-root">
         <div class='deletarGrupo'>
-            <button data-groupname="{{group.nome}}" class="close-modal">
+          <!-- <button data-groupname="{{group.nome}}" class="close-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
-            </button>
-            
+            </button> 
+         -->
             <h2>Deseja deletar esse grupo?</h2>
             <h3 id = grupoaserdeletado>{{group.nome}}</h3>
 
             <div class="delete-actions-container">
-                <button class="close-modal">Cancelar</button>
+                <button class="close-modal" id="canceleButton">Cancelar</button>
                 <a href="" id="delete-group-link" class="delete-group">Deletar</a>
             </div>
         </div>
@@ -166,24 +174,24 @@
     <div class="modal-root" id="gerenciarGroupModal">
         <div class='gerenciarGrupo'>
             <button class="close-modal">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
             <div>
                 <h2 id="apresentandoGrupo">Gerenciar Grupo</h2>
                 <h3 id="apresentandoProfessor">Esse Grupo foi criado por:</h3>
             </div>    
-            <h4>Deseja adicionar alguém à equipe de administração do grupo?</h4>
+            <h4>Adicionar colaborador à equipe de administração</h4>
 
             <form id="formParaAdicionarAdmins" name=action" value=addAdmin">
                 {% csrf_token %}
                 
-                <label for="user">Selecione um usuário a ser adicionado: </label>
+                <label for="user">Selecione colaborador:</label>
                 <select name="usuariosProfessores" id="usuariosProfessores">
                     {% for user in allUsers %}
                         <option value="{{user.id}}">{{user.username}}</option>
                     {% endfor %}
                 </select>
-                <button id="botaoDoConfia" type="submit">Confio nessa pessoa! Quero adicioná-la!</button>
+                <button id="botaoDoConfia" type="submit">Confirmar</button>
             </form>
         </div>
     </div>
@@ -367,5 +375,10 @@
             .then(response => response.json())
             .then(data => location.reload())
         }
+    </script>
+
+    <script>
+    let textBoxNome = document.getElementById("name");
+    textBoxNome.setCustomValidity('');
     </script>
 {% endblock %}
