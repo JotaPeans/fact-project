@@ -45,10 +45,10 @@ A aplicação é:
 3. Eu, como usuário professor, gostaria de visitar a página de cada grupo;
 4. Eu, como usuário professor, gostaria de criar um aluno manualmente;
 5. Eu, como usuário professor, desejo excluir um aluno de um grupo;
-6. Eu, como usuario professor, gostaria de adicionar outros usuários professor para gerenciar o grupo;
+6. Eu, como usuário professor, gostaria de adicionar outros usuários professor para gerenciar o grupo;
 7. Eu, como usuário professor, gostaria de excluir grupos existentes;
 8. Eu, como usuário professor, gostaria de mudar qualquer informação relacionado aos alunos;
-9. Eu, como usuario professor, gostaria de criar um form de avaliação para cada grupo automaticamente;
+9. Eu, como usuário professor, gostaria de criar um form de avaliação para cada grupo automaticamente;
 10. Eu, como usuário professor, gostaria de adicionar um aluno novo manualmente ao grupo.
 
 
