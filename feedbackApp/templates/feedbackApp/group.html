@@ -58,6 +58,25 @@
             </div>
         </div>
 
+        <div class="modal-root">  
+            <div class="modal-import-fact">
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+                </button>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="uploadfile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                        Selecione o arquivo Excel
+                        <label for="uploadfileInput"></label>
+                    </div>
+                    <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+
         <div class="groupHeader">
             <div>
                 <a href="{% url 'feedbackApp:root' %}" id="back-button">
@@ -68,6 +87,7 @@
 
             <div class="myGroupButtons">
                 <button id="exportButton">Exportar FACT</button>
+                <button id="upload-fact">Importar FACT</button>
                 <button id="generate-fact">Gerar FACT</button>
                 <a href="{% url 'feedbackApp:edit' id=group.id %}">Editar Grupo</a>
             </div>
@@ -144,13 +164,24 @@
     {% endif %}
     
     <script>
-        const upload=document.getElementById("uploadfileInput");
-        const uploadLabel=document.getElementById("uploadfile");
+        const upload = document.getElementById("uploadfileInput");
+        const uploadLabel = document.getElementById("uploadfile");
+        const uploadFact = document.getElementById("upload-fact");
+
+        uploadFact?.addEventListener("click", () => {
+            const editarAluno = document.querySelectorAll(".modal-root")[2];
+
+            uploadLabel.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                        Selecione o arquivo Excel
+                        <label for="uploadfileInput"></label>`;
+
+            editarAluno.classList.add("active");
+        })
 
         upload?.addEventListener("change", (event) => {
             const file=event.target.files[0];
             if(file) {
-                uploadLabel.innerHTML=`<p class="currentFile">${file.name}</p>`
+                uploadLabel.innerHTML=`<label class="currentFile" for="uploadfileInput">${file.name}</label>`
             }
         });
 

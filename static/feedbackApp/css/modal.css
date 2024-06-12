@@ -50,8 +50,8 @@ button{
 
 .close-modal {
     position: absolute;
-    right: 2rem;
-    top: 2.2rem;
+    right: 8px;
+    top: 8px;
 }
 
 .modal-root.active {
@@ -66,18 +66,6 @@ button{
     backdrop-filter: blur(0.5rem);
     opacity: 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .adicionarGrupo {
     position: relative;
@@ -133,14 +121,6 @@ button{
 .adicionarGrupo > form > button:hover {
     background: var(--blueHover);
 }
-
-/*.create-group-container{  COM BOTÃO DE CANCELAR
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    gap: 10rem;
-    margin-top: 0.4rem
-}*/
 
 .create-group-container{
     width: 100%;
@@ -253,36 +233,6 @@ button{
 .upload > p {
     font-size: 14px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .deletarGrupo {
     position: relative;
@@ -602,6 +552,17 @@ button{
 
 
 .modal-fact {
+    position: relative;
+    width: 30rem;
+    background-color: var(--beige);
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-import-fact {
     position: relative;
     width: 30rem;
     background-color: var(--beige);
