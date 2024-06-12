@@ -16,7 +16,7 @@ def alunoAtualInAlunos(aluno):
         if(aluno in alunos[index]):
             return True
         
-    return False;
+    return False
 
 def getAlunoEmail(aluno):
     for _, valor in alunos.items():
@@ -26,9 +26,10 @@ def getAlunoEmail(aluno):
     return ""
 
 reject = [
+    "Timestamp",
     "Carimbo de data/hora", 
-    "Endereço de e-mail", 
-    "Nome completo"
+    "Selecione seu EMAIL", 
+    "Selecione seu NOME"
 ]
 
 
@@ -37,9 +38,9 @@ def getMediaAluno(df):
 
     for nome_coluna in df.columns:
         for index, x in enumerate(df[nome_coluna]):
-            if(nome_coluna == "Endereço de e-mail"):
+            if(nome_coluna == "Selecione seu EMAIL"):
                 alunos[index] = [x]
-            if(nome_coluna == "Nome completo"):
+            if(nome_coluna == "Selecione seu NOME"):
                 alunos[index].append(x)
 
     for nome_coluna in df.columns:

@@ -1,0 +1,17 @@
+{
+  "name": "fact-project",
+  "version": "1.0.0",
+  "description": "testes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.10.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8"
+  }
+}

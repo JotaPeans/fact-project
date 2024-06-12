@@ -4,77 +4,154 @@
 {% block head%}
     <link rel="stylesheet" href="{% static 'feedbackApp/css/group.css' %}">
     <link rel="stylesheet" href="{% static 'root/styles/animations.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'feedbackApp/css/select.css' %}">
 {% endblock %}
 
 {% block content %}
     <main>
-        <h1>{{ group.nome }}</h1>
+        <div class="export-modal">  
+            <div class="exportar-modal-content">
+                <h2>Exportar FaCT</h2>
+                <button id="fact1">FaCT 1</button>
+                <button id="fact2">FaCT 2</button>
+                <button id="cancelExport">Cancelar</button>
+            </div>
+        </div>
 
-        {% if alunos|length < 1 %}
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label id="uploadfile" for="uploadfileInput">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                    Envie o arquivo Excel
-                </label>
-                <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                <button type="submit">Enviar</button>
-            </form>
+        <div class="modal-root">
+            <div class="editar-aluno">
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+                </button>
 
-        {% else %}
-            <div class="alunos-container">
-                {% for aluno in alunos %}
-                    <div class="aluno">
-                        <div>
-                            <p>Nome:</p>
-                            <p>{{aluno.nome}}</p>
-                        </div>
-                        <div>
-                            <p>Email:</p>
-                            <p>{{aluno.email}}</p>
-                        </div>
-                        <div>
-                            <p>Pensamento Crítico e Criatividade:</p>
-                            <p>{{aluno.pensamento_critico_criatividade}}</p>
-                        </div>
-                        <div>
-                            <p>Comunicação:</p>
-                            <p>{{aluno.comunicacao}}</p>
-                        </div>
-                        <div>
-                            <p>Colaboração:</p>
-                            <p>{{aluno.colaboracao}}</p>
-                        </div>
-                        <div>
-                            <p>Qualidade das Entregas:</p>
-                            <p>{{aluno.qualidade_entregas}}</p>
-                        </div>
-                        <div>
-                            <p>Presença:</p>
-                            <p>{{aluno.presenca}}</p>
-                        </div>
-                        <div>
-                            <p>Entrega e Prazos:</p>
-                            <p>{{aluno.entrega_prazos}}</p>
-                        </div>
-                        <div>
-                            <p>Soma Total:</p>
-                            <p class="total-{{aluno.id}}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="5"  stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-circle animate-spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                            </p>
-                        </div>
+                <h3> Editar Aluno </h3>
+                <p id="current-aluno"></p>
+
+                <form id="editar-aluno-form" method="post" action="{% url 'feedbackApp:editAluno' %}">
+                    {% csrf_token %}
+                    <label for="nome-aluno">Nome</label>
+                    <input type="text" id="nome-aluno" name="nome" placeholder="Nome">
+                    <label for="email-aluno">Email</label>
+                    <input type="text" id="email-aluno" name="email" placeholder="email">
+                    <label for="matricula-aluno">Matrícula</label>
+                    <input type="text" id="matricula-aluno" name="matricula" placeholder="Matrícula">
+                    <input type="hidden" name="groupId" value="{{group.id}}">
+                    <input type="hidden" id="id-aluno" name="alunoId" value="{{group.id}}">
+                    
+                    <div>
+                        <button type="button" class="cancel">Cancelar</button>
+                        <button type="submit" class="save-edit">Salvar</button>
                     </div>
+                </form>
+            </div>
+        </div>
 
-                    {% if not forloop.last %}
-                        <hr>
-                    {% endif %}
-                {% endfor %}
+        <div class="modal-root">  
+            <div class="modal-fact">
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+                </button>
+                <h3>FaCT gerado</h3>
+                
+                <input type="text" disabled id="generated-fact">
+            </div>
+        </div>
+
+        <div class="modal-root">  
+            <div class="modal-import-fact">
+                <button class="close-modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> 
+                </button>
+
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="uploadfile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                        Selecione o arquivo Excel
+                        <label for="uploadfileInput"></label>
+                    </div>
+                    <input id="uploadfileInput" style="display: none;" type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="groupHeader">
+            <div>
+                <a href="{% url 'feedbackApp:root' %}" id="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                </a>
+                <h1 id="groupName" data-group-id="{{group.id}}">{{ group.nome }}</h1>
             </div>
 
-        {% endif %}
-    </main>
+            <div class="myGroupButtons">
+                <button id="exportButton">Exportar FACT</button>
+                <button id="upload-fact">Importar FACT</button>
+                <button id="generate-fact">Gerar FACT</button>
+                <a href="{% url 'feedbackApp:edit' id=group.id %}">Editar Grupo</a>
+            </div>
+        </div>
 
-    <div class="background"></div>
+        <div class="alunos-container">
+            <h2>Alunos</h2>
+            {% for aluno in alunos %}
+                <details class="accordions">
+                    <summary>
+                        {{aluno.nome}}
+                        <div id="summary-aluno-{{ forloop.counter0 }}">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="24" 
+                                height="24" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                stroke-width="2" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                class="lucide lucide-chevron-down"
+                            >
+                                <path d="m6 9 6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </summary>
+                    <div class="notas-aluno">
+                        <div class="notas">
+                            <h5>FaCT 1</h5>
+                            <p>{{aluno.sr1}}</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="notas">
+                            <h5>FaCT 2</h5>
+                            <p>{{aluno.sr2}}</p>
+                        </div>
+
+                        <hr>
+
+                        <div class="notas">
+                            <h5>Media Final</h5>
+                            <p>{{aluno.media}}</p>
+                        </div>
+                    </div>
+                    <div class="detalhesLowerButtons">
+                        <button 
+                            class="editarAluno"
+                            data-alunoid="{{aluno.id}}"
+                            data-nomealuno="{{aluno.nome}}"
+                            data-emailaluno="{{aluno.email}}"
+                            data-matriculaaluno="{{aluno.matricula}}"
+                        >
+                            Editar Aluno
+                        </button>
+                        <button class="maisDetalhes" data-alunoid="{{aluno.id}}">Mais detalhes</button>
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock %}
 
 {% block script %}
@@ -89,30 +166,140 @@
     <script>
         const upload = document.getElementById("uploadfileInput");
         const uploadLabel = document.getElementById("uploadfile");
+        const uploadFact = document.getElementById("upload-fact");
+
+        uploadFact?.addEventListener("click", () => {
+            const editarAluno = document.querySelectorAll(".modal-root")[2];
+
+            uploadLabel.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                        Selecione o arquivo Excel
+                        <label for="uploadfileInput"></label>`;
+
+            editarAluno.classList.add("active");
+        })
 
         upload?.addEventListener("change", (event) => {
-            const file = event.target.files[0];
+            const file=event.target.files[0];
             if(file) {
-                uploadLabel.innerHTML = `<p class="currentFile">${file.name}</p>`
+                uploadLabel.innerHTML=`<label class="currentFile" for="uploadfileInput">${file.name}</label>`
             }
         });
-        
-        window.addEventListener("load", async () => {
-            const res = await fetch("/app/group/action/{{group.pk}}");
-            const data = await res.json();
 
-            for(let aluno of data.alunos) {
-                const totalParagraph = document.getElementsByClassName(`total-${aluno.id}`);
-                
-                const somaTotal = aluno.pensamento_critico_criatividade
-                 + aluno.comunicacao
-                 + aluno.colaboracao
-                 + aluno.qualidade_entregas 
-                 + aluno.presenca 
-                 + aluno.entrega_prazos;
-                 
-                totalParagraph[0].textContent = somaTotal;
-            }
+        document.getElementById("exportButton")?.addEventListener("click", modalForExport);
+
+        function modalForExport(){
+            const modal=document.getElementsByClassName("export-modal");
+            modal[0].style.display="flex";
+        }
+
+        const cancelButton=document.getElementById("cancelExport");
+        cancelButton.addEventListener("click", fecharModal);
+        function fecharModal() {
+            const modals=document.getElementsByClassName("export-modal");
+            
+            modals[0].style.display="none";
+        }
+
+        let accordions=document.querySelectorAll(".accordions");
+        accordions.forEach((accordion, index) => {
+            accordion.addEventListener("toggle", () => {
+                let summaryIcon=document.getElementById(`summary-aluno-${index}`);
+
+                if(accordion.open) {
+                    summaryIcon.innerHTML=`
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        class="lucide lucide-chevron-up"
+                    >
+                        <path d="m18 15-6-6-6 6"/>
+                    </svg>`
+                }
+                else {
+                    summaryIcon.innerHTML=`
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        class="lucide lucide-chevron-down"
+                    >
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>`
+                }
+            })
         });
+
+
+        const editarAluno = document.querySelectorAll(".modal-root")[0];
+        const subTitleAlunoModal = document.getElementById("current-aluno");
+        const idAlunoModal = document.getElementById("id-aluno");
+        const nomeAlunoModal = document.getElementById("nome-aluno");
+        const emailAlunoModal = document.getElementById("email-aluno");
+        const matriculaAlunoModal = document.getElementById("matricula-aluno");
+        const enviarFact = document.querySelectorAll(".modal-root")[1];
+
+        document.querySelectorAll(".close-modal")?.forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".modal-root").forEach(modal => modal.classList.remove("active"));
+            })
+        });
+        document.querySelectorAll(".cancel")?.forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".modal-root").forEach(modal => modal.classList.remove("active"));
+            })
+        });
+
+        document.getElementById("cancelar-editar-aluno")?.addEventListener("click", () => {
+            editarAluno.classList.remove("active");
+        })
+
+        document.querySelectorAll(".editarAluno")?.forEach(btn => {
+            btn.addEventListener("click", () => {
+                editarAluno.classList.add("active");
+
+                subTitleAlunoModal.innerText = btn.dataset.nomealuno;
+                idAlunoModal.value = btn.dataset.alunoid;
+                nomeAlunoModal.value = btn.dataset.nomealuno;
+                emailAlunoModal.value = btn.dataset.emailaluno;
+                matriculaAlunoModal.value = btn.dataset.matriculaaluno;
+            });
+        });
+
+        const createFact = document.getElementById("generate-fact");
+
+        createFact?.addEventListener("click", async () => {
+            createFact.innerHTML = `<div class="animate-spin spinner"></div>`;
+            const factModal = document.querySelectorAll(".modal-root")[1];
+            const generatedFact = document.getElementById("generated-fact");
+            
+            const res = await fetch("{% url 'feedbackApp:createFact' groupId=group.id %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}"
+                }
+            });
+            
+            if(res.ok) {
+                factModal.classList.add("active");
+                generatedFact.value = (await res.json()).url
+            }
+
+            createFact.innerHTML = "Gerar FACT";
+
+        })
+       
     </script>
 {% endblock %}

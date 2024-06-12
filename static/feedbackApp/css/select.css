@@ -1,0 +1,33 @@
+:root {
+    --arrow-bg: rgba(255, 255, 255, 0.3);
+    --arrow-icon: url(https://www.svgrepo.com/show/80156/down-arrow.svg);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+select {
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 100%;
+    padding: .5rem;
+    padding-right: 2.3rem;
+    background: var(--arrow-icon) no-repeat right 0.5em center / 0.6em, white;
+    color: black;
+    border-radius: 0.25em;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+select option {
+    cursor: pointer;
+}
+
+select option:disabled {
+    color: grey;          /* Muda a cor do texto para cinza */
+    background-color: #e6e6e6; /* Muda a cor de fundo para um cinza mais claro */
+}

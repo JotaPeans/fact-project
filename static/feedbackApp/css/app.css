@@ -1,9 +1,12 @@
 :root {
+    --soft-blue: #4161D8;
     --blue: #1E46D9;
     --blueHover: #1c3ebb;
     --yellow: #F7B401;
     --yellowHover: #d69d00;
-    --red: #D72C00;
+    --red-200: #fecaca;
+    --red-300: #fca5a5;
+    --red-600: #dc2626;
     --redHover: #c02600;
     --beige: #F0EBE5;
     --beigeHover: #efe0ce;
@@ -11,20 +14,25 @@
     --blackHover: rgb(16, 16, 15);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 main {
     flex: 1 1 0%;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 2rem;
+    background-color: #F9F6F3;
 }
 
 .error {
     text-align: center;
     font-weight: 600;
     font-size: 0.8rem;
-    color: var(--red);
+    color: var(--red-600);
     margin: 1rem 0;
 }
 
@@ -43,6 +51,7 @@ main {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1rem;
+   /* overflow-y: auto; */
 }
 
 .container {
@@ -59,60 +68,246 @@ main {
     font-size: 2rem;
 }
 
-.group {
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 600;
-    width: auto;
-    height: 15rem;
-    background-color: var(--beigeHover);
-    padding: 1rem;
+.upperButtons{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    height: 48px;
+    padding-left: 1rem;
+ }
+
+#addGroup, #addStudent {
+    border: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    border-radius: 10px;
+    padding: 11.5px 19.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background-color: var(--soft-blue);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+#addGroup:hover, #addStudent:hover {
+    background-color: var(--blueHover);
+}
+
+.upload {
+    width: 100%;
+    border: 2px dashed rgba(0, 0, 0, 0.4);
+    color: rgb(156, 156, 156);
+    background-color: white;
+    border-radius: 0.8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: 200px;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    gap: 4px;
+    margin: 0.7rem auto;
+    padding: 4px;
+    border-radius: 0.7rem;
+}
+
+.tabs > button{
+    font-size: 20px;
+}
+
+.tab {
+    padding: 4px 8px;
+    border-radius: 0.25rem;
+    background: none;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+.tab.active {
+    background-color: var(--soft-blue);
+    color: white;
+    border-radius: 0.5rem;
+}
+
+#upload-excel, #add-manually {
+    display: none;
+}
+
+#upload-excel.active, #add-manually.active {
+    display: flex;
+}
+
+.currentFile {
+    border-radius: 0.5rem;
+    padding: 16px;
+    color: var(--black);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+#mensagemDeDelete{
+    display: none;
+}
+
+.group {
+    position: relative;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
     border-radius: 1rem;
 }
 
-.img {
+.group > div {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    max-height: 80%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0rem 1.2rem;
 }
 
-.img > img {
+.group > div > a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.group > div > p {
+    text-decoration: underline;
+}
+
+.img {
+    width: 100%;
+    min-width: 16rem;
+    display: flex;
+    justify-content: center;
+    background-color: #EBE2D8;
+    border-radius: 1rem;
+}
+
+.img >  img {
     height: 100%;
     object-fit: cover;
 }
 
-.group > p {
+.group > div > p {
     font-size: 1.2rem;
 }
 
-#addGroup {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popover-container {
+    right: 1rem;
+    bottom: 1rem;
+}
+
+.popover-trigger {
     border: none;
-    max-width: fit-content;
-    max-height: fit-content;
-    border-radius: 1rem;
+    background: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--blue);
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
+    justify-content: center;
     transition: all 150ms ease-in-out;
+    border-radius: 0.5rem;
+    z-index: 50;
 }
 
-#addGroup:hover {
-    background-color: var(--blueHover);
+.popover-content {
+    position: absolute;
+    min-width: 9.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 0.7rem;
+    background-color: #F0EBE5;
+    border: 0.1rem solid #B9AD9E;
+    padding: 4px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.35);
+    transition: all 150ms ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
 }
 
+.popover-content.active {
+    opacity: 1;
+    pointer-events: all;
+}
 
-.temBorda{
-    border: 2px solid white;
-    border-radius: 5%;
+.popover-content > h3 {
+    font-size: 1.1rem;
+    margin: 0.3rem 0;
+    margin-left: 0.8rem;
+    font-weight: 500;
+}
+
+.popover-content > hr {
+    margin: 0 -4px;
+    border: 0.05rem solid #B9AD9E;
+}
+
+.popover-button {
+    color: black;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    background: none;
+    padding: 4px;
+    height: 32px;
+    border-radius: 0.5rem;
+    gap: 0.5rem;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.delete {
+    color: var(--red-600);
+}
+
+.delete:hover {
+    background-color: var(--red-200);
+    color: var(--red-600);
+}
+
+.gerenciar:hover {
+    background-color: rgb(221, 211, 198);
+}
+
+.gerenciar > svg, .delete > svg {
+    width: 18px;
 }

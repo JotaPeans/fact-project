@@ -14,9 +14,15 @@
         
         <form method="POST">
             {% csrf_token %}
-            <input placeholder="Usuário" type="text" name="username">
-            <input placeholder="Senha" type="password" name="password">
-            <button>Sign in</button>
+            <div class='login'>
+                <h2>E-mail</h2>
+                <input placeholder="Digite seu e-mail" type="text" name="username">
+            </div>    
+            <div class='password'>
+                <h2>Senha</h2>
+                <input placeholder="Digite sua senha" type="password" name="password">
+            </div>    
+            <button>Entrar</button>
         </form>
 
         {% if messages %}
