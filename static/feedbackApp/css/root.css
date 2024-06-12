@@ -82,11 +82,17 @@ aside > div {
     gap: 1rem;
 }
 
-aside > div > p {
+.email {
+    font-size: 14px;
+    color: rgb(190, 190, 190);
+}
+
+.user {
     text-transform: capitalize;
     font-size: 1.5rem;
     color: white;
 }
+
 
 .logout {
     padding: 0.5rem 1rem;

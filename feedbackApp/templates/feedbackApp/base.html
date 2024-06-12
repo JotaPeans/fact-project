@@ -30,7 +30,8 @@
         <aside>
             <div id = "usuario">
                 <img class = "temBorda" src="{% static 'images/imagem_padrao.png' %}" height="150" width = "150" alt="FACT">
-                <p>{{user}}</p>
+                <p class="user">{{user}}</p>
+                <p class="email">{{user.email}}</p>
             </div>
     
             <a class="logout" href="{% url 'feedbackApp:logout' %}">

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
 
-from .create_fact import create_fact
+from .create_fact import Fact as FactClass
 from .models import Aluno, Grupo, Fact
 from .get_fact_grade import getMediaAluno, transformNotasToObject
 from .get_students_excel import getStudents
@@ -375,14 +375,20 @@ class FactCreate(View):
             alunos = list(grupo.alunos.all())
 
             alunos_nomes = [aluno.nome for aluno in alunos]
-            alunos_emails = [f"{aluno.email}.test" for aluno in alunos]
+            alunos_emails = [aluno.email for aluno in alunos]
 
-            fact_url = create_fact(email_address=req.user.email, alunos=alunos_nomes, emails=alunos_emails)
+            fact = FactClass()
 
-            return JsonResponse({ "url": fact_url })
+            fact = fact.create_fact(email_address=req.user.email, alunos=alunos_nomes, emails=alunos_emails)
+
+            if(fact["error"] == None):
+                return JsonResponse({ "url": fact["formUrl"] })
+            
+            else:
+                raise Exception(fact["error"])
 
         except Exception as e:
-            return JsonResponse({ "message": f"Erro {e}" }, status=400)
+            return JsonResponse({ "message": f"Erro: {e}" }, status=400)
 
 
 def getAlunos(req, id):

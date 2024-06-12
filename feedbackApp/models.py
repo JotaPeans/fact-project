@@ -37,5 +37,6 @@ class Fact(models.Model):
     def __str__(self) -> str:
         return self.nome + " - " + self.aluno.nome
     
+
 class GoogleCredentials(models.Model):
     credetinals = models.CharField(max_length=3000)

@@ -601,7 +601,7 @@ button{
 }
 
 
-.enviar-fact {
+.modal-fact {
     position: relative;
     width: 30rem;
     background-color: var(--beige);
@@ -612,49 +612,16 @@ button{
     gap: 1rem;
 }
 
-.enviar-fact > h1{
-    font-size: 24px;
-    font-weight: 600;
+.modal-fact > h3 {
+    color: var(--black);
 }
 
-.enviar-fact > div {
+#generated-fact {
     width: 100%;
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 1rem;
-}
-
-.cancel-edit {
-    background: var(--cream);
-    color: var(--black);;
-    cursor: pointer;
+    margin-bottom: .5rem;
+    padding: .5rem;
+    border-radius: .5rem;
     border: none;
-    padding: 0.6rem;
-    width: auto;
-    max-width: fit-content;
-    height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    font-size: 1rem;
-    position: static;
-    margin-left: 0px;
-}
-
-#confirmFact {
-    background: var(--blue);
-    display: flex;
-    color: white;
-    cursor: pointer;
-    border: none;
-    padding: 0.6rem 1rem;
-    width: auto;
-    max-width: fit-content;
-    margin-left: auto;
-    height: auto;
-    border-radius: 0.5rem;
-    transition: all 150ms ease-in-out;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    font-size: 1rem;
+    box-shadow: 0 0 2px rgba(100, 100, 100, 0.5);
+    cursor: text;
 }
