@@ -175,9 +175,17 @@ A aplicação é:
 
   ### <a target="_blank">https://youtu.be/k-KTijuDLMM</a>
 
-  ## ScreenCast do Deploy
+  ## ScreenCast do Sistema
 
   ### <a target="_blank">https://youtu.be/fPVJWMufm_I</a>
+
+  ## Screencast do Deploy com Testes
+  
+  ### [https://drive.google.com/drive/folders/15xN0_X2mePfPMHaE6fi3v82dqcyCLZj5](https://drive.google.com/file/d/1iMm9DEYtP3aDLJV-_d9NUH6yu1K7Crap/view?usp=sharing)
+
+  ## Screencast dos Testes
+
+  ### https://drive.google.com/file/d/1R-nWSZPN0T_mzxFcKWgr9jeHRR1e2jT-/view?usp=sharing
   
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
