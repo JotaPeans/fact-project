@@ -12,7 +12,7 @@
 
 
 Nós, do grupo VERTEX, apresentamos o FaCT: Uma solução web inovadora para avaliação e feedback contínuos. 📊📈
-
+test
 
 A aplicação é:
 
