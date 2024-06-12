@@ -23,6 +23,8 @@ describe('Criar Formulário FaCT', () => {
 
     cy.get('#generate-fact').click()
 
+    cy.get('#confirmFact').click()
+
     cy.get('header > a').then(($link) => {
       if ($link.length) {
           cy.wrap($link).click();
