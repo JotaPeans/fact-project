@@ -169,6 +169,15 @@ A aplicação é:
 
 <details>
   <summary><h1>Segunda Entrega 📦</h1></summary>
+
+
+  ## ScreenCast Protótipo De Média
+
+  ### <a target="_blank">https://youtu.be/k-KTijuDLMM</a>
+
+  ## ScreenCast do Deploy
+
+  ### <a target="_blank">https://youtu.be/fPVJWMufm_I</a>
   
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
