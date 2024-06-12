@@ -3,18 +3,6 @@ from google.oauth2 import service_account
 from .models import GoogleCredentials
 import json
 
-SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
-SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
-
-CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
-
-credentials_forms = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_FORMS)
-credentials_drive = service_account.Credentials.from_service_account_info(info=CREDENTIALS_JSON, scopes=SCOPES_DRIVE)
-
-service = build("forms", "v1", credentials=credentials_forms)
-
-drive_service = build("drive", "v3", credentials=credentials_drive)
-
 # Acessar https://console.developers.google.com/apis/api/forms.googleapis.com/overview para ativar a api do forms caso esteja desativada
 # Acessar https://console.developers.google.com/apis/api/drive.googleapis.com/overview para ativar a api do drive caso esteja desativada
 
@@ -69,204 +57,213 @@ title_images = [
     },
 ]
 
-def create_new_form() -> str:
-    form = {
-        "info": {
-            "title": "FACT - Fator de Contribuição Técnica",
-        },
-    }
-    created_form = service.forms().create(body=form).execute()
 
-    formId = created_form["formId"]
+class Fact():
+    def __init__(self) -> None:
+        self.SCOPES_FORMS = ["https://www.googleapis.com/auth/forms.body"]
+        self.SCOPES_DRIVE = ["https://www.googleapis.com/auth/drive"]
 
-    return formId
+        self.CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
 
+        self.credentials_forms = service_account.Credentials.from_service_account_info(info=self.CREDENTIALS_JSON, scopes=self.SCOPES_FORMS)
+        self.credentials_drive = service_account.Credentials.from_service_account_info(info=self.CREDENTIALS_JSON, scopes=self.SCOPES_DRIVE)
 
-def add_permission(formId: str, email_address: str):
-    permission = {
-        "type": "user",
-        "role": "writer",
-        "emailAddress": email_address
-    }
+        self.service = build("forms", "v1", credentials=self.credentials_forms)
 
-    try:
-        drive_service.permissions().create(
-            fileId=formId,
-            body=permission,
-            fields="id"
-        ).execute()
-
-    except Exception as e:
-        print("error: ", e)
+        self.drive_service = build("drive", "v3", credentials=self.credentials_drive)
 
 
-def update_form(formId, lista_perguntas):
-    updates = {
-        "requests": lista_perguntas,
-    }
 
-    service.forms().batchUpdate(formId=formId, body=updates).execute()
-
-    URL = f"https://docs.google.com/forms/d/{formId}"
-
-    print(f"URL form: {URL}")
-
-    return URL
-
-
-def create_item(title, aluno, image, count):
-    if(image):
-        return {
-            "createItem": {
-                "item": {
-                    "title": f"{title} ({aluno})",
-                    "questionItem": {
-                        "question": {
-                            "required": True,
-                            "textQuestion": {
-                                "paragraph": False
-                            }
-                        },
-                        "image": {
-                            "sourceUri": image
-                        }
-                    }
-                },
-                "location": {
-                    "index": count
-                }
-            },
-        }
-    else:
-        return {
-            "createItem": {
-                "item": {
-                    "title": f"{title} ({aluno})",
-                    "questionItem": {
-                        "question": {
-                            "required": True,
-                            "textQuestion": {
-                                "paragraph": False
-                            }
-                        }
-                    }
-                },
-                "location": {
-                    "index": count
-                }
-            },
-        }
-    
-
-def create_select_name_section(formId, alunos, emails):
-    updates = {
-        "requests": [
-            {
-                "createItem": {
-                    "item": {
-                        "title": "Selecione seu NOME",
-                        "questionItem": {
-                            "question": {
-                                "required": True,
-                                "choiceQuestion": {
-                                    "type": "RADIO",
-                                    "options": [{"value": aluno} for aluno in alunos],
-                                    "shuffle": False
-                                }
-                            }
-                        }
-                    },
-                    "location": {
-                        "index": 0
-                    }
-                },
-            },
-            {
-                "createItem": {
-                    "item": {
-                        "title": "Selecione seu EMAIL",
-                        "questionItem": {
-                            "question": {
-                                "required": True,
-                                "choiceQuestion": {
-                                    "type": "RADIO",
-                                    "options": [{"value": email} for email in emails],
-                                    "shuffle": False
-                                }
-                            }
-                        }
-                    },
-                    "location": {
-                        "index": 1
-                    }
-                },
-            },
-        ]
-    }
-
-    service.forms().batchUpdate(formId=formId, body=updates).execute()
-
-
-def create_page_break(title, count):
-    return {
-        "createItem": {
-            "item": {
-                "title": title,
-                "pageBreakItem": {},
-            },
-            "location": {
-                "index": count
-            }
-        }
-    }
-
-
-def update_form_info():
-    return {
-        "updateFormInfo": {
+    def create_new_form(self) -> str:
+        form = {
             "info": {
                 "title": "FACT - Fator de Contribuição Técnica",
-                "description": descricao_fact
             },
-            "updateMask": "*"
         }
-    }
+        created_form = self.service.forms().create(body=form).execute()
+
+        formId = created_form["formId"]
+
+        return formId
 
 
-def create_fact(email_address, alunos, emails):
-    formId = create_new_form()
-    add_permission(formId=formId, email_address=email_address)
-    create_select_name_section(formId, alunos, emails)
+    def add_permission(self, formId: str, email_address: str):
+        permission = {
+            "type": "user",
+            "role": "writer",
+            "emailAddress": email_address
+        }
 
-    alunos_ordenados = sorted(alunos, key=lambda nome: nome, reverse=True)
+        try:
+            self.drive_service.permissions().create(
+                fileId=formId,
+                body=permission,
+                fields="id"
+            ).execute()
 
-    lista_perguntas = [] 
+        except Exception as e:
+            print("error: ", e)
 
-    for aluno in alunos_ordenados:
-        count = 2
 
-        lista_perguntas.append(update_form_info())
+    def update_form(self, formId, lista_perguntas):
+        updates = {
+            "requests": lista_perguntas,
+        }
 
-        lista_perguntas.append(create_page_break(count=count, title=aluno))
-        count += 1
+        self.service.forms().batchUpdate(formId=formId, body=updates).execute()
 
-        for title_images_index in range(7):
-            question_item = create_item(
-                aluno=aluno, 
-                count=count, 
-                title=title_images[title_images_index]["title"], 
-                image=title_images[title_images_index]["image"]
-            )
-            
-            lista_perguntas.append(question_item)
+        URL = f"https://docs.google.com/forms/d/{formId}"
+
+        print(f"URL form: {URL}")
+
+        return URL
+
+
+    def create_item(title, aluno, image, count):
+        if(image):
+            return {
+                "createItem": {
+                    "item": {
+                        "title": f"{title} ({aluno})",
+                        "questionItem": {
+                            "question": {
+                                "required": True,
+                                "textQuestion": {
+                                    "paragraph": False
+                                }
+                            },
+                            "image": {
+                                "sourceUri": image
+                            }
+                        }
+                    },
+                    "location": {
+                        "index": count
+                    }
+                },
+            }
+        else:
+            return {
+                "createItem": {
+                    "item": {
+                        "title": f"{title} ({aluno})",
+                        "questionItem": {
+                            "question": {
+                                "required": True,
+                                "textQuestion": {
+                                    "paragraph": False
+                                }
+                            }
+                        }
+                    },
+                    "location": {
+                        "index": count
+                    }
+                },
+            }
+        
+
+    def create_select_name_section(self, formId, alunos, emails):
+        updates = {
+            "requests": [
+                {
+                    "createItem": {
+                        "item": {
+                            "title": "Selecione seu NOME",
+                            "questionItem": {
+                                "question": {
+                                    "required": True,
+                                    "choiceQuestion": {
+                                        "type": "RADIO",
+                                        "options": [{"value": aluno} for aluno in alunos],
+                                        "shuffle": False
+                                    }
+                                }
+                            }
+                        },
+                        "location": {
+                            "index": 0
+                        }
+                    },
+                },
+                {
+                    "createItem": {
+                        "item": {
+                            "title": "Selecione seu EMAIL",
+                            "questionItem": {
+                                "question": {
+                                    "required": True,
+                                    "choiceQuestion": {
+                                        "type": "RADIO",
+                                        "options": [{"value": email} for email in emails],
+                                        "shuffle": False
+                                    }
+                                }
+                            }
+                        },
+                        "location": {
+                            "index": 1
+                        }
+                    },
+                },
+            ]
+        }
+
+        self.service.forms().batchUpdate(formId=formId, body=updates).execute()
+
+
+    def create_page_break(self, title, count):
+        return {
+            "createItem": {
+                "item": {
+                    "title": title,
+                    "pageBreakItem": {},
+                },
+                "location": {
+                    "index": count
+                }
+            }
+        }
+
+
+    def update_form_info(self):
+        return {
+            "updateFormInfo": {
+                "info": {
+                    "title": "FACT - Fator de Contribuição Técnica",
+                    "description": descricao_fact
+                },
+                "updateMask": "*"
+            }
+        }
+
+
+    def create_fact(self, email_address, alunos, emails):
+        formId = self.create_new_form()
+        self.add_permission(formId=formId, email_address=email_address)
+        self.create_select_name_section(formId, alunos, emails)
+
+        alunos_ordenados = sorted(alunos, key=lambda nome: nome, reverse=True)
+
+        lista_perguntas = [] 
+
+        for aluno in alunos_ordenados:
+            count = 2
+
+            lista_perguntas.append(self.update_form_info())
+
+            lista_perguntas.append(self.create_page_break(count=count, title=aluno))
             count += 1
 
-    return update_form(formId, lista_perguntas)
+            for title_images_index in range(7):
+                question_item = self.create_item(
+                    aluno=aluno, 
+                    count=count, 
+                    title=title_images[title_images_index]["title"], 
+                    image=title_images[title_images_index]["image"]
+                )
+                
+                lista_perguntas.append(question_item)
+                count += 1
 
-
-if __name__ == "__main__":
-    alunos = ["ADRIANA SOUZA LIMA","ALBERTO CARVALHO SANTOS","ALESSANDRA PEREIRA SILVA","ALEXANDRE COSTA BARBOSA","ALICE FERREIRA GOMES","AMANDA ALVES RIBEIRO","ANA BEATRIZ CASTRO OLIVEIRA","ANA CAROLINA MORAES ROCHA","ANDRÉ LUIZ CARDOSO ALMEIDA","ANTÔNIO CARLOS BATISTA MARTINS","ARIANE CUNHA MELO","BRUNA SOUZA SANTOS","BRUNO HENRIQUE LIMA FERREIRA"]
-
-    emails = ["ADRIANA SOUZA LIMA","ALBERTO CARVALHO SANTOS","ALESSANDRA PEREIRA SILVA","ALEXANDRE COSTA BARBOSA","ALICE FERREIRA GOMES","AMANDA ALVES RIBEIRO","ANA BEATRIZ CASTRO OLIVEIRA","ANA CAROLINA MORAES ROCHA","ANDRÉ LUIZ CARDOSO ALMEIDA","ANTÔNIO CARLOS BATISTA MARTINS","ARIANE CUNHA MELO","BRUNA SOUZA SANTOS","BRUNO HENRIQUE LIMA FERREIRA"]
-
-    create_fact(email_address="jpff2@cesar.school", alunos=alunos, emails=emails)
+        return self.update_form(formId, lista_perguntas)
