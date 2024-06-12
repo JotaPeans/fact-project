@@ -195,6 +195,10 @@ A aplicação é:
 
    ![Diagrama de atividades SR2 - VERTEX drawio (2)](https://github.com/JotaPeans/fact-project/assets/133816986/db2ba600-f607-4d26-a326-07add17bdfe7)
 
+
+ ## Sketches e Storyboards 
+   https://www.figma.com/design/uUFHPt8xAba5tI6qO66xWF/PROT%C3%93TIPO-TELAS?node-id=448-540&t=2yFapGHWbtUNvWw7-1
+
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
    <details>
