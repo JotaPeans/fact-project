@@ -25,7 +25,7 @@ describe('Criar Formulário FaCT', () => {
 
     cy.wait(20000)
 
-    cy.get('.close-modal').click({ multiple: true })
+    cy.get('.close-modal').click({ multiple: true, force: true })
 
     cy.get('header > a').then(($link) => {
       if ($link.length) {

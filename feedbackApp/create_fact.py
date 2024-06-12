@@ -187,13 +187,13 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                 {
                     "createItem": {
                         "item": {
-                            "title": "Selecione seu NOME",
+                            "title": "Endereço de e-mail",
                             "questionItem": {
                                 "question": {
                                     "required": True,
                                     "choiceQuestion": {
                                         "type": "RADIO",
-                                        "options": [{"value": aluno} for aluno in alunos],
+                                        "options": [{"value": email} for email in emails],
                                         "shuffle": False
                                     }
                                 }
@@ -207,13 +207,13 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                 {
                     "createItem": {
                         "item": {
-                            "title": "Selecione seu EMAIL",
+                            "title": "Nome completo",
                             "questionItem": {
                                 "question": {
                                     "required": True,
                                     "choiceQuestion": {
                                         "type": "RADIO",
-                                        "options": [{"value": email} for email in emails],
+                                        "options": [{"value": aluno} for aluno in alunos],
                                         "shuffle": False
                                     }
                                 }
@@ -223,7 +223,7 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                             "index": 1
                         }
                     },
-                },
+                }
             ]
         }
 
