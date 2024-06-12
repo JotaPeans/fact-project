@@ -18,5 +18,6 @@ urlpatterns = [
 
     path("fact/create/<int:groupId>", views.FactCreate.as_view(), name="createFact"),
 
+    path("populate", views.populate, name="populate"),
     path("logout/", views.logoutFunction, name="logout"),
 ]

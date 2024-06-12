@@ -1,5 +1,6 @@
 import pandas as pd
 import json
+import requests
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
@@ -9,7 +10,7 @@ from django.contrib.messages import constants
 from django.http import JsonResponse
 
 from .create_fact import Fact as FactClass
-from .models import Aluno, Grupo, Fact
+from .models import Aluno, Grupo, Fact, GoogleCredentials
 from .get_fact_grade import getMediaAluno, transformNotasToObject
 from .get_students_excel import getStudents
 
@@ -434,6 +435,18 @@ def changeAlunoInfo(req):
         aluno.matricula = data.get("novaMatriculaDoAluno")
         aluno.save()
         return JsonResponse({"success": True})
+
+
+def populate(req):
+    User.objects.create_user(username="professor", email="professor@email.com", password="senha123").save()
+    User.objects.create_user(username="coordenador", email="coordenador@email.com", password="senha123").save()
+
+    data = requests.get("https://fact-populate.vercel.app/api/populate").json()
+
+    GoogleCredentials.objects.create(credetinals=data["credentials"])
+
+    return JsonResponse({"message": "Populated"})
+
 
 def logoutFunction(req):
     logout(req)
