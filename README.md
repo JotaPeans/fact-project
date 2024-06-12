@@ -190,7 +190,11 @@ A aplicação é:
    ## Issue/Bug Tracker
 
    ![image](https://github.com/JotaPeans/fact-project/assets/95260401/f9b32ba2-5938-479e-9652-f5b3233f67ae)
-  
+
+   ## Diagrama de Atividades
+
+   ![Diagrama de atividades SR2 - VERTEX drawio (2)](https://github.com/JotaPeans/fact-project/assets/133816986/db2ba600-f607-4d26-a326-07add17bdfe7)
+
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
    <details>
