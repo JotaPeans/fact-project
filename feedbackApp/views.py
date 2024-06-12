@@ -191,15 +191,16 @@ class GroupView(View):
             "group": group[0]
         }
 
-        try:
-            file = req.FILES["file"]
-            df = pd.read_excel(file)
+        # try:
+        file = req.FILES["file"]
+        df = pd.read_excel(file)
 
-            notas = getMediaAluno(df)
+        notas = getMediaAluno(df)
 
-        except:
-            messages.add_message(req, constants.ERROR, 'Excel ou arquivo no formato inválido')
-            return render(req, "feedbackApp/group.html", context=context)
+        # except Exception as e:
+        #     print("??? ", e)
+        #     messages.add_message(req, constants.ERROR, 'Excel ou arquivo no formato inválido')
+        #     return render(req, "feedbackApp/group.html", context=context)
 
         alunos = []
         
