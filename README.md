@@ -186,6 +186,10 @@ A aplicação é:
   ## Screencast dos Testes
 
   ### https://drive.google.com/file/d/1R-nWSZPN0T_mzxFcKWgr9jeHRR1e2jT-/view?usp=sharing
+
+   ## Issue/Bug Tracker
+
+   ![image](https://github.com/JotaPeans/fact-project/assets/95260401/f9b32ba2-5938-479e-9652-f5b3233f67ae)
   
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
