@@ -438,6 +438,7 @@ def changeAlunoInfo(req):
 
 
 def populate(req):
+    # Verificar o ambiente, se for prod, nao permitir essa requisição
     User.objects.create_user(username="professor", email="professor@email.com", password="senha123").save()
     User.objects.create_user(username="coordenador", email="coordenador@email.com", password="senha123").save()
 

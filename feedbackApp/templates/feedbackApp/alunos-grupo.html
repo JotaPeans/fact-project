@@ -172,6 +172,13 @@
                     }
                 })
             });
+            optionsDesign.forEach(option => {
+                selectedDesign.forEach(selected => {
+                    if(selected === option.value) {
+                        option.disabled = true;
+                    }
+                })
+            });
         }
 
         document.getElementsByClassName("confirm")[0].addEventListener("click", pushStudentsToGroup)

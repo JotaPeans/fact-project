@@ -50,8 +50,8 @@ button{
 
 .close-modal {
     position: absolute;
-    right: 8px;
-    top: 8px;
+    right: 16px;
+    top: 12px;
 }
 
 .modal-root.active {
@@ -63,7 +63,6 @@ button{
     z-index: 99999;
     pointer-events: all;
     background-color: #181818b0;
-    backdrop-filter: blur(0.5rem);
     opacity: 1;
 }
 
@@ -182,13 +181,14 @@ button{
     margin-bottom: 0.4rem;
 }
 
-.add-student-container{
+.add-student-container {
     width: 100%;
     display: flex;
-    justify-content: space-around;
-    gap: 10rem;
-    margin-top: 0.4rem
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.4rem;
 }
+
 
 #canceleButton{
     background: var(--cream);
