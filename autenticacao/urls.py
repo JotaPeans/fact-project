@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'autenticacao'
 urlpatterns = [
-    path('', views.SignIn.as_view(), name="root") # não precisamos de signup por agora. Pretendemos fzr registro com superuser
+    path('auth/user/create', views.SignUp.as_view(), name="root"),
+    path('auth/user', views.User.as_view(), name="root"),
 ]

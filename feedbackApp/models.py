@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from autenticacao.models import CustomUser
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=200)
@@ -14,8 +14,8 @@ class Aluno(models.Model):
 class Grupo(models.Model):
     nome = models.CharField(max_length=200)  
     alunos = models.ManyToManyField(Aluno, related_name='grupos')
-    professor = models.ForeignKey(User, on_delete=models.CASCADE)
-    sharedToProfessor = models.ManyToManyField(User, related_name='professoresAdmins')
+    professor = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    sharedToProfessor = models.ManyToManyField(CustomUser, related_name='professoresAdmins')
     image = models.CharField(max_length=200, default = 'a')
 
     def __str__(self) -> str:

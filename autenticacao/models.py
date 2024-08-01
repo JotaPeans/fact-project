@@ -1,3 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+class CustomUser(AbstractUser):
+    providerId = models.CharField(max_length=200)
+    image = models.CharField(max_length=2000)
+    role = models.CharField(max_length=15)
