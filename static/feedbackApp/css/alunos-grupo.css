@@ -116,6 +116,7 @@ h3{
 .options {
     display: flex;
     gap: 1rem;
+    justify-content: end;
 }
 
 .options > a, .options > button {

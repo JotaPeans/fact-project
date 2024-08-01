@@ -10,13 +10,13 @@
     <img id="logo" src="{% static 'images/factLogo.png' %}" alt="background">
     
     <div class="container-login">
-        <h1>Login</h1>
+        <h1 style="font-weight:bold ">Login</h1>
         
         <form method="POST">
             {% csrf_token %}
             <div class='login'>
-                <h2>E-mail</h2>
-                <input placeholder="Digite seu e-mail" type="text" name="username">
+                <h2>Login</h2>
+                <input placeholder="Digite seu login" type="text" name="username">
             </div>    
             <div class='password'>
                 <h2>Senha</h2>

@@ -54,52 +54,52 @@ A aplicação é:
 
     ## Validações
       
-    - **História 1**: Criar um Grupo  <br/>
+    - **História 1**: Criar um Grupo <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu importo uma planilha com as informações dos alunos participantes do gurpo,
                                    Então o novo grupo deve ser adicionado à lista de grupos e uma mensagem de confirmação deve ser exibida.
 
-    - **História 2**: Importar Planilha <br/> 
+    - **História 2**: Importar Planilha <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/> 
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono a opção de importar planilhas, faço o upload do arquivo correto e confirmo a importação,
                                    Então os dados da planilha devem ser importados e atualizados no sistema, e uma mensagem de confirmação deve ser exibida. 
 
-    - **História 3**: Visualizar Informações de Grupo <br/>
+    - **História 3**: Visualizar Informações de Grupo <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu clico no nome de um grupo na lista de grupos,
                                    Então eu devo ser redirecionado para a página desse grupo específico, onde posso ver detalhes e gerenciar o grupo.
 
-    - **História 4**: Adicionar um Aluno <br/>
+    - **História 4**: Adicionar um Aluno <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu preencho os dados do aluno e clico no botão de criar aluno,
                                    Então o novo aluno deve ser adicionado à lista de alunos e uma mensagem de confirmação deve ser exibida. 
 
-    - **História 5**: Excluir um Aluno <br/>
+    - **História 5**: Excluir um Aluno <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para gerenciar alunos em um grupo,
                                    Quando eu acesso a lista de alunos do grupo, seleciono o aluno que desejo excluir e clico na opção de excluir,
                                    Então o aluno deve ser removido da lista de alunos do grupo e uma mensagem de confirmação deve ser exibida.
         
-    - **História 6**: Adicionar outros usuários professor para gerenciar o grupo <br/>
+    - **História 6**: Adicionar outros usuários professor para gerenciar o grupo <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
        - **Validação de história**: Dado que eu sou um usuário professor autenticado e tenho permissões de administrador do grupo,
                                     Quando eu seleciono a opção de adicionar professor, insiro os detalhes do novo professor e confirmo,
                                     Então o novo professor deve ser adicionado à lista de administradores do grupo e uma notificação de sucesso deve ser exibida.
          
-    - **História 7**: Excluir grupos existentes <br/>
+    - **História 7**: Excluir grupos existentes <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário autenticado com permissões para excluir grupos,
                                    Quando eu seleciono um grupo existente e clico na opção de excluir,
                                    Então o grupo deve ser removido da lista de grupos.
         
-    - **História 8**: Mudar qualquer informação relacionada aos alunos <br/>
+    - **História 8**: Mudar qualquer informação relacionada aos alunos <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono um aluno, edito as informações desejadas e salvo as alterações,
                                    Então as novas informações do aluno devem ser atualizadas no sistema e uma mensagem de confirmação deve ser exibida.
         
-    - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <br/>
+    - **História 9**: Criar um formulário de avaliação para cada grupo automaticamente <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
       - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono a opção de criar um formulário de avaliação e confirmo a criação para cada grupo,
                                    Então um formulário de avaliação deve ser gerado automaticamente para cada grupo e uma mensagem de confirmação deve ser exibida.
         
-    - **História 10**: Adicionar um aluno novo manualmente ao grupo <br/>
+    - **História 10**: Adicionar um aluno novo manualmente ao grupo <img alt="Static Badge" src="https://img.shields.io/badge/Deployed-green"> <br/>
          - **Validação de história**: Dado que eu sou um usuário professor autenticado,
                                    Quando eu seleciono um grupo, insiro os detalhes do novo aluno e confirmo a adição,
                                    Então o aluno deve ser adicionado à lista de alunos do grupo selecionado e uma mensagem de confirmação deve ser exibida.
@@ -169,7 +169,36 @@ A aplicação é:
 
 <details>
   <summary><h1>Segunda Entrega 📦</h1></summary>
+
+
+  ## ScreenCast Protótipo De Média
+
+  ### <a target="_blank">https://youtu.be/k-KTijuDLMM</a>
+
+  ## ScreenCast do Sistema
+
+  ### <a target="_blank">https://youtu.be/fPVJWMufm_I</a>
+
+  ## Screencast do Deploy com Testes
   
+  ### [https://drive.google.com/drive/folders/15xN0_X2mePfPMHaE6fi3v82dqcyCLZj5](https://drive.google.com/file/d/1iMm9DEYtP3aDLJV-_d9NUH6yu1K7Crap/view?usp=sharing)
+
+  ## Screencast dos Testes
+
+  ### https://drive.google.com/file/d/1R-nWSZPN0T_mzxFcKWgr9jeHRR1e2jT-/view?usp=sharing
+
+   ## Issue/Bug Tracker
+
+   ![image](https://github.com/JotaPeans/fact-project/assets/95260401/f9b32ba2-5938-479e-9652-f5b3233f67ae)
+
+   ## Diagrama de Atividades
+
+   ![Diagrama de atividades SR2 - VERTEX drawio (2)](https://github.com/JotaPeans/fact-project/assets/133816986/db2ba600-f607-4d26-a326-07add17bdfe7)
+
+
+ ## Sketches e Storyboards 
+   https://www.figma.com/design/uUFHPt8xAba5tI6qO66xWF/PROT%C3%93TIPO-TELAS?node-id=448-540&t=2yFapGHWbtUNvWw7-1
+
   <details>
      <summary><h3>Relatos Pair Programing</h3></summary>
    <details>
@@ -223,6 +252,16 @@ A aplicação é:
 
    **Conclusão**: A estratégia de pair programming se mostrou extremamente valiosa, melhorando não apenas a qualidade técnica do desenvolvimento, mas também a colaboração entre João Pedro e Leonardo. A metodologia promoveu uma comunicação efetiva e permitiu que ambos os desenvolvedores compartilhassem conhecimentos, resultando em uma solução mais robusta e confiável.
    </details>
+  </details>
+</details>
+<details>
+     <summary><h1>Próximos Passos 💡</h1></summary>
+     
+   ## Nosso Futuro
+   
+   Nosso projeto tem uma previsão de um ano para sua completude. Nos primeiros 6 meses, tivemos nosso foco direcionado aos professores que utilizam o Fact como método avaliativo. Esse período foi essencial para garantir que a ferramenta atendesse às necessidades dos educadores, promovendo transparência e objetividade nas avaliações, acompanhando o desenvolvimento de competências dos alunos e fomentando um ambiente de feedback construtivo.</p>
+   Agora, nos próximos 6 meses, estamos nos dedicando a expandir nossa plataforma para incluir uma área dedicada aos alunos. Com isso, buscamos proporcionar uma experiência completa, onde os alunos possam tanto avaliar quanto serem avaliados, incentivando a autogestão e o autoaprimoramento. Essa nova fase visa integrar os alunos de maneira mais ativa no processo avaliativo, utilizando dados para decisões mais precisas e fomentando uma cultura de excelência e melhoria contínua.</p>
+   Com a completude de um ano de projeto, desejamos continuar trabalhando nele, melhorando o que já foi implementado e nos preparando para entrar no mundo dos negócios. É importante ressaltar que a entrada do Fact na área de trabalho acontecerá apenas após o primeiro ano, quando nosso objetivo inicial estiver completo. Desde o início, deixamos claro que a transição para o mercado de trabalho (na área business) só ocorrerá após a conclusão de todo o cronograma inicial. Assim, garantimos que a ferramenta estará completamente desenvolvida e pronta para atender às novas demandas. Nosso próximo passo será migrar o Fact para o setor empresarial. A aplicação se tornará uma ferramenta valiosa para avaliação e desenvolvimento de equipes no mercado de trabalho. Facilitaremos a avaliação dos superiores e a troca de feedback entre os próprios funcionários, promovendo um ambiente de transparência, crescimento profissional e tomada de decisões baseadas em dados. Com isso, o Fact não apenas acompanhará o desenvolvimento de competências, mas também incentivará uma cultura de excelência e melhoria contínua em diversos contextos, desde a educação até o ambiente corporativo.</p>
   </details>
 </details>
 
