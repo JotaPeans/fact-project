@@ -1,34 +1,37 @@
 import re
 
 typeNotas = [
-    "Pensamento Crítico e Criatividade", 
-    "Comunicação", 
-    "Colaboração", 
-    "Qualidade das Entregas", 
-    "Presença", 
+    "Pensamento Crítico e Criatividade",
+    "Comunicação",
+    "Colaboração",
+    "Qualidade das Entregas",
+    "Presença",
     "Entregas e Prazos"
 ]
 
 alunos = {}
 
+
 def alunoAtualInAlunos(aluno):
     for index in alunos:
-        if(aluno in alunos[index]):
+        if (aluno in alunos[index]):
             return True
-        
+
     return False
+
 
 def getAlunoEmail(aluno):
     for _, valor in alunos.items():
         if valor[1] == aluno:
             return valor[0]
-        
+
     return ""
+
 
 reject = [
     "Timestamp",
-    "Carimbo de data/hora", 
-    "Endereço de e-mail", 
+    "Carimbo de data/hora",
+    "Endereço de e-mail",
     "Nome completo"
 ]
 
@@ -38,16 +41,16 @@ def getMediaAluno(df):
 
     for nome_coluna in df.columns:
         for index, x in enumerate(df[nome_coluna]):
-            if(nome_coluna == "Endereço de e-mail"):
+            if (nome_coluna == "Endereço de e-mail"):
                 alunos[index] = [x]
-            if(nome_coluna == "Nome completo"):
+            if (nome_coluna == "Nome completo"):
                 alunos[index].append(x)
 
     for nome_coluna in df.columns:
         match = re.search(r'\(([^)]*)\)', nome_coluna)
         tipoNota = re.sub(r'\s+\([^)]*\)', '', nome_coluna)
-        
-        if(match):
+
+        if (match):
             aluno_atual = match.group(1)
 
             somaNotas = 0
@@ -55,26 +58,27 @@ def getMediaAluno(df):
             media = 0
 
             for index, x in enumerate(df[nome_coluna]):
-                if(nome_coluna not in reject and not nome_coluna.startswith("Justifique suas respostas")):
+                if (nome_coluna not in reject and not nome_coluna.startswith("Justifique suas respostas")):
 
                     nota = x
-                    
-                    if(aluno_atual in alunos[index]):
+
+                    if (aluno_atual in alunos[index]):
                         nota = 0
-                    
+
                     somaNotas += nota
                     countNotas += 1
-                
+
                 else:
                     somaNotas += 0
                     countNotas += 1
 
             media = somaNotas / (countNotas - 1)
 
-            if(not alunoAtualInAlunos(aluno_atual)):
+            if (not alunoAtualInAlunos(aluno_atual)):
                 media = 0
 
-            notas.append([ aluno_atual, getAlunoEmail(aluno_atual), tipoNota, media ])
+            notas.append([aluno_atual, getAlunoEmail(
+                aluno_atual), tipoNota, media])
 
     return notas
 

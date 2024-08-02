@@ -1,10 +1,10 @@
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-from .models import GoogleCredentials
 import json
 
 # Acessar https://console.developers.google.com/apis/api/forms.googleapis.com/overview para ativar a api do forms caso esteja desativada
 # Acessar https://console.developers.google.com/apis/api/drive.googleapis.com/overview para ativar a api do drive caso esteja desativada
+
 
 class Fact():
     def __init__(self) -> None:
@@ -62,16 +62,18 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             },
         ]
 
-        self.CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
+        # TODO FAZER AS CREDENCIAIS
+        # self.CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
 
-        self.credentials_forms = service_account.Credentials.from_service_account_info(info=self.CREDENTIALS_JSON, scopes=self.SCOPES_FORMS)
-        self.credentials_drive = service_account.Credentials.from_service_account_info(info=self.CREDENTIALS_JSON, scopes=self.SCOPES_DRIVE)
+        self.credentials_forms = service_account.Credentials.from_service_account_info(
+            info=self.CREDENTIALS_JSON, scopes=self.SCOPES_FORMS)
+        self.credentials_drive = service_account.Credentials.from_service_account_info(
+            info=self.CREDENTIALS_JSON, scopes=self.SCOPES_DRIVE)
 
         self.service = build("forms", "v1", credentials=self.credentials_forms)
 
-        self.drive_service = build("drive", "v3", credentials=self.credentials_drive)
-
-
+        self.drive_service = build(
+            "drive", "v3", credentials=self.credentials_drive)
 
     def create_new_form(self) -> str:
         form = {
@@ -84,7 +86,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
         formId = created_form["formId"]
 
         return formId
-
 
     def add_permission(self, email_address: str):
         permission = {
@@ -102,7 +103,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
 
         except Exception as e:
             print("error: ", e)
-
 
     def invite_students(self, emails):
         for email in emails:
@@ -122,7 +122,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             except Exception as e:
                 print("error: ", e)
 
-
     def update_form(self, lista_perguntas):
         updates = {
             "requests": lista_perguntas,
@@ -136,9 +135,8 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
 
         return URL
 
-
     def create_item(self, title, aluno, image, count):
-        if(image):
+        if (image):
             return {
                 "createItem": {
                     "item": {
@@ -179,7 +177,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                     }
                 },
             }
-        
 
     def create_select_name_section(self, alunos, emails):
         updates = {
@@ -229,7 +226,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
 
         self.service.forms().batchUpdate(formId=self.formId, body=updates).execute()
 
-
     def create_page_break(self, title, count):
         return {
             "createItem": {
@@ -243,7 +239,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             }
         }
 
-
     def update_form_info(self):
         return {
             "updateFormInfo": {
@@ -254,7 +249,6 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                 "updateMask": "*"
             }
         }
-
 
     def create_fact(self, email_address, alunos, emails):
         self.formId = self.create_new_form()
@@ -269,18 +263,19 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             for aluno in alunos_ordenados:
                 count = 2
 
-                lista_perguntas.append(self.create_page_break(count=count, title=aluno))
+                lista_perguntas.append(
+                    self.create_page_break(count=count, title=aluno))
 
                 count += 1
 
                 for title_images_index in range(7):
                     question_item = self.create_item(
-                        aluno=aluno, 
-                        count=count, 
-                        title=self.title_images[title_images_index]["title"], 
+                        aluno=aluno,
+                        count=count,
+                        title=self.title_images[title_images_index]["title"],
                         image=self.title_images[title_images_index]["image"]
                     )
-                    
+
                     lista_perguntas.append(question_item)
                     count += 1
 
@@ -290,7 +285,7 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                 "formUrl": self.update_form(lista_perguntas),
                 "error": None
             }
-        
+
         except Exception as e:
             self.drive_service.files().delete(
                 fileId=self.formId

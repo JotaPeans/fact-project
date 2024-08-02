@@ -1,14 +1,22 @@
+import json
+import jwt
+import pytz
+from datetime import datetime, timedelta
+
 from django.http.response import JsonResponse
-from django.views import View
-from .models import CustomUser
 from django.views.decorators.csrf import csrf_exempt
 from django.middleware.csrf import get_token
-import json
+from django.conf import settings
+
+from .models import CustomUser
+from .utils.get_jwt_token import get_jwt_token
+
 
 
 @csrf_exempt
 def getUser(req, email):
     if req.method == 'GET':
+        print(get_jwt_token(req))
         try:
             user = CustomUser.objects.get(email=email)
             return JsonResponse({
@@ -60,3 +68,29 @@ def get_csrftoken(req):
         return JsonResponse({"csrftoken": csrf_token})
 
     return JsonResponse({})
+
+
+@csrf_exempt
+def auth(req):
+    if req.method == 'POST':
+        data = json.loads(req.body)
+
+        email: str = data.get("email")
+
+        user = CustomUser.objects.filter(email=email)
+
+        if (len(user) >= 1):
+            user = user[0]
+            utc_now = datetime.now(pytz.utc)
+            payload = {
+                'id': user.id,
+                'email': email,
+                'exp': utc_now + timedelta(seconds=settings.JWT_EXP_DELTA_SECONDS),
+                'iat': utc_now,
+            }
+
+            token = jwt.encode(payload, settings.JWT_SECRET, settings.JWT_ALGORITHM)
+
+            return JsonResponse({"access": token})
+
+    return JsonResponse({"message": "Usuário não existe"}, status=401)

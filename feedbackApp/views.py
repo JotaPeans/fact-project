@@ -1,16 +1,16 @@
 import pandas as pd
 import json
 import requests
+
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
-from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
 
 from .create_fact import Fact as FactClass
-from .models import Aluno, Grupo, Fact, GoogleCredentials
+from .models import Aluno, Grupo, Fact
 from .get_fact_grade import getMediaAluno, transformNotasToObject
 from .get_students_excel import getStudents
 
@@ -47,7 +47,6 @@ class FeedBackView(View):
         #dá append em grupos q foram compartilhados tbm
 
         context = {
-            "user": user,
             "groups": allowed_groups,
             "allUsers": users_to_list
         }

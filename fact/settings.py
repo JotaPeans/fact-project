@@ -11,6 +11,10 @@ load_dotenv(dotenvpath)
 TARGET_ENV = os.environ.get("TARGET_ENV")
 NOT_PROD = not TARGET_ENV.lower().startswith('prod')
 
+JWT_SECRET = os.environ.get("JWT_SECRET")
+JWT_ALGORITHM = os.environ.get("JWT_ALGORITHM")
+JWT_EXP_DELTA_SECONDS = 3600
+
 if NOT_PROD:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
