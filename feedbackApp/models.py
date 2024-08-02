@@ -12,6 +12,7 @@ class Aluno(models.Model):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'nome': self.nome,
             'email': self.email,
             'matricula': self.matricula,
@@ -31,6 +32,7 @@ class Grupo(models.Model):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'nome': self.nome,
             'alunos': [aluno.to_dict() for aluno in self.alunos.all()],
             'professor': self.professor.to_dict(),
@@ -53,3 +55,17 @@ class Fact(models.Model):
 
     def __str__(self) -> str:
         return self.nome + " - " + self.aluno.nome
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'aluno': self.aluno.to_dict(),
+            'grupo': self.grupo.to_dict(),
+            'nome': self.nome,
+            'pensamento_critico_criatividade': self.pensamento_critico_criatividade,
+            'comunicacao': self.comunicacao,
+            'colaboracao': self.colaboracao,
+            'qualidade_entregas': self.qualidade_entregas,
+            'presenca': self.presenca,
+            'comunicacao': self.comunicacao,
+        }

@@ -11,4 +11,5 @@ class CustomUser(AbstractUser):
             'nome': self.first_name,
             'email': self.email,
             'image': self.image,
+            'role': self.role
         }
