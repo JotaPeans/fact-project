@@ -1,7 +1,10 @@
 from django.http.response import JsonResponse
 from django.views import View
 from .models import CustomUser
-from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import get_token
+import json
+
 
 class User(View):
     def get(self, req):
@@ -9,21 +12,32 @@ class User(View):
         return JsonResponse({"id": "asd1kj23hjdjk12h3k12j"})
 
 
-class SignUp(View):
-    def post(self, req):
-        id = req.POST.get("id")
-        name = req.POST.get("name")
-        email = str(req.POST.get("email"))
-        image = req.POST.get("image")
+@csrf_exempt
+def signUp(req):
+    if req.method == 'POST':
+        csrf_token = get_token(req)
+        data = json.loads(req.body)
 
-        if(email.endswith("@cesar.school")):
+        id = data.get("id")
+        name = data.get("name")
+        email = str(data.get("email"))
+        image = data.get("image")
+
+        if (email.endswith("@cesar.school")):
             user = CustomUser.objects.filter(email=email)
+            print(user)
 
-            if(user[0]):
-                return JsonResponse({"message": "Usuário já existe"}, status=400)
+            if (len(user) >= 1):
+                return JsonResponse({"message": "Usuário já existe", "csrftoken": csrf_token}, status=400)
+
+            CustomUser.objects.create(
+                email=email, image=image, username=name, first_name=name, providerId=id, role="aluno")
+
+            response = JsonResponse(
+                {"message": "Usuário criado com sucesso", "csrftoken": csrf_token})
             
-            CustomUser.objects.create(email=email, image=image, first_name=name, providerId=id, role="aluno")
+            return response
 
-            return JsonResponse({"message": "Usuário criado com sucesso"})
-        
         return JsonResponse({"message": "Apenas email @cesar.school podem ser cadastrados"}, status=400)
+
+    return JsonResponse({})
