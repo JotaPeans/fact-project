@@ -2,7 +2,7 @@ from pandas import DataFrame
 
 from .models import Aluno
 
-def getStudents(df: DataFrame):
+def createStudentsUsingExcelFile(df: DataFrame):
     for row in range(len(df)):
         aluno = {}
         for nome_coluna in df.columns:

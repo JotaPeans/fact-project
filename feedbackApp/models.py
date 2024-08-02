@@ -10,6 +10,14 @@ class Aluno(models.Model):
     def __str__(self) -> str:
         return self.nome
     
+    def to_dict(self):
+        return {
+            'nome': self.nome,
+            'email': self.email,
+            'matricula': self.matricula,
+            'turma': self.turma
+        }
+    
 
 class Grupo(models.Model):
     nome = models.CharField(max_length=200)  
@@ -20,6 +28,15 @@ class Grupo(models.Model):
 
     def __str__(self) -> str:
         return self.nome
+    
+    def to_dict(self):
+        return {
+            'nome': self.nome,
+            'alunos': [aluno.to_dict() for aluno in self.alunos.all()],
+            'professor': self.professor.to_dict(),
+            'sharedToProfessor': [shared.to_dict() for shared in self.sharedToProfessor.all()],
+            'image': self.image,
+        }
 
 
 class Fact(models.Model):

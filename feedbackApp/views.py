@@ -12,46 +12,46 @@ from django.http import JsonResponse
 from .create_fact import Fact as FactClass
 from .models import Aluno, Grupo, Fact
 from .get_fact_grade import getMediaAluno, transformNotasToObject
-from .get_students_excel import getStudents
+from .get_students_excel import createStudentsUsingExcelFile as getStudents
 
 class FeedBackView(View):
-    def get(self, req):
-        if(not req.user.is_authenticated):
-            return redirect("autenticacao:root")
+    # def get(self, req):
+    #     if(not req.user.is_authenticated):
+    #         return redirect("autenticacao:root")
         
-        user = User.objects.get(username=req.user.username)
+    #     user = User.objects.get(username=req.user.username)
 
-        allowed_groups = []
+    #     allowed_groups = []
 
-        groups = Grupo.objects.all()
-        for group in groups:
-            professors = list(group.sharedToProfessor.all())
+    #     groups = Grupo.objects.all()
+    #     for group in groups:
+    #         professors = list(group.sharedToProfessor.all())
 
-            if(group.professor.email == user.email):
-                allowed_groups.append(group)
+    #         if(group.professor.email == user.email):
+    #             allowed_groups.append(group)
 
-            else:
-                for professor in professors:
-                    if(user == professor):
-                        allowed_groups.append(group)
+    #         else:
+    #             for professor in professors:
+    #                 if(user == professor):
+    #                     allowed_groups.append(group)
         
-        all_users = list(User.objects.all())
-        users_to_list = []
+    #     all_users = list(User.objects.all())
+    #     users_to_list = []
 
-        for current_user in all_users:
-            if(current_user == user):
-                continue
-            else:
-                users_to_list.append(current_user)
+    #     for current_user in all_users:
+    #         if(current_user == user):
+    #             continue
+    #         else:
+    #             users_to_list.append(current_user)
 
-        #dá append em grupos q foram compartilhados tbm
+    #     #dá append em grupos q foram compartilhados tbm
 
-        context = {
-            "groups": allowed_groups,
-            "allUsers": users_to_list
-        }
+    #     context = {
+    #         "groups": allowed_groups,
+    #         "allUsers": users_to_list
+    #     }
         
-        return render(req, "feedbackApp/app.html", context=context)
+    #     return render(req, "feedbackApp/app.html", context=context)
 
 
     def post(self, req):
@@ -66,28 +66,28 @@ class FeedBackView(View):
             "user": user
         }
 
-        if(action == "addGroup"):
-            return self.addGroup(req, context, user)
+        # if(action == "addGroup"):
+        #     return self.addGroup(req, context, user)
         
         if(action == "addStudent"):
             return self.addStudent(req)
     
-    def addGroup(self, req, context, user):
-        groupName = req.POST.get("groupName")
+    # def addGroup(self, req, context, user):
+    #     groupName = req.POST.get("groupName")
 
-        if(len(groupName) < 5):
-            groups = Grupo.objects.filter(professor=user)
+    #     if(len(groupName) < 5):
+    #         groups = Grupo.objects.filter(professor=user)
 
-            context["groups"] = groups
+    #         context["groups"] = groups
 
-            messages.add_message(req, constants.ERROR, 'O nome do grupo precisa ter no mínimo 5 caracteres!')
+    #         messages.add_message(req, constants.ERROR, 'O nome do grupo precisa ter no mínimo 5 caracteres!')
 
-            return render(req, "feedbackApp/app.html", context=context)
+    #         return render(req, "feedbackApp/app.html", context=context)
         
-        group = Grupo.objects.create(nome=groupName, professor=context["user"])
-        group.save()
+    #     group = Grupo.objects.create(nome=groupName, professor=context["user"])
+    #     group.save()
 
-        return redirect("feedbackApp:root")
+    #     return redirect("feedbackApp:root")
     
     def addStudent(self, req):
         file = None

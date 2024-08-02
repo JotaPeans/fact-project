@@ -1,9 +1,23 @@
 from django.urls import path
 from . import views
 
+from .group.get_groups import get_groups
+from .group.create_group import create_group
+
+from .student.get_students import get_students
+from .student.create_student import create_student
+
 app_name = "feedbackApp"
 
 urlpatterns = [
+    path("groups", get_groups, name="get_groups"),
+    path("groups/create", create_group, name="create_group"),
+
+    path("students", get_students, name="get_students"),
+    path("students/create", create_student, name="create_students"),
+
+
+
     path("", views.FeedBackView.as_view(), name="root"),
     path("addAdminToGroup", views.addAdmin, name = "add_admin"),
     path("changeInfo", views.changeAlunoInfo, name = "change_info"), 

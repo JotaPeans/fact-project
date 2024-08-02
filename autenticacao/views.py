@@ -9,14 +9,10 @@ from django.middleware.csrf import get_token
 from django.conf import settings
 
 from .models import CustomUser
-from .utils.get_jwt_token import get_jwt_token
-
-
 
 @csrf_exempt
 def getUser(req, email):
     if req.method == 'GET':
-        print(get_jwt_token(req))
         try:
             user = CustomUser.objects.get(email=email)
             return JsonResponse({
