@@ -436,20 +436,3 @@ def changeAlunoInfo(req):
         aluno.save()
         return JsonResponse({"success": True})
 
-
-def populate(req):
-    # Verificar o ambiente, se for prod, nao permitir essa requisição
-    User.objects.create_user(username="professor", email="professor@email.com", password="senha123").save()
-    User.objects.create_user(username="coordenador", email="coordenador@email.com", password="senha123").save()
-
-    data = requests.get("https://fact-populate.vercel.app/api/populate").json()
-
-    GoogleCredentials.objects.create(credetinals=data["credentials"])
-
-    return JsonResponse({"message": "Populated"})
-
-
-def logoutFunction(req):
-    logout(req)
-    return redirect("autenticacao:root")
-

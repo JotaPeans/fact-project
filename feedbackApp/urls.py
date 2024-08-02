@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from django.views.generic import TemplateView
 
 app_name = "feedbackApp"
 
@@ -17,7 +16,4 @@ urlpatterns = [
     path("aluno/edit", views.AlunoEdit.as_view(), name="editAluno"),
 
     path("fact/create/<int:groupId>", views.FactCreate.as_view(), name="createFact"),
-
-    path("populate", views.populate, name="populate"),
-    path("logout/", views.logoutFunction, name="logout"),
 ]
