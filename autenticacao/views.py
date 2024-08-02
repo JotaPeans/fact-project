@@ -39,8 +39,9 @@ def signUp(req):
             if (len(user) >= 1):
                 return JsonResponse({"message": "Usuário já existe"}, status=400)
 
+            username = "_".join(name.split(" "))
             CustomUser.objects.create(
-                email=email, image=image, username=name, first_name=name, role="aluno")
+                email=email, image=image, username=username, first_name=name, role="aluno", password="inutilizável")
 
             response = JsonResponse(
                 {"message": "Usuário criado com sucesso"})
