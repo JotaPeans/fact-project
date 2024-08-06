@@ -8,6 +8,7 @@ from .group.create_group import create_group
 from .student.get_student_fact import get_student_fact
 from .student.get_students import get_students
 from .student.create_student import create_student
+from .student.update_student import update_student
 
 from .fact.import_fact import import_fact
 from .fact.create_fact import create_fact
@@ -22,7 +23,8 @@ urlpatterns = [
 
     path("students", get_students, name="get_students"),
     path("students/<int:id>/fact", get_student_fact, name="get_student_fact"),
-    path("students/create", create_student, name="create_students"),
+    path("students/create", create_student, name="create_student"),
+    path("students/update", update_student, name="update_student"),
 
     path("fact/import", import_fact, name="import_fact"),
     path("fact/create", create_fact, name="create_fact"),
