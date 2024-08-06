@@ -1,6 +1,6 @@
 from pandas import DataFrame
 
-from .models import Aluno
+from feedbackApp.models import Aluno
 
 def createStudentsUsingExcelFile(df: DataFrame):
     for row in range(len(df)):

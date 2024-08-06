@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from autenticacao.utils.get_jwt_token import get_jwt_token
 from feedbackApp.models import CustomUser
 
-from ..get_students_excel import createStudentsUsingExcelFile
+from .utils.get_students_excel import createStudentsUsingExcelFile
 
 @csrf_exempt
 def create_student(req):

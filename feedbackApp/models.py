@@ -68,4 +68,5 @@ class Fact(models.Model):
             'qualidade_entregas': self.qualidade_entregas,
             'presenca': self.presenca,
             'comunicacao': self.comunicacao,
+            'entrega_prazos': self.entrega_prazos
         }

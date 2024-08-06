@@ -9,10 +9,10 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import JsonResponse
 
-from .create_fact import Fact as FactClass
+from .fact.utils.create_fact import Fact as FactClass
 from .models import Aluno, Grupo, Fact
-from .get_fact_grade import getMediaAluno, transformNotasToObject
-from .get_students_excel import createStudentsUsingExcelFile as getStudents
+from .fact.utils.get_fact_grade import getMediaAluno, transformNotasToObject
+from .student.utils.get_students_excel import createStudentsUsingExcelFile as getStudents
 
 class FeedBackView(View):
     def deleteGroup(self,req,context,user,id):

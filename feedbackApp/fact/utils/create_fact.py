@@ -1,10 +1,21 @@
+import os
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
+from django.conf import settings
 import json
 
 # Acessar https://console.developers.google.com/apis/api/forms.googleapis.com/overview para ativar a api do forms caso esteja desativada
 # Acessar https://console.developers.google.com/apis/api/drive.googleapis.com/overview para ativar a api do drive caso esteja desativada
 
+def load_credentials():
+    # Caminho absoluto para o arquivo JSON
+    json_file_path = os.path.join(settings.BASE_DIR, 'credentials.json')
+    
+    # Abrindo e carregando o arquivo JSON
+    with open(json_file_path, 'r') as json_file:
+        data = json.load(json_file)
+    
+    return data
 
 class Fact():
     def __init__(self) -> None:
@@ -62,8 +73,8 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             },
         ]
 
-        # TODO FAZER AS CREDENCIAIS
         # self.CREDENTIALS_JSON = json.loads(GoogleCredentials.objects.all()[0].credetinals)
+        self.CREDENTIALS_JSON = load_credentials()
 
         self.credentials_forms = service_account.Credentials.from_service_account_info(
             info=self.CREDENTIALS_JSON, scopes=self.SCOPES_FORMS)
@@ -102,7 +113,7 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
             ).execute()
 
         except Exception as e:
-            print("error: ", e)
+            print("add_permission error: ", e)
 
     def invite_students(self, emails):
         for email in emails:
@@ -120,7 +131,7 @@ O FACT não contempla autoavaliação, portanto ao chegar em sua própria avalia
                 ).execute()
 
             except Exception as e:
-                print("error: ", e)
+                print("invite_students error: ", e)
 
     def update_form(self, lista_perguntas):
         updates = {
