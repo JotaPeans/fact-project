@@ -1,7 +1,7 @@
 from ..models import Grupo
 from django.http import JsonResponse
 from autenticacao.utils.get_jwt_token import get_jwt_token
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 def get_groups(req):
     if (req.method == 'GET'):
@@ -26,7 +26,7 @@ def get_groups(req):
             return JsonResponse({'groups': allowed_groups})
         
         except Exception as e:
-            print(e)
+            print("erro get grupos:", e)
             return JsonResponse({'message': "Nao autorizado"}, status=401)
     
     return JsonResponse({}, status=405)

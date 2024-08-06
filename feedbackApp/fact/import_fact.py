@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from autenticacao.utils.get_jwt_token import get_jwt_token
 from .utils.get_fact_grade import getMediaAluno, transformNotasToObject
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 import pandas as pd
 

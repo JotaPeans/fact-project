@@ -1,7 +1,7 @@
 from ..models import Aluno
 from django.http import JsonResponse
 from autenticacao.utils.get_jwt_token import get_jwt_token
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 from ..models import Fact
 
 def get_student_fact(req, id):

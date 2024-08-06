@@ -2,7 +2,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from autenticacao.utils.get_jwt_token import get_jwt_token
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 from ..models import Grupo
 from .utils.create_fact import Fact as FactClass

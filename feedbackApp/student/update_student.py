@@ -2,7 +2,7 @@ from ..models import Aluno
 from django.http import JsonResponse
 from autenticacao.utils.get_jwt_token import get_jwt_token
 from django.views.decorators.csrf import csrf_exempt
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 @csrf_exempt
 def update_student(req):

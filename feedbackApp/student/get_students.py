@@ -1,7 +1,7 @@
 from ..models import Aluno
 from django.http import JsonResponse
 from autenticacao.utils.get_jwt_token import get_jwt_token
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 def get_students(req):
     if (req.method == 'GET'):

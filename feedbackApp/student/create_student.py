@@ -4,7 +4,7 @@ from ..models import Aluno
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from autenticacao.utils.get_jwt_token import get_jwt_token
-from feedbackApp.models import CustomUser
+from autenticacao.models import CustomUser
 
 from .utils.get_students_excel import createStudentsUsingExcelFile
 
