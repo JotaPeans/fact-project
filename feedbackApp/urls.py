@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .group.get_group_by_id import get_group_by_id
+from .group.get_group_facts import get_group_facts
 from .group.delete_group import delete_group
 from .group.get_groups import get_groups
 from .group.create_group import create_group
@@ -18,6 +19,7 @@ app_name = "feedbackApp"
 urlpatterns = [
     path("groups", get_groups, name="get_groups"),
     path("groups/<int:id>", get_group_by_id, name="get_group_by_id"),
+    path("groups/<int:id>/fact", get_group_facts, name="get_group_facts"),
     path("groups/delete/<int:id>", delete_group, name="delete_group"),
     path("groups/create", create_group, name="create_group"),
 
