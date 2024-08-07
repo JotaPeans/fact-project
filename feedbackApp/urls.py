@@ -5,9 +5,11 @@ from .group.get_group_facts import get_group_facts
 from .group.delete_group import delete_group
 from .group.get_groups import get_groups
 from .group.create_group import create_group
+from .group.update_group_students import update_group_students
 
 from .student.get_student_fact import get_student_fact
 from .student.get_students import get_students
+from .student.get_students_by_class import get_students_by_class
 from .student.create_student import create_student
 from .student.update_student import update_student
 
@@ -26,8 +28,10 @@ urlpatterns = [
     path("groups/<int:id>/fact", get_group_facts, name="get_group_facts"),
     path("groups/delete/<int:id>", delete_group, name="delete_group"),
     path("groups/create", create_group, name="create_group"),
+    path("groups/update/students", update_group_students, name="update_group_students"),
 
     path("students", get_students, name="get_students"),
+    path("students/filter", get_students_by_class, name="get_students_by_class"),
     path("students/<int:id>/fact", get_student_fact, name="get_student_fact"),
     path("students/create", create_student, name="create_student"),
     path("students/update", update_student, name="update_student"),
