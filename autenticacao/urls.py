@@ -1,7 +1,10 @@
 from django.urls import path
-from . import views
+from .views import signUp, getUser, get_csrftoken, auth
 
 app_name = 'autenticacao'
 urlpatterns = [
-    path('', views.SignIn.as_view(), name="root") # não precisamos de signup por agora. Pretendemos fzr registro com superuser
+    path('', view=auth, name="jwt"),
+    path('get-csrftoken', view=get_csrftoken, name="get_token"),
+    path('user/create', view=signUp, name="create"),
+    path('user/<str:email>', view=getUser, name="get"),
 ]
