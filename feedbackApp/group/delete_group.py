@@ -1,4 +1,4 @@
-from ..models import Grupo
+from ..models import Fact, Grupo
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from autenticacao.utils.get_jwt_token import get_jwt_token
@@ -14,6 +14,11 @@ def delete_group(req, id):
 
             group = Grupo.objects.get(pk=id)
             if(user.id == group.professor.id):
+                facts = Fact.objects.filter(grupo__id=id)
+
+                for fact in facts:
+                    fact.delete()
+                
                 group.delete()
 
                 return JsonResponse({'message': 'Grupo deletado com sucesso'})

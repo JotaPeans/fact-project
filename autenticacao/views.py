@@ -17,7 +17,7 @@ def getUser(req, email):
             user = CustomUser.objects.get(email=email)
             return JsonResponse({
                 "id": user.id,
-                "name": user.first_name,
+                "nome": user.first_name,
                 "email": user.email,
                 "image": user.image,
                 "role": user.role,
@@ -33,7 +33,7 @@ def signUp(req):
     if req.method == 'POST':
         data = json.loads(req.body)
 
-        name = data.get("name")
+        name = data.get("nome")
         email = str(data.get("email"))
         image = data.get("image")
 

@@ -11,6 +11,10 @@ from .student.get_students import get_students
 from .student.create_student import create_student
 from .student.update_student import update_student
 
+from .teacher.get_teachers import get_teachers
+from .teacher.add_teachers_to_group import add_teachers_to_group
+from .teacher.get_teachers_by_group import get_teachers_by_group
+
 from .fact.import_fact import import_fact
 from .fact.create_fact import create_fact
 
@@ -28,19 +32,10 @@ urlpatterns = [
     path("students/create", create_student, name="create_student"),
     path("students/update", update_student, name="update_student"),
 
+    path("teachers", get_teachers, name="get_teachers"),
+    path("teachers/group/<int:id>", get_teachers_by_group, name="get_teachers_by_group"),
+    path("teachers/group/add", add_teachers_to_group, name="add_teachers_to_group"),
+
     path("fact/import", import_fact, name="import_fact"),
     path("fact/create", create_fact, name="create_fact"),
-
-    # path("", views.FeedBackView.as_view(), name="root"),
-    # path("addAdminToGroup", views.addAdmin, name = "add_admin"),
-    # path("changeInfo", views.changeAlunoInfo, name = "change_info"), 
-
-    # path("group/<int:id>", views.GroupView.as_view(), name="group"),
-    # path("group/deleting/<int:groupId>", views.deleteGroup.as_view(), name = "deleteGroup"),
-    # path("group/<int:id>/edit/", views.GroupStudent.as_view(), name="edit"),
-    # path("group/<int:id>/alunos/", views.getAlunos, name="getAlunos"),
-
-    # path("aluno/edit", views.AlunoEdit.as_view(), name="editAluno"),
-
-    # path("fact/create/<int:groupId>", views.FactCreate.as_view(), name="createFact"),
 ]
